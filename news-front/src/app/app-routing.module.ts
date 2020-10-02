@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
 import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
-import {HomeAdvertiserComponent} from './home-advertiser/home-advertiser.component';
 import {RequestPageComponent} from './request-page/request-page.component';
+import {HomePageComponent} from './home-page/home-page.component';
 
 
 const routes: Routes = [
@@ -11,15 +11,21 @@ const routes: Routes = [
     //делаем редирект. pathMatch - путь должен полностью совпадать с родительским.
     path: '', component: MainLayoutComponent, children: [
       {path: '', redirectTo: '/', pathMatch: 'full'},
-      {path: '', component: HomeAdvertiserComponent},
+      {path: '', component: HomePageComponent},
       {path: 'request/:id', component: RequestPageComponent}
-
     ]
+  },
+  {
+    //lazy loading для админского модуля
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

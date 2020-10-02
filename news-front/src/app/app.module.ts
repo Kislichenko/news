@@ -4,15 +4,15 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
-import { HomeAdvertiserComponent } from './home-advertiser/home-advertiser.component';
 import { RequestPageComponent } from './request-page/request-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainLayoutComponent,
-    HomeAdvertiserComponent,
-    RequestPageComponent
+    RequestPageComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
