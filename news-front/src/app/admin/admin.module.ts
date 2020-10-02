@@ -6,6 +6,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { AdvertiserDashboardComponent } from './advertiser-dashboard/advertiser-dashboard.component';
 import { CreateRequestComponent } from './create-request/create-request.component';
 import { EditRequestComponent } from './edit-request/edit-request.component';
+import { ReportDashboardComponent } from './report-dashboard/report-dashboard.component';
+import { CreateReportComponent } from './create-report/create-report.component';
+import { EditReportComponent } from './edit-report/edit-report.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +16,10 @@ import { EditRequestComponent } from './edit-request/edit-request.component';
     LoginPageComponent,
     AdvertiserDashboardComponent,
     CreateRequestComponent,
-    EditRequestComponent
+    EditRequestComponent,
+    ReportDashboardComponent,
+    CreateReportComponent,
+    EditReportComponent
   ],
   imports: [
     CommonModule,
@@ -26,8 +32,8 @@ import { EditRequestComponent } from './edit-request/edit-request.component';
           {path: 'login', component: LoginPageComponent},
           {path: 'dashboard', component: AdvertiserDashboardComponent},
           {path: 'create', component: CreateRequestComponent},
-          {path: 'request/:id/edit', component:EditRequestComponent}
-
+          {path: 'request/:id/edit', component:EditRequestComponent},
+          {path: 'report/:id/edit', component:EditReportComponent}
         ]
       }
     ])
