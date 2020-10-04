@@ -10,6 +10,8 @@ import { ReportDashboardComponent } from './report-dashboard/report-dashboard.co
 import { CreateReportComponent } from './create-report/create-report.component';
 import { EditReportComponent } from './edit-report/edit-report.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthService} from './shared/services/auth.service';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     //т.к. мы используем не корневой модуль, а мы используем дочерний модуль, к которому
     //в последствии будем применять lazy load.
     RouterModule.forChild([
@@ -42,6 +45,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ])
   ],
   exports: [RouterModule],
+  providers: [AuthService]
 })
 export class AdminModule {
 
