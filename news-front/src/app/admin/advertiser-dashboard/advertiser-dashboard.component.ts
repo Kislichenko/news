@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-advertiser-dashboard',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdvertiserDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private auth: AuthService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  test(){
+    console.log(this.auth.token)
   }
 
 }

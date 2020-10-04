@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-report-dashboard',
@@ -11,5 +12,6 @@ export class ReportDashboardComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
 }
