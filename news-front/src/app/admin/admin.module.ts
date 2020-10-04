@@ -9,6 +9,7 @@ import { EditRequestComponent } from './edit-request/edit-request.component';
 import { ReportDashboardComponent } from './report-dashboard/report-dashboard.component';
 import { CreateReportComponent } from './create-report/create-report.component';
 import { EditReportComponent } from './edit-report/edit-report.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,8 @@ import { EditReportComponent } from './edit-report/edit-report.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     //т.к. мы используем не корневой модуль, а мы используем дочерний модуль, к которому
     //в последствии будем применять lazy load.
     RouterModule.forChild([
