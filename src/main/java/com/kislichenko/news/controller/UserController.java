@@ -1,23 +1,31 @@
 package com.kislichenko.news.controller;
 
 import com.kislichenko.news.dao.AppUserRepository;
+import com.kislichenko.news.dao.RoleRepository;
 import com.kislichenko.news.model.AppUser;
+import com.kislichenko.news.model.Role;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Controller
 public class UserController {
 
     private AppUserRepository userRepository;
+    private RoleRepository roleRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserController(AppUserRepository userRepository,
-                          BCryptPasswordEncoder bCryptPasswordEncoder){
+                          BCryptPasswordEncoder bCryptPasswordEncoder,
+                          RoleRepository roleRepository){
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.roleRepository = roleRepository;
     }
 
 
@@ -27,6 +35,11 @@ public class UserController {
         System.out.println("SIGN-UP");
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.getOne(1L));
+        user.setRoles(roles);
+
         userRepository.save(user);
 
     }

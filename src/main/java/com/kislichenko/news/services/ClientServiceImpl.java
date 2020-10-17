@@ -1,5 +1,7 @@
-package com.kislichenko.news;
+package com.kislichenko.news.services;
 
+import com.kislichenko.news.dao.ClientRepository;
+import com.kislichenko.news.model.Client;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

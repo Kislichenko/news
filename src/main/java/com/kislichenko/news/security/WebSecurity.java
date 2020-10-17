@@ -1,5 +1,7 @@
 package com.kislichenko.news.security;
 
+import com.kislichenko.news.dao.AppUserRepository;
+import com.kislichenko.news.model.AppUser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,11 +21,14 @@ import static com.kislichenko.news.security.SecurityConstants.SIGN_UP_URL;
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private AppUserRepository appUserRepository;
 
     public WebSecurity(UserDetailsServiceImpl userDetailsService,
-                       BCryptPasswordEncoder bCryptPasswordEncoder){
+                       BCryptPasswordEncoder bCryptPasswordEncoder,
+                       AppUserRepository appUserRepository){
         this.userDetailsService = userDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.appUserRepository = appUserRepository;
     }
 
     @Override
@@ -32,7 +37,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                .addFilter(new JWTAuthenticationFilter(authenticationManager(), appUserRepository))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 //отключение сессий в Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

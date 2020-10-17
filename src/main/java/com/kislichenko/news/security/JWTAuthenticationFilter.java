@@ -2,10 +2,14 @@ package com.kislichenko.news.security;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kislichenko.news.dao.AppUserRepository;
 import com.kislichenko.news.model.AppUser;
+import com.kislichenko.news.model.Role;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -13,8 +17,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.kislichenko.news.security.SecurityConstants.*;
@@ -22,9 +25,13 @@ import static com.kislichenko.news.security.SecurityConstants.*;
 //аутентификация - проверка логин/пароль
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
+    private AppUserRepository appUserRepository;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager,
+                                   AppUserRepository appUserRepository) {
         this.authenticationManager = authenticationManager;
+        this.appUserRepository = appUserRepository;
     }
 
     @Override
@@ -32,17 +39,27 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         try {
             //из json запроса вытаскиваем данные (логин, пароль) о пользователе
-            AppUser creds = new ObjectMapper()
+            AppUser credential = new ObjectMapper()
                     .readValue(req.getInputStream(), AppUser.class);
+
+            AppUser appUser = appUserRepository.findByUsername(credential.getUsername());
+
+            Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+
+            if(appUser != null && appUser.getRoles() != null) {
+                for (Role role : appUser.getRoles()) {
+                    grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+                }
+            }
 
             //производим аутиентификацию. Чтобы произвести аутентификацию Spring Security
             //использует метод loadUserByUsername из сервиса UserDetailsServiceImpl,
             //который имплементит UserDetailService
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            creds.getUsername(),
-                            creds.getPassword(),
-                            new ArrayList<>())
+                            credential.getUsername(),
+                            credential.getPassword(),
+                            grantedAuthorities)
             );
         } catch (IOException e) {
             throw new RuntimeException(e);

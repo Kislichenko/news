@@ -1,4 +1,4 @@
-package com.kislichenko.news;
+package com.kislichenko.news.model;
 
 import lombok.Data;
 

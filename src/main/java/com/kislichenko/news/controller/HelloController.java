@@ -1,4 +1,4 @@
-package com.kislichenko.news;
+package com.kislichenko.news.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
