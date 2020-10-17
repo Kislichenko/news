@@ -4,16 +4,15 @@ import com.kislichenko.news.dao.AppUserRepository;
 import com.kislichenko.news.dao.RoleRepository;
 import com.kislichenko.news.model.AppUser;
 import com.kislichenko.news.model.Role;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Controller
+@RestController
 public class UserController {
 
     private AppUserRepository userRepository;
@@ -30,6 +29,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
     public void registration(@RequestBody AppUser user) {
         //userValidator.validate(userForm, bindingResult);
         System.out.println("SIGN-UP");

@@ -31,15 +31,17 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
         //проверка того, что извлеченный заголовок не пустой и имеет префих Bearer
         if (header == null || !header.startsWith(TOKEN_PREFIX)){
-            chain.doFilter(req, res);//??????
+            //вызов следующего фильтра в цепочке
+            chain.doFilter(req, res);
             return;
+        }else {
+
+            UsernamePasswordAuthenticationToken authenticationToken = getAuthentication(req);
+
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            //запускаем следующий фильтр в цепочке фильтров
+            chain.doFilter(req, res);
         }
-
-        UsernamePasswordAuthenticationToken authenticationToken = getAuthentication(req);
-
-        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        //запускаем следующий фильтр в цепочке фильтров
-        chain.doFilter(req, res);
     }
 
 
