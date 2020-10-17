@@ -1,8 +1,8 @@
 package com.kislichenko.news.security;
 
 import com.kislichenko.news.dao.AppUserRepository;
-import com.kislichenko.news.model.AppUser;
-import com.kislichenko.news.model.Role;
+import com.kislichenko.news.entity.AppUser;
+import com.kislichenko.news.entity.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import static java.util.Collections.emptyList;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

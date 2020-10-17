@@ -2,11 +2,10 @@ package com.kislichenko.news.controller;
 
 import com.kislichenko.news.dao.AppUserRepository;
 import com.kislichenko.news.dao.RoleRepository;
-import com.kislichenko.news.model.AppUser;
-import com.kislichenko.news.model.Role;
+import com.kislichenko.news.entity.AppUser;
+import com.kislichenko.news.entity.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;

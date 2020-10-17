@@ -1,4 +1,4 @@
-package com.kislichenko.news.model;
+package com.kislichenko.news.entity;
 
 import lombok.Getter;
 import lombok.Setter;
