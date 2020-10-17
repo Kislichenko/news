@@ -34,14 +34,14 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             //вызов следующего фильтра в цепочке
             chain.doFilter(req, res);
             return;
-        }else {
-
-            UsernamePasswordAuthenticationToken authenticationToken = getAuthentication(req);
-
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-            //запускаем следующий фильтр в цепочке фильтров
-            chain.doFilter(req, res);
         }
+
+        UsernamePasswordAuthenticationToken authenticationToken = getAuthentication(req);
+
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        //запускаем следующий фильтр в цепочке фильтров
+        chain.doFilter(req, res);
+
     }
 
 
