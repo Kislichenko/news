@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {FbAuthResponse, User} from '../../../shared/interfaces';
 import {Observable, Subject, throwError} from 'rxjs';
 import {environment} from '../../../../environments/environment';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 
 @Injectable()
 export class AuthService{
@@ -22,13 +22,28 @@ export class AuthService{
     return localStorage.getItem('fb-token')
   }
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
+
   login(user: User): Observable<any>{
-    user.returnSecureToken = true
-    return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,user)
-      .pipe(
-        tap(this.setToken),
-        catchError(this.hadleError.bind(this))
-      )
+    //user.returnSecureToken = true
+    const tmp = this.http.post<HttpResponse<any>>(`http://localhost:8080/login`,user, {observe: 'response'})
+    .pipe(tap(response =>{
+      this.setToken(response)
+      console.log("TTTTT")
+      console.log(response.headers.get("authorization"))
+    }),
+      catchError(this.hadleError.bind(this)))
+
+    return tmp
+
+      // .pipe(
+      //   tap(this.setToken),
+      //   catchError(this.hadleError.bind(this))
+      // )
   }
 
   logout(){
@@ -59,10 +74,13 @@ export class AuthService{
 
   }
 
-  private setToken(response: FbAuthResponse | null){
+  private setToken(response: HttpResponse<any> | null){
+    console.log("AAAA")
+    console.log(response)
+    console.log("AAAA2")
     if (response) {
-      const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000)
-      localStorage.setItem('fb-token', response.idToken)
+      const expDate = new Date(new Date().getTime() + +36000000 * 1000)//исправить время
+      localStorage.setItem('fb-token', response.headers.get("authorization"))
       localStorage.setItem('fb-token-exp', expDate.toString())
     }else{
       localStorage.clear()

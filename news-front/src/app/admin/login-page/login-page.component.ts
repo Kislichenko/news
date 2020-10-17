@@ -48,7 +48,7 @@ export class LoginPageComponent implements OnInit {
     this.submitted = true
 
     const user: User = {
-      email: this.form.value.email,
+      username: this.form.value.email,
       password: this.form.value.password
     }
 

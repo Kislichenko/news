@@ -42,6 +42,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             AppUser credential = new ObjectMapper()
                     .readValue(req.getInputStream(), AppUser.class);
 
+            System.out.println(credential.getUsername());
+
             AppUser appUser = appUserRepository.findByUsername(credential.getUsername());
 
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();

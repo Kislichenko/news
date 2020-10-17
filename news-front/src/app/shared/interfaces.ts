@@ -1,7 +1,7 @@
 export interface User {
-  email: string
+  username: string
   password: string
-  returnSecureToken?: boolean
+  // returnSecureToken?: boolean
 }
 
 export interface FbAuthResponse {
