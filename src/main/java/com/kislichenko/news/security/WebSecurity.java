@@ -1,6 +1,7 @@
 package com.kislichenko.news.security;
 
 import com.kislichenko.news.dao.AppUserRepository;
+import com.kislichenko.news.errors.FilterChainExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -20,13 +21,16 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private AppUserRepository appUserRepository;
+    private FilterChainExceptionHandler filterChainExceptionHandler;
 
     public WebSecurity(UserDetailsServiceImpl userDetailsService,
                        BCryptPasswordEncoder bCryptPasswordEncoder,
-                       AppUserRepository appUserRepository){
+                       AppUserRepository appUserRepository,
+                       FilterChainExceptionHandler filterChainExceptionHandler){
         this.userDetailsService = userDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.appUserRepository = appUserRepository;
+        this.filterChainExceptionHandler = filterChainExceptionHandler;
     }
 
     @Override
@@ -36,6 +40,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager(), appUserRepository))
+                .addFilterBefore(filterChainExceptionHandler,(new JWTAuthorizationFilter(authenticationManager())).getClass())
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 //отключение сессий в Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

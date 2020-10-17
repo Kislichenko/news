@@ -6,9 +6,14 @@ import com.kislichenko.news.entity.AppUser;
 import com.kislichenko.news.entity.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -29,7 +34,7 @@ public class UserController {
 
     @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void registration(@RequestBody AppUser user) {
+    public void registration(@Valid @RequestBody AppUser user) {
         //userValidator.validate(userForm, bindingResult);
         System.out.println("SIGN-UP");
 
@@ -42,6 +47,7 @@ public class UserController {
         userRepository.save(user);
 
     }
+
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String registration() {
