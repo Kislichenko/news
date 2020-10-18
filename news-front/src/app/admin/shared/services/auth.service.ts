@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {FbAuthResponse, User} from '../../../shared/interfaces';
+import {FbAuthResponse, Role, User} from '../../../shared/interfaces';
 import {Observable, Subject, throwError} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
@@ -11,6 +11,10 @@ export class AuthService{
   public error$: Subject<string> = new Subject<string>()
 
   constructor(private http: HttpClient) {
+  }
+
+  get role(): string{
+    return localStorage.getItem('role')
   }
 
   get token(): string{
@@ -54,6 +58,14 @@ export class AuthService{
     return !!this.token
   }
 
+  checkRole(roleName: String): boolean{
+    if (this.role == roleName){
+      return true
+    }else{
+      return false
+    }
+  }
+
   private hadleError(error: HttpErrorResponse){
     const {message} = error.error.error
 
@@ -82,6 +94,7 @@ export class AuthService{
       const expDate = new Date(new Date().getTime() + +36000000 * 1000)//исправить время
       localStorage.setItem('fb-token', response.headers.get("authorization"))
       localStorage.setItem('fb-token-exp', expDate.toString())
+      localStorage.setItem('role', Role.User)//заглушка, тоже надо исправить
     }else{
       localStorage.clear()
     }

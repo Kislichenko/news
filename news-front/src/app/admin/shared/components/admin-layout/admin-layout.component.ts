@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import {Role} from '../../../../shared/interfaces';
 
 @Component({
   selector: 'app-admin-layout',
@@ -14,6 +15,10 @@ export class AdminLayoutComponent implements OnInit {
     public auth: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  public get role(): typeof Role {
+    return Role;
   }
 
   logout(event: Event){
