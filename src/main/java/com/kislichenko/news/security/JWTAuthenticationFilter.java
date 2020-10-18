@@ -46,9 +46,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             AppUser appUser = appUserRepository.findByUsername(credential.getUsername());
 
-            System.out.println(appUser.getUsername());
-            appUser.getRoles().forEach(role -> System.out.println(role));
-
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
             if (appUser != null && appUser.getRoles() != null) {
@@ -76,10 +73,22 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException {
+
+        AppUser appUser = appUserRepository.findByUsername(((User) auth.getPrincipal()).getUsername());
+
+        Set<String> grantedAuthorities = new HashSet<>();
+
+        if (appUser != null && appUser.getRoles() != null) {
+            for (Role role : appUser.getRoles()) {
+                grantedAuthorities.add(role.getName());
+            }
+        }
+
         //Создаем токен. Subject - имя пользователя. Механизм шифрования - HMAC512.
         String token = JWT.create()
                 .withSubject(((User) auth.getPrincipal()).getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .withArrayClaim("roles", grantedAuthorities.stream().toArray(String[]::new))
                 .sign(HMAC512(SECRET.getBytes()));
 
         //в заголовок ответа добавляем сгенерированный JWT токен

@@ -4,6 +4,7 @@ import {FbAuthResponse, Role, User} from '../../../shared/interfaces';
 import {Observable, Subject, throwError} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
+import jwt_decode from "jwt-decode";
 
 @Injectable()
 export class AuthService{
@@ -37,7 +38,6 @@ export class AuthService{
     const tmp = this.http.post<HttpResponse<any>>(`http://localhost:8080/login`,user, {observe: 'response'})
     .pipe(tap(response =>{
       this.setToken(response)
-      console.log("TTTTT")
       console.log(response.headers.get("authorization"))
     }),
       catchError(this.hadleError.bind(this)))
@@ -58,8 +58,8 @@ export class AuthService{
     return !!this.token
   }
 
-  checkRole(roleName: String): boolean{
-    if (this.role == roleName){
+  checkRole(roleName: string): boolean{
+    if (this.role.includes(roleName)){
       return true
     }else{
       return false
@@ -87,14 +87,13 @@ export class AuthService{
   }
 
   private setToken(response: HttpResponse<any> | null){
-    console.log("AAAA")
-    console.log(response)
-    console.log("AAAA2")
     if (response) {
-      const expDate = new Date(new Date().getTime() + +36000000 * 1000)//исправить время
+      const decoded = jwt_decode(response.headers.get("authorization"))
+      const expDate = new Date( +decoded.exp * 1000)
+      console.log(expDate)
       localStorage.setItem('fb-token', response.headers.get("authorization"))
       localStorage.setItem('fb-token-exp', expDate.toString())
-      localStorage.setItem('role', Role.User)//заглушка, тоже надо исправить
+      localStorage.setItem('role', decoded.roles)
     }else{
       localStorage.clear()
     }
