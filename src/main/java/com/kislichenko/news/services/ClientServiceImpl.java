@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ClientServiceImpl{
+public class ClientServiceImpl {
 
     private final ClientRepository clientRepository;
 
@@ -19,7 +19,7 @@ public class ClientServiceImpl{
         clientRepository.save(client);
     }
 
-    public List<Client>  readAll() {
+    public List<Client> readAll() {
         return clientRepository.findAll();
     }
 

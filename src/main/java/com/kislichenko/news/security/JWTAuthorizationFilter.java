@@ -26,11 +26,11 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest req,
                                     HttpServletResponse res,
-                                    FilterChain chain) throws IOException, ServletException{
+                                    FilterChain chain) throws IOException, ServletException {
         String header = req.getHeader(HEADER_STRING);
 
         //проверка того, что извлеченный заголовок не пустой и имеет префих Bearer
-        if (header == null || !header.startsWith(TOKEN_PREFIX)){
+        if (header == null || !header.startsWith(TOKEN_PREFIX)) {
             //вызов следующего фильтра в цепочке
             chain.doFilter(req, res);
             return;
@@ -45,17 +45,17 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
 
-    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request){
+    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String token = request.getHeader(HEADER_STRING);
-        if(token != null) {
+        if (token != null) {
             //верификаця полученного в заголовке токена без префикса
             String user = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
                     .build()
                     .verify(token.replace(TOKEN_PREFIX, ""))
                     .getSubject();
-            if(user != null){
+            if (user != null) {
                 //внутренний токе Spring Security
-                return  new UsernamePasswordAuthenticationToken(
+                return new UsernamePasswordAuthenticationToken(
                         user,
                         null,
                         new ArrayList<>());

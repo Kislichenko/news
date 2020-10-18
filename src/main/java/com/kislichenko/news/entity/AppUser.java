@@ -18,7 +18,7 @@ public class AppUser {
     private Long id;
 
     @NotBlank(message = "Name is mandatory")
-    @Column(unique=true)
+    @Column(unique = true)
     private String username;
 
     @NotBlank(message = "password is mandatory")
@@ -27,7 +27,7 @@ public class AppUser {
     @Transient
     private String confirmPassword;
 
-    @ManyToMany (fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;

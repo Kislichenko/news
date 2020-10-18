@@ -18,7 +18,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name", unique=true)
+    @Column(name = "name", unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)

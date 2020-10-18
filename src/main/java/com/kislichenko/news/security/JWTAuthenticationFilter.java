@@ -50,7 +50,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
-            if(appUser != null && appUser.getRoles() != null) {
+            if (appUser != null && appUser.getRoles() != null) {
                 for (Role role : appUser.getRoles()) {
                     grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
                 }
@@ -74,7 +74,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest req,
                                             HttpServletResponse res,
                                             FilterChain chain,
-                                            Authentication auth) throws IOException{
+                                            Authentication auth) throws IOException {
         //Создаем токен. Subject - имя пользователя. Механизм шифрования - HMAC512.
         String token = JWT.create()
                 .withSubject(((User) auth.getPrincipal()).getUsername())

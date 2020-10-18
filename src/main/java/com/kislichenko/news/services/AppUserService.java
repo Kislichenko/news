@@ -19,13 +19,13 @@ public class AppUserService {
     public AppUserService(
             AppUserRepository appUserRepository,
             BCryptPasswordEncoder bCryptPasswordEncoder,
-            RoleRepository roleRepository){
+            RoleRepository roleRepository) {
         this.appUserRepository = appUserRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.roleRepository = roleRepository;
     }
 
-    public void registration(AppUser user){
+    public void registration(AppUser user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         Set<Role> roles = new HashSet<>();
