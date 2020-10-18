@@ -33,6 +33,17 @@ export class AuthService{
     })
   };
 
+  register(user: User): Observable<any>{
+    const tmp = this.http.post<HttpResponse<any>>(`http://localhost:8080/sign-up`,user, {observe: 'response'})
+      .pipe(tap(response =>{
+          console.log("Registration")
+          console.log(response)
+        }),
+        catchError(this.hadleError.bind(this)))
+
+    return tmp
+  }
+
   login(user: User): Observable<any>{
     //user.returnSecureToken = true
     const tmp = this.http.post<HttpResponse<any>>(`http://localhost:8080/login`,user, {observe: 'response'})

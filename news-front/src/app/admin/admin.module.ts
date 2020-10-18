@@ -13,6 +13,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './shared/services/auth.service';
 import {SharedModule} from '../shared/shared.module';
 import {AuthGuard} from './shared/services/auth.guard';
+import { RegPageComponent } from './reg-page/reg-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {AuthGuard} from './shared/services/auth.guard';
     EditRequestComponent,
     ReportDashboardComponent,
     CreateReportComponent,
-    EditReportComponent
+    EditReportComponent,
+    RegPageComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import {AuthGuard} from './shared/services/auth.guard';
       {
         path: '', component: AdminLayoutComponent, children: [
           {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
+          {path: 'sign-up', component: RegPageComponent},
           {path: 'login', component: LoginPageComponent},
           {path: 'dashboard', component: AdvertiserDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
           {path: 'create', component: CreateRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_AD_MANAGER'}},

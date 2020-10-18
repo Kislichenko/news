@@ -15,6 +15,15 @@
     </li>
   </ul>
 
+  <ul *ngIf = "auth.isAuthenticated() == false">
+    <li routerLinkActive="active">
+      <a [routerLink]="['/admin', 'sign-up']">Регистрация</a>
+    </li>
+    <li routerLinkActive="active">
+      <a [routerLink]="['/admin', 'login']">Войти</a>
+    </li>
+  </ul>
+
 </nav>
 
 <div class="container">
