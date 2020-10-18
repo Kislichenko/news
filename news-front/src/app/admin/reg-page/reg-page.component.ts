@@ -23,15 +23,36 @@ export class RegPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
+      username: new FormControl(null, [
+        Validators.required
+      ]),
       email: new FormControl(null, [
         Validators.required,
         Validators.email
+      ]),
+      name: new FormControl(null, [
+        Validators.required
+      ]),
+      surname: new FormControl(null, [
+        Validators.required
       ]),
       password: new FormControl(null, [
         Validators.required,
         Validators.minLength(6)
       ]),
+      confirmPassword: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(6)
+      ])
+    }, {
+      validators: this.password.bind(this)
     })
+  }
+
+  password(formGroup: FormGroup) {
+    const { value: password } = formGroup.get('password');
+    const { value: confirmPassword } = formGroup.get('confirmPassword');
+    return password === confirmPassword ? null : { passwordNotMatch: true };
   }
 
   submit(){
@@ -42,8 +63,12 @@ export class RegPageComponent implements OnInit {
     this.submitted = true
 
     const user: User = {
-      username: this.form.value.email,
-      password: this.form.value.password
+      username: this.form.value.username,
+      password: this.form.value.password,
+      email: this.form.value.email,
+      name: this.form.value.name,
+      surname: this.form.value.surname,
+      confirmPassword: this.form.value.confirmPassword
     }
 
     this.auth.register(user).subscribe(()=>{

@@ -18,6 +18,10 @@ export class AuthService{
     return localStorage.getItem('role')
   }
 
+  get username(): string{
+    return localStorage.getItem('username')
+  }
+
   get token(): string{
     const expDate = new Date(localStorage.getItem('fb-token-exp'))
     if (new Date() > expDate){
@@ -78,6 +82,7 @@ export class AuthService{
   }
 
   private hadleError(error: HttpErrorResponse){
+    console.log(error)
     const {message} = error.error.error
 
     switch (message) {
@@ -101,9 +106,9 @@ export class AuthService{
     if (response) {
       const decoded = jwt_decode(response.headers.get("authorization"))
       const expDate = new Date( +decoded.exp * 1000)
-      console.log(expDate)
       localStorage.setItem('fb-token', response.headers.get("authorization"))
       localStorage.setItem('fb-token-exp', expDate.toString())
+      localStorage.setItem('username', decoded.sub)
       localStorage.setItem('role', decoded.roles)
     }else{
       localStorage.clear()

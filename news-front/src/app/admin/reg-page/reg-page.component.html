@@ -11,6 +11,20 @@
 
   <div
     class="form-control"
+    [ngClass]="{invalid: form.get('username').touched && form.get('username').invalid}">
+    <label for="username">Логин:</label>
+    <input id="username" type="text" formControlName="username">
+    <div
+      *ngIf="form.get('username').touched && form.get('username').invalid"
+      class="validation">
+      <small *ngIf="form.get('username').errors.required">
+        Введите логин:
+      </small>
+    </div>
+  </div>
+
+  <div
+    class="form-control"
     [ngClass]="{invalid: form.get('email').touched && form.get('email').invalid}">
     <label for="email">Email:</label>
     <input id="email" type="email" formControlName="email">
@@ -22,6 +36,34 @@
       </small>
       <small *ngIf="form.get('email').errors.email">
         Email некорректный
+      </small>
+    </div>
+  </div>
+
+  <div
+    class="form-control"
+    [ngClass]="{invalid: form.get('name').touched && form.get('name').invalid}">
+    <label for="name">Имя:</label>
+    <input id="name" type="text" formControlName="name">
+    <div
+      *ngIf="form.get('name').touched && form.get('name').invalid"
+      class="validation">
+      <small *ngIf="form.get('name').errors.required">
+        Введите свое имя
+      </small>
+    </div>
+  </div>
+
+  <div
+    class="form-control"
+    [ngClass]="{invalid: form.get('surname').touched && form.get('surname').invalid}">
+    <label for="surname">Фамилия:</label>
+    <input id="surname" type="text" formControlName="surname">
+    <div
+      *ngIf="form.get('surname').touched && form.get('surname').invalid"
+      class="validation">
+      <small *ngIf="form.get('surname').errors.required">
+        Введите свою Фамилию
       </small>
     </div>
   </div>
@@ -43,6 +85,21 @@
         символов. Сейчас он
         {{form.get('password').errors.minlength.actualLength}}
         символа.
+      </small>
+    </div>
+  </div>
+
+  <div
+    class="form-control"
+    [ngClass]="{invalid: form.get('confirmPassword').touched && form.get('confirmPassword').invalid}">
+    <label for="confirmPassword">Повторите пароль:</label>
+    <input id="confirmPassword" type="password" formControlName="confirmPassword">
+    <div
+      *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').invalid
+      || form.get('confirmPassword').touched && form.errors != null && form.errors.passwordNotMatch == true"
+      class="validation">
+      <small *ngIf="form.errors.passwordNotMatch != null">
+        Пароли не совпадают
       </small>
     </div>
   </div>

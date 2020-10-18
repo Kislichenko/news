@@ -29,9 +29,8 @@ export class LoginPageComponent implements OnInit {
     })
 
     this.form = new FormGroup({
-      email: new FormControl(null, [
-        Validators.required,
-        Validators.email
+      username: new FormControl(null, [
+        Validators.required
       ]),
       password: new FormControl(null, [
         Validators.required,
@@ -48,13 +47,17 @@ export class LoginPageComponent implements OnInit {
     this.submitted = true
 
     const user: User = {
-      username: this.form.value.email,
+      username: this.form.value.username,
       password: this.form.value.password
     }
 
     this.auth.login(user).subscribe(()=>{
       this.form.reset()
-      this.router.navigate(['/admin', 'dashboard'])
+      if(this.auth.role.includes(Role.User)){
+        this.router.navigate(['/admin', this.auth.username , 'dashboard'])
+      }else if(this.auth.role.includes(Role.AdManager)){
+        this.router.navigate(['/admin', this.auth.username,'dashboard'])
+      }
       this.submitted = false
     }, () => {
       this.submitted = false
