@@ -1,6 +1,5 @@
 package com.kislichenko.news.errors;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -12,13 +11,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.logging.Logger;
 
+//handler для фильтра авторизации
 @Component
 public class FilterChainExceptionHandler extends OncePerRequestFilter {
 
     @Autowired
-    @Qualifier("handlerExceptionResolver")
+    @Qualifier("handlerExceptionResolver") //задаем имя бина
     private HandlerExceptionResolver resolver;
 
     @Override
@@ -28,7 +27,6 @@ public class FilterChainExceptionHandler extends OncePerRequestFilter {
         try {
             filterChain.doFilter(request, response);
         } catch (Exception e) {
-            System.out.println("ERRRROR");
             resolver.resolveException(request, response, null, e);
         }
     }

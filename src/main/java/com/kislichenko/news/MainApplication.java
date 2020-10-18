@@ -10,6 +10,7 @@ public class MainApplication {
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
+        //использует функцию сильного хеширования BCrypt
         return new BCryptPasswordEncoder();
     }
 

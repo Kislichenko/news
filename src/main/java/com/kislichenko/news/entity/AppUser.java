@@ -18,6 +18,7 @@ public class AppUser {
     private Long id;
 
     @NotBlank(message = "Name is mandatory")
+    @Column(unique=true)
     private String username;
 
     @NotBlank(message = "password is mandatory")
