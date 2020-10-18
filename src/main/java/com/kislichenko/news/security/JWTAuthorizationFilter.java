@@ -2,8 +2,14 @@ package com.kislichenko.news.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.kislichenko.news.dao.AppUserRepository;
+import com.kislichenko.news.entity.AppUser;
+import com.kislichenko.news.entity.Role;
+import lombok.Setter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -13,11 +19,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.kislichenko.news.security.SecurityConstants.*;
 
 //авторизация - проверка прав доступа залогиненного пользователя
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
+
+    @Setter
+    private AppUserRepository appUserRepository;
 
     public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
@@ -53,12 +64,25 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                     .build()
                     .verify(token.replace(TOKEN_PREFIX, ""))
                     .getSubject();
+            System.out.println("AUTH: "+user);
+
             if (user != null) {
-                //внутренний токе Spring Security
+
+                AppUser appUser = appUserRepository.findByUsername(user);
+
+                Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+
+                if (appUser != null && appUser.getRoles() != null) {
+                    for (Role role : appUser.getRoles()) {
+                        grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+                    }
+                }
+
+                //внутренний токен Spring Security
                 return new UsernamePasswordAuthenticationToken(
                         user,
                         null,
-                        new ArrayList<>());
+                        grantedAuthorities);
             }
             return null;
         }

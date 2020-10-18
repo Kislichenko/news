@@ -23,13 +23,23 @@ public class AppUserService {
         this.appUserRepository = appUserRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.roleRepository = roleRepository;
+
+        if(appUserRepository.findByUsername("admin") == null) {
+            AppUser admin = new AppUser();
+            admin.setUsername("admin");
+            admin.setPassword(bCryptPasswordEncoder.encode("password"));
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleRepository.findByName("ROLE_ADMIN"));
+            admin.setRoles(roles);
+            appUserRepository.save(admin);
+        }
     }
 
     public void registration(AppUser user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         Set<Role> roles = new HashSet<>();
-        roles.add(roleRepository.getOne(1L));
+        roles.add(roleRepository.findByName("ROLE_USER"));
         user.setRoles(roles);
 
         appUserRepository.save(user);

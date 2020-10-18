@@ -63,9 +63,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     //handler для отлова ошибок типа RuntimeException в контроллерах
     @ExceptionHandler(RuntimeException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResponseEntity<Object> processRuntimeException(RuntimeException ex) {
-        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR);
+        ApiError apiError = new ApiError(HttpStatus.FORBIDDEN);
         apiError.setMessage(ex.getMessage());
         return buildResponseEntity(apiError);
     }

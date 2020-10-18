@@ -5,6 +5,7 @@ import com.kislichenko.news.errors.FilterChainExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -19,6 +20,7 @@ import java.util.Arrays;
 import static com.kislichenko.news.security.SecurityConstants.SIGN_UP_URL;
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -37,14 +39,18 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        JWTAuthorizationFilter jwtAuthorizationFilter = new JWTAuthorizationFilter(authenticationManager());
+        jwtAuthorizationFilter.setAppUserRepository(appUserRepository);
+
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers("/secret/**").hasAnyRole("ADMIN", "ADMIN1")
+                //.antMatchers("/change-role").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager(), appUserRepository))
-                .addFilterBefore(filterChainExceptionHandler, (new JWTAuthorizationFilter(authenticationManager())).getClass())
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                .addFilterBefore(filterChainExceptionHandler, jwtAuthorizationFilter.getClass())
+                .addFilter(jwtAuthorizationFilter)
                 //отключение сессий в Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
