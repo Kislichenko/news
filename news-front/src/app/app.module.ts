@@ -10,19 +10,22 @@ import { PostComponent } from './shared/components/post/post.component';
 import {SharedModule} from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainLayoutComponent,
-    RequestPageComponent,
-    HomePageComponent,
-    PostComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    SharedModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        MainLayoutComponent,
+        RequestPageComponent,
+        HomePageComponent,
+        PostComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        SharedModule
+    ],
+    providers: [],
+    exports: [
+        AppComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

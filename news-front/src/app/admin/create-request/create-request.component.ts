@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ReqData} from '../../shared/interfaces';
 
 @Component({
   selector: 'app-create-request',
@@ -7,9 +9,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateRequestComponent implements OnInit {
 
+  form: FormGroup;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.form = new FormGroup({
+      subject: new FormControl(null, [
+        Validators.required
+      ]),
+      duration: new FormControl(null, [
+        Validators.required
+      ]),
+      legaldata: new FormControl(null, [
+        Validators.required
+      ]),
+      wishes: new FormControl(null, [
+        Validators.required
+      ]),
+
+    })
+  }
+
+  submit(){
+    if(this.form.invalid){
+      return
+    }
+
+    const reqData: ReqData ={
+      subject: this.form.value.subject,
+      duration: this.form.value.duration,
+      legaldata: this.form.value.legaldata,
+      date: new Date()
+
+    }
   }
 
 }

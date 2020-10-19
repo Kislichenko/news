@@ -20,3 +20,11 @@ export enum Role{
   InfoManager = "ROLE_INFO_MANAGER",
   Repoter = "REPORTER"
 }
+
+export interface ReqData {
+  id?: string
+  subject: string
+  duration: string
+  legaldata: string
+  date: Date
+}

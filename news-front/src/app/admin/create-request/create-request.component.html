@@ -1,1 +1,55 @@
-<p>create-request works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <h1>Создание новой заявки</h1>
+
+  <div
+    class="form-control"
+    [ngClass]="{invalid: form.get('subject').touched && form.get('subject').invalid}">
+    <label for="subject">Тематика:</label>
+    <input id="subject" type="text" formControlName="subject">
+    <div
+      *ngIf="form.get('subject').touched && form.get('subject').invalid"
+      class="validation">
+      <small *ngIf="form.get('subject').errors.required">
+        Введите тематику
+      </small>
+    </div>
+  </div>
+
+  <div
+    class="form-control"
+    [ngClass]="{invalid: form.get('duration').touched && form.get('duration').invalid}">
+    <label for="duration">Длительность размещения:</label>
+    <input id="duration" type="text" formControlName="duration">
+    <div
+      *ngIf="form.get('duration').touched && form.get('duration').invalid"
+      class="validation">
+      <small *ngIf="form.get('duration').errors.required">
+        Введите длительность размещения рекламного блока
+      </small>
+    </div>
+  </div>
+
+  <div
+    class="form-control"
+    [ngClass]="{invalid: form.get('legaldata').touched && form.get('legaldata').invalid}">
+    <label for="legaldata">Юридические данные:</label>
+    <input id="legaldata" type="text" formControlName="legaldata">
+    <div
+      *ngIf="form.get('legaldata').touched && form.get('legaldata').invalid"
+      class="validation">
+      <small *ngIf="form.get('legaldata').errors.required">
+        Введите юридические данные
+      </small>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label>Пожелания:</label>
+    <quill-editor formControlName="wishes"></quill-editor>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-block btn-dark"
+    [disabled]="form.invalid">Создать заявку</button>
+</form>
