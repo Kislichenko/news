@@ -16,12 +16,14 @@ export class CreateRequestComponent implements OnInit {
     private reqdataService: ReqdataService
   ) { }
 
+  datePickerConfig = {
+    drops: 'up',
+    format: 'YY/M/D'
+  }
+
   ngOnInit(): void {
     this.form = new FormGroup({
       subject: new FormControl(null, [
-        Validators.required
-      ]),
-      duration: new FormControl(null, [
         Validators.required
       ]),
       legaldata: new FormControl(null, [
@@ -30,6 +32,13 @@ export class CreateRequestComponent implements OnInit {
       wishes: new FormControl(null, [
         Validators.required
       ]),
+      startdate: new FormControl(null, [
+        Validators.required
+      ]),
+      enddate: new FormControl(null, [
+        Validators.required
+      ]),
+
 
     })
   }
@@ -41,7 +50,8 @@ export class CreateRequestComponent implements OnInit {
 
     const reqData: ReqData ={
       subject: this.form.value.subject,
-      duration: this.form.value.duration,
+      startdate: this.form.value.startdate._d,
+      enddate: this.form.value.enddate._d,
       legaldata: this.form.value.legaldata,
       date: new Date()
     }

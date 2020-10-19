@@ -13,6 +13,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 import {AuthGuard} from './shared/services/auth.guard';
 import { RegPageComponent } from './reg-page/reg-page.component';
+import {DpDatePickerModule} from 'ng2-date-picker';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { RegPageComponent } from './reg-page/reg-page.component';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    DpDatePickerModule,
     //т.к. мы используем не корневой модуль, а мы используем дочерний модуль, к которому
     //в последствии будем применять lazy load.
     RouterModule.forChild([

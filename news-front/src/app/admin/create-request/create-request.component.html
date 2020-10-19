@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
   <h1>Создание новой заявки</h1>
-
+  
   <div
     class="form-control"
     [ngClass]="{invalid: form.get('subject').touched && form.get('subject').invalid}">
@@ -17,14 +17,28 @@
 
   <div
     class="form-control"
-    [ngClass]="{invalid: form.get('duration').touched && form.get('duration').invalid}">
-    <label for="duration">Длительность размещения:</label>
-    <input id="duration" type="text" formControlName="duration">
+    [ngClass]="{invalid: form.get('startdate').touched && form.get('startdate').invalid}">
+    <label for="startdate">Дата начала размещения: </label>
+    <dp-date-picker id="startdate" #dayPicker theme="dp-material" formControlName="startdate"></dp-date-picker>
     <div
-      *ngIf="form.get('duration').touched && form.get('duration').invalid"
+      *ngIf="form.get('startdate').touched && form.get('startdate').invalid"
       class="validation">
-      <small *ngIf="form.get('duration').errors.required">
-        Введите длительность размещения рекламного блока
+      <small *ngIf="form.get('startdate').errors.required">
+        Введите дату начала размещения рекламного блока
+      </small>
+    </div>
+  </div>
+
+  <div
+    class="form-control"
+    [ngClass]="{invalid: form.get('enddate').touched && form.get('enddate').invalid}">
+    <label for="enddate">Дата окончания размещения: </label>
+    <dp-date-picker id="enddate" #dayPicker theme="dp-material" formControlName="enddate"></dp-date-picker>
+    <div
+      *ngIf="form.get('enddate').touched && form.get('enddate').invalid"
+      class="validation">
+      <small *ngIf="form.get('enddate').errors.required">
+        Введите дату окончания размещения рекламного блока
       </small>
     </div>
   </div>

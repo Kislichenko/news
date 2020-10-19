@@ -24,7 +24,8 @@ export enum Role{
 export interface ReqData {
   id?: string
   subject: string
-  duration: string
+  startdate: Date
+  enddate: Date
   legaldata: string
   date: Date
 }
