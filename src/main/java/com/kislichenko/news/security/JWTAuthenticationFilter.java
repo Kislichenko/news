@@ -50,7 +50,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             AppUser credential = new ObjectMapper()
                     .readValue(req.getInputStream(), AppUser.class);
 
-            System.out.println(credential.getUsername());
             AppUser appUser = appUserRepository.findByUsername(credential.getUsername());
 
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
@@ -71,7 +70,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                             grantedAuthorities)
             );
         } catch (IOException e) {
-            System.out.println("TTTT2");
             throw new RuntimeException(e);
         }
     }
@@ -79,7 +77,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         SecurityContextHolder.clearContext();
-        System.out.println(failed.getMessage());
 
         ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED);
         apiError.setError(failed.getMessage().toUpperCase().replaceAll(" ", "_"));

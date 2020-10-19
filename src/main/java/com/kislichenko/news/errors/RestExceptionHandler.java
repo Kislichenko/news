@@ -1,6 +1,11 @@
 package com.kislichenko.news.errors;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
+import com.kislichenko.news.exceptions.ClientNotFoundException;
 import org.hibernate.JDBCException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,22 +53,32 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
             HttpStatus status,
             WebRequest request) {
         final List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
+
         Map<String, Set<String>> errorsMap = fieldErrors.stream().collect(
                 Collectors.groupingBy(FieldError::getField,
                         Collectors.mapping(FieldError::getDefaultMessage, Collectors.toSet())
                 )
         );
-        return new ResponseEntity(errorsMap.isEmpty() ? ex : errorsMap, headers, status);
+
+        ApiError apiError = new ApiError(status);
+        apiError.setError("ARGUMENT_NOT_VALID");
+
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+
+            apiError.setMessage(errorsMap.toString());
+
+
+        return new ResponseEntity(apiError, headers, status);
     }
 
     @ExceptionHandler(JWTVerificationException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ResponseEntity<Object> processRuntimeException(JWTVerificationException ex) {
+    public ResponseEntity<Object> processJWTVerificationException(JWTVerificationException ex) {
         logger.debug("JWT is not verificated!");
 
         ApiError apiError = new ApiError(HttpStatus.FORBIDDEN);
         apiError.setError("INVALID_JWT");
-        apiError.setMessage("JWT токен невалидный");
+        apiError.setMessage("JWT token is not valid");
 
         return buildResponseEntity(apiError);
     }
@@ -75,7 +90,19 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
         apiError.setError(getErrorFromJDBCException(ex.getSQLException().getMessage()));
-        apiError.setMessage(ex.getSQLException().getMessage());
+        apiError.setMessage(getErrorFromJDBCException(ex.getSQLException().getMessage()));
+
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(ClientNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Object> processClientNotFoundException(ClientNotFoundException ex) {
+        logger.debug("ClientNotFoundException is catched!");
+
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND);
+        apiError.setError("NOT_FOUND");
+        apiError.setMessage(ex.getMessage());
 
         return buildResponseEntity(apiError);
     }

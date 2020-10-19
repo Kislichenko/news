@@ -2,6 +2,8 @@ package com.kislichenko.news.controller;
 
 import com.kislichenko.news.entity.AppUser;
 import com.kislichenko.news.services.AppUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +11,7 @@ import javax.validation.Valid;
 
 @RestController
 public class UserController {
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private AppUserService appUserService;
 
@@ -19,7 +22,7 @@ public class UserController {
     @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void registration(@Valid @RequestBody AppUser user) {
-        System.out.println("SIGN-UP");
+        logger.debug("SIGN-UP");
         appUserService.registration(user);
     }
 

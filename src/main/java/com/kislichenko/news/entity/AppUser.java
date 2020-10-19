@@ -17,7 +17,7 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "Name is mandatory")
+    @NotBlank(message = "username is mandatory")
     @Column(unique = true)
     private String username;
 

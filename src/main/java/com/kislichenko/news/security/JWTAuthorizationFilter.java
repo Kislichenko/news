@@ -63,7 +63,6 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                     .build()
                     .verify(token.replace(TOKEN_PREFIX, ""))
                     .getSubject();
-            System.out.println("AUTH: " + user);
 
             if (user != null) {
 
