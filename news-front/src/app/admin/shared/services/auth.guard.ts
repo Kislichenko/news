@@ -36,7 +36,7 @@ export class AuthGuard implements CanActivate{
       const userRole = this.auth.role;
       if (route.data.role && route.data.role.indexOf(userRole) === -1) {
         this.auth.logout()
-        this.router.navigate(['/admin', 'login'], {
+        this.router.navigate(['/cabinet', 'login'], {
           queryParams:{
             loginAgain: true
           }

@@ -54,9 +54,9 @@ export class LoginPageComponent implements OnInit {
     this.auth.login(user).subscribe(()=>{
       this.form.reset()
       if(this.auth.role.includes(Role.User)){
-        this.router.navigate(['/admin', this.auth.username , 'dashboard'])
+        this.router.navigate(['/cabinet', 'user' , 'dashboard'])
       }else if(this.auth.role.includes(Role.AdManager)){
-        this.router.navigate(['/admin', this.auth.username,'dashboard'])
+        this.router.navigate(['/cabinet', 'admanager','dashboard'])
       }
       this.submitted = false
     }, () => {

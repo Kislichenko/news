@@ -5,10 +5,10 @@
 
   <ul *ngIf="auth.isAuthenticated()">
     <li routerLinkActive="active" *ngIf="auth.checkRole(role.User)">
-      <a [routerLink]="['/admin', this.auth.username,'dashboard']">Главная</a>
+      <a [routerLink]="['/cabinet', 'user','dashboard']">Главная</a>
     </li>
     <li routerLinkActive="active" *ngIf="auth.checkRole(role.User)">
-      <a [routerLink]="['/admin', this.auth.username,'create']">Создать</a>
+      <a [routerLink]="['/cabinet', 'user','create']">Создать</a>
     </li>
     <li>
       <a href="#" (click)="logout($event)">Выйти</a>
@@ -17,10 +17,10 @@
 
   <ul *ngIf = "auth.isAuthenticated() == false">
     <li routerLinkActive="active">
-      <a [routerLink]="['/admin', 'sign-up']">Регистрация</a>
+      <a [routerLink]="['/cabinet', 'sign-up']">Регистрация</a>
     </li>
     <li routerLinkActive="active">
-      <a [routerLink]="['/admin', 'login']">Войти</a>
+      <a [routerLink]="['/cabinet', 'login']">Войти</a>
     </li>
   </ul>
 

@@ -73,7 +73,7 @@ export class RegPageComponent implements OnInit {
 
     this.auth.register(user).subscribe(()=>{
       this.form.reset()
-      this.router.navigate(['/admin', 'login'])
+      this.router.navigate(['/cabinet', 'login'])
       this.submitted = false
     }, () => {
       this.submitted = false

@@ -25,7 +25,7 @@ export class AdminLayoutComponent implements OnInit {
     //отмена дефолтного поведения ссылки
     event.preventDefault()
     this.auth.logout()
-    this.router.navigate(['/admin', 'login'])
+    this.router.navigate(['/cabinet', 'login'])
   }
 
 }

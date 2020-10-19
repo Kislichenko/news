@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     //lazy loading для админского модуля
-    path: 'admin',
+    path: 'cabinet',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   }
 ];

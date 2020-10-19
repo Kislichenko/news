@@ -37,20 +37,20 @@ import { RegPageComponent } from './reg-page/reg-page.component';
     RouterModule.forChild([
       {
         path: '', component: AdminLayoutComponent, children: [
-          {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
+          {path: '', redirectTo: '/cabinet/login', pathMatch: 'full'},
           {path: 'sign-up', component: RegPageComponent},
           {path: 'login', component: LoginPageComponent},
           //{path: 'admin/dashboard', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_ADMIN'}}
-          {path: ':user/dashboard', component: AdvertiserDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
-          {path: ':user/create', component: CreateRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
-          {path: ':user/request/:id/edit', component: EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
+          {path: 'user/dashboard', component: AdvertiserDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
+          {path: 'user/create', component: CreateRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
+          {path: 'user/request/:id/edit', component: EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
           //{path: 'admanager/dashboard', component: AdmanagerDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_AD_MANAGER'}},
-          {path: ':admanager/request/:id/edit', component: EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_AD_MANAGER'}},
+          {path: 'admanager/request/:id/edit', component: EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_AD_MANAGER'}},
           //{path: 'reporter/dashboard', component:EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
-          {path: ':reporter/report/:id/edit', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
+          {path: 'reporter/report/:id/edit', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
           //{path: 'infomanager/dashboard', component:EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}},
           //{path: 'infomanager/create', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}},
-          {path: ':infomanager/report/:id/edit', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}}
+          {path: 'infomanager/report/:id/edit', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}}
 
         ]},
 
