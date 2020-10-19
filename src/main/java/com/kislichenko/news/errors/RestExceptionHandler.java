@@ -1,11 +1,7 @@
 package com.kislichenko.news.errors;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.kislichenko.news.controller.AdminController;
-import org.hibernate.HibernateException;
 import org.hibernate.JDBCException;
-import org.hibernate.exception.GenericJDBCException;
-import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
@@ -14,8 +10,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,8 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice //используется, чтобы один ExceptionHandler можно было применить к нескольким контроллерам
@@ -88,12 +80,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(apiError);
     }
 
-    private String getErrorFromJDBCException(String message){
+    private String getErrorFromJDBCException(String message) {
         String tmp = "";
-        if(message.contains("already exists")){
-            tmp = message.substring(message.lastIndexOf("Key (")+"Key (".length());
+        if (message.contains("already exists")) {
+            tmp = message.substring(message.lastIndexOf("Key (") + "Key (".length());
             tmp = tmp.substring(0, tmp.indexOf(")"));
-            return tmp.toUpperCase()+"_ALREADY_USED";
+            return tmp.toUpperCase() + "_ALREADY_USED";
         }
         return "";
     }

@@ -24,7 +24,7 @@ public class AppUserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.roleRepository = roleRepository;
 
-        if(appUserRepository.findByUsername("admin") == null) {
+        if (appUserRepository.findByUsername("admin") == null) {
             AppUser admin = new AppUser();
             admin.setUsername("admin");
             admin.setPassword(bCryptPasswordEncoder.encode("password"));

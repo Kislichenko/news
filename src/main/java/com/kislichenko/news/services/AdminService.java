@@ -18,19 +18,19 @@ public class AdminService {
 
     public AdminService(
             RoleRepository roleRepository,
-            AppUserRepository appUserRepository){
+            AppUserRepository appUserRepository) {
         this.appUserRepository = appUserRepository;
         this.roleRepository = roleRepository;
     }
 
-    public List<String> getAllRoles(){
+    public List<String> getAllRoles() {
         List<String> roleNames = new ArrayList<>();
-        List<Role> roles =  roleRepository.findAll();
+        List<Role> roles = roleRepository.findAll();
         roles.forEach(role -> roleNames.add(role.getName()));
         return roleNames;
     }
 
-    public boolean changeRoles(String username, List<String> newRoles){
+    public boolean changeRoles(String username, List<String> newRoles) {
         AppUser appUser = appUserRepository.findByUsername(username);
 
         if (appUser == null) {
@@ -39,9 +39,9 @@ public class AdminService {
 
         Set<Role> roles = new HashSet<>();
 
-        for(String newRole : newRoles){
+        for (String newRole : newRoles) {
             Role role = roleRepository.findByName(newRole);
-            if(role == null){
+            if (role == null) {
                 continue;
             }
             roles.add(role);
