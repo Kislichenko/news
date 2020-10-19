@@ -83,19 +83,17 @@ export class AuthService{
 
   private hadleError(error: HttpErrorResponse){
     console.log(error)
-    const {message} = error.error.error
+    var message = error.error.error
+    // const {message} = error.error.error
 
     switch (message) {
-      case 'EMAIL_NOT_FOUND':
-        this.error$.next('Такого email нет')
+      case 'USERNAME_ALREADY_USED':
+        console.log(error.error.error)
+        this.error$.next('Такой логин уже используется. Выберите другой!')
         break
-      case 'INVALID_EMAIL':
-        this.error$.next('Неверный email')
+      case 'BAD_CREDENTIALS':
+        this.error$.next('Неверный логин/пароль')
         break
-      case 'INVALID_PASSWORD':
-        this.error$.next('Неверный пароль')
-        break
-
     }
 
     return throwError(error)

@@ -2,18 +2,25 @@ package com.kislichenko.news.security;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.kislichenko.news.dao.AppUserRepository;
 import com.kislichenko.news.entity.AppUser;
 import com.kislichenko.news.entity.Role;
+import com.kislichenko.news.errors.ApiError;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -44,6 +51,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             AppUser credential = new ObjectMapper()
                     .readValue(req.getInputStream(), AppUser.class);
 
+            System.out.println(credential.getUsername());
             AppUser appUser = appUserRepository.findByUsername(credential.getUsername());
 
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
@@ -64,8 +72,27 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                             grantedAuthorities)
             );
         } catch (IOException e) {
+            System.out.println("TTTT2");
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        SecurityContextHolder.clearContext();
+        System.out.println(failed.getMessage());
+
+        ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED);
+        apiError.setError(failed.getMessage().toUpperCase().replaceAll(" ", "_"));
+        apiError.setMessage(failed.getMessage());
+
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.addHeader("Content-Type", "application/json");
+        response.getWriter().write(ow.writeValueAsString(apiError));
+        response.getWriter().flush();
+        response.getWriter().close();
     }
 
     @Override

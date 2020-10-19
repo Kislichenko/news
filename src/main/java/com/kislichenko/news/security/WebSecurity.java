@@ -41,6 +41,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         JWTAuthorizationFilter jwtAuthorizationFilter = new JWTAuthorizationFilter(authenticationManager());
         jwtAuthorizationFilter.setAppUserRepository(appUserRepository);
+        JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(authenticationManager(), appUserRepository);
 
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
@@ -48,7 +49,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/change-role").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager(), appUserRepository))
+                .addFilterBefore(filterChainExceptionHandler, jwtAuthenticationFilter.getClass())
+                .addFilter(jwtAuthenticationFilter)
                 .addFilterBefore(filterChainExceptionHandler, jwtAuthorizationFilter.getClass())
                 .addFilter(jwtAuthorizationFilter)
                 //отключение сессий в Spring Security

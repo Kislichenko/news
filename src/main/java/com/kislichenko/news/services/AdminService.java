@@ -30,11 +30,11 @@ public class AdminService {
         return roleNames;
     }
 
-    public void changeRoles(String username, List<String> newRoles){
+    public boolean changeRoles(String username, List<String> newRoles){
         AppUser appUser = appUserRepository.findByUsername(username);
 
         if (appUser == null) {
-            return;
+            return false;
         }
 
         Set<Role> roles = new HashSet<>();
@@ -48,5 +48,7 @@ public class AdminService {
         }
         appUser.setRoles(roles);
         appUserRepository.save(appUser);
+
+        return true;
     }
 }

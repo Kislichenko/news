@@ -2,6 +2,8 @@ package com.kislichenko.news.controller;
 
 import com.kislichenko.news.dto.ChangeRole;
 import com.kislichenko.news.services.AdminService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,14 +19,14 @@ public class AdminController {
 
     @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/change-role", method = RequestMethod.POST)
-    public void changeRole(@RequestBody ChangeRole changeRole){
-        System.out.println(changeRole.getUsername());
+    public ResponseEntity<String> changeRole(@RequestBody ChangeRole changeRole){
         adminService.changeRoles(changeRole.getUsername(), changeRole.getRoles());
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @Secured("ROLE_ADMIN")
     @GetMapping("roles")
-    public List<String> getRoles()  {
-        return adminService.getAllRoles();
+    public ResponseEntity<Object> getRoles()  {
+        return new ResponseEntity<>(adminService.getAllRoles(), HttpStatus.OK);
     }
 }
