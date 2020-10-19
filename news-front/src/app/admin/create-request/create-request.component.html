@@ -6,7 +6,7 @@
     [ngClass]="{invalid: form.get('type').touched && form.get('type').invalid}">
     <label for="subject">Тип рекламного блока:</label>
     <select id="type" formControlName="type">
-<!--      <option [value]="null">Select one...</option>-->
+      <option [value]="null">Select one...</option>
       <option *ngFor="let type of ePropertyType | keyvalue" [ngValue]="type.value">{{type.value}}</option>
     </select>
     <div
@@ -17,7 +17,7 @@
       </small>
     </div>
   </div>
-  
+
   <div
     class="form-control"
     [ngClass]="{invalid: form.get('subject').touched && form.get('subject').invalid}">

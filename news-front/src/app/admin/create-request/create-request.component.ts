@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ReqData, Role} from '../../shared/interfaces';
+import {AdBlockType, ReqData, Role} from '../../shared/interfaces';
 import {ReqdataService} from '../../shared/reqdata.service';
 
-const roleType: Array<string> = Object.keys(Role).filter(key => isNaN(+key));
+const adBlockType: Array<string> = Object.keys(AdBlockType).filter(key => isNaN(+key));
 
 @Component({
   selector: 'app-create-request',
@@ -13,8 +13,7 @@ const roleType: Array<string> = Object.keys(Role).filter(key => isNaN(+key));
 export class CreateRequestComponent implements OnInit {
 
   form: FormGroup;
-  ePropertyType = roleType;
-
+  ePropertyType = adBlockType;
 
   constructor(
     private reqdataService: ReqdataService

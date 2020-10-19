@@ -21,6 +21,13 @@ export enum Role{
   Repoter = "REPORTER"
 }
 
+export enum AdBlockType{
+  Simple = "SIMPLE",
+  Big = "BIG",
+  Header = "HEADER",
+  Footer = "FOOTER"
+}
+
 
 export interface ReqData {
   id?: string
