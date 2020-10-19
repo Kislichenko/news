@@ -1,5 +1,22 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
   <h1>Создание новой заявки</h1>
+
+  <div
+    class="form-control"
+    [ngClass]="{invalid: form.get('type').touched && form.get('type').invalid}">
+    <label for="subject">Тип рекламного блока:</label>
+    <select id="type" formControlName="type">
+<!--      <option [value]="null">Select one...</option>-->
+      <option *ngFor="let type of ePropertyType | keyvalue" [ngValue]="type.value">{{type.value}}</option>
+    </select>
+    <div
+      *ngIf="form.get('type').touched && form.get('type').invalid"
+      class="validation">
+      <small *ngIf="form.get('type').errors.required">
+        Введите тип рекламного блока
+      </small>
+    </div>
+  </div>
   
   <div
     class="form-control"

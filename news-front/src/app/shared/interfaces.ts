@@ -21,11 +21,13 @@ export enum Role{
   Repoter = "REPORTER"
 }
 
+
 export interface ReqData {
   id?: string
   subject: string
   startdate: Date
   enddate: Date
   legaldata: string
-  date: Date
+  creationdate: Date
+  type: Role
 }

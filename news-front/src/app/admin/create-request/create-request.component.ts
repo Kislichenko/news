@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ReqData} from '../../shared/interfaces';
+import {ReqData, Role} from '../../shared/interfaces';
 import {ReqdataService} from '../../shared/reqdata.service';
+
+const roleType: Array<string> = Object.keys(Role).filter(key => isNaN(+key));
 
 @Component({
   selector: 'app-create-request',
@@ -11,10 +13,14 @@ import {ReqdataService} from '../../shared/reqdata.service';
 export class CreateRequestComponent implements OnInit {
 
   form: FormGroup;
+  ePropertyType = roleType;
+
 
   constructor(
     private reqdataService: ReqdataService
-  ) { }
+  ) {
+
+  }
 
   datePickerConfig = {
     drops: 'up',
@@ -38,8 +44,9 @@ export class CreateRequestComponent implements OnInit {
       enddate: new FormControl(null, [
         Validators.required
       ]),
-
-
+      type: new FormControl(null, [
+        Validators.required
+      ])
     })
   }
 
@@ -53,7 +60,8 @@ export class CreateRequestComponent implements OnInit {
       startdate: this.form.value.startdate._d,
       enddate: this.form.value.enddate._d,
       legaldata: this.form.value.legaldata,
-      date: new Date()
+      creationdate: new Date(),
+      type: this.form.value.type
     }
     this.reqdataService.create(reqData).subscribe(()=>{
       this.form.reset()
