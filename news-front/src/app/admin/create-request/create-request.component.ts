@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReqData} from '../../shared/interfaces';
+import {ReqdataService} from '../../shared/reqdata.service';
 
 @Component({
   selector: 'app-create-request',
@@ -11,7 +12,9 @@ export class CreateRequestComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() { }
+  constructor(
+    private reqdataService: ReqdataService
+  ) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -41,8 +44,12 @@ export class CreateRequestComponent implements OnInit {
       duration: this.form.value.duration,
       legaldata: this.form.value.legaldata,
       date: new Date()
-
     }
+    this.reqdataService.create(reqData).subscribe(()=>{
+      this.form.reset()
+    })
+
+    console.log(reqData)
   }
 
 }

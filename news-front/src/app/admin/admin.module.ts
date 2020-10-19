@@ -10,7 +10,6 @@ import { ReportDashboardComponent } from './report-dashboard/report-dashboard.co
 import { CreateReportComponent } from './create-report/create-report.component';
 import { EditReportComponent } from './edit-report/edit-report.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AuthService} from './shared/services/auth.service';
 import {SharedModule} from '../shared/shared.module';
 import {AuthGuard} from './shared/services/auth.guard';
 import { RegPageComponent } from './reg-page/reg-page.component';
@@ -57,7 +56,7 @@ import { RegPageComponent } from './reg-page/reg-page.component';
     ])
   ],
   exports: [RouterModule],
-  providers: [AuthService, AuthGuard]
+  providers: [AuthGuard]
 })
 export class AdminModule {
 

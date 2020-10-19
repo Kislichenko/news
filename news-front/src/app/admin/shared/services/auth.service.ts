@@ -6,7 +6,7 @@ import {environment} from '../../../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import jwt_decode from "jwt-decode";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AuthService{
 
   public error$: Subject<string> = new Subject<string>()
@@ -38,7 +38,7 @@ export class AuthService{
   };
 
   register(user: User): Observable<any>{
-    const tmp = this.http.post<HttpResponse<any>>(`http://localhost:8080/sign-up`,user, {observe: 'response'})
+    const tmp = this.http.post<HttpResponse<any>>(`${environment.backendUrl}/sign-up`,user, {observe: 'response'})
       .pipe(tap(response =>{
           console.log("Registration")
           console.log(response)
@@ -50,7 +50,7 @@ export class AuthService{
 
   login(user: User): Observable<any>{
     //user.returnSecureToken = true
-    const tmp = this.http.post<HttpResponse<any>>(`http://localhost:8080/login`,user, {observe: 'response'})
+    const tmp = this.http.post<HttpResponse<any>>(`${environment.backendUrl}/login`,user, {observe: 'response'})
     .pipe(tap(response =>{
       this.setToken(response)
       console.log(response.headers.get("authorization"))
