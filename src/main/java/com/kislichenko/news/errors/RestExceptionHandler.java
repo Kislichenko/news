@@ -1,10 +1,13 @@
 package com.kislichenko.news.errors;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.kislichenko.news.controller.AdminController;
 import org.hibernate.HibernateException;
 import org.hibernate.JDBCException;
 import org.hibernate.exception.GenericJDBCException;
 import org.postgresql.util.PSQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -32,6 +35,8 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RestControllerAdvice //используется, чтобы один ExceptionHandler можно было применить к нескольким контроллерам
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
+    Logger logger = LoggerFactory.getLogger(RestExceptionHandler.class);
+
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(
             HttpMessageNotReadableException ex,
@@ -41,16 +46,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         String error = "Malformed JSON request";
         return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, error, ex));
     }
-
-   // handler для отлова ошибок типа Exception в контроллерах
-//    @ExceptionHandler(Exception.class)
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    protected ResponseEntity<Object> handleException(
-//            Exception ex) {
-//        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR);
-//        apiError.setMessage(ex.getMessage());
-//        return buildResponseEntity(apiError);
-//    }
 
     //handler для отлова невалидных входных аргументов в контроллерах
     @Override
@@ -69,20 +64,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity(errorsMap.isEmpty() ? ex : errorsMap, headers, status);
     }
 
-    @ExceptionHandler( BadCredentialsException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ResponseEntity<Object> processAuthenticationException( BadCredentialsException ex) {
-        System.out.println(ex.getMessage());
-        ApiError apiError = new ApiError(HttpStatus.FORBIDDEN);
-        apiError.setError("INVALID_JWT");
-        apiError.setMessage("JWT токен невалидный");
-
-        return buildResponseEntity(apiError);
-    }
-
     @ExceptionHandler(JWTVerificationException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResponseEntity<Object> processRuntimeException(JWTVerificationException ex) {
+        logger.debug("JWT is not verificated!");
+
         ApiError apiError = new ApiError(HttpStatus.FORBIDDEN);
         apiError.setError("INVALID_JWT");
         apiError.setMessage("JWT токен невалидный");
@@ -93,8 +79,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(JDBCException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Object> processJDBCException(JDBCException ex) {
-        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
+        logger.debug("processJDBCException is catched!");
 
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
         apiError.setError(getErrorFromJDBCException(ex.getSQLException().getMessage()));
         apiError.setMessage(ex.getSQLException().getMessage());
 
@@ -110,15 +97,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         }
         return "";
     }
-
-    //handler для отлова ошибок типа RuntimeException в контроллерах
-//    @ExceptionHandler(RuntimeException.class)
-//    @ResponseStatus(HttpStatus.FORBIDDEN)
-//    public ResponseEntity<Object> processRuntimeException(RuntimeException ex) {
-//        ApiError apiError = new ApiError(HttpStatus.FORBIDDEN);
-//        apiError.setMessage(ex.getMessage());
-//        return buildResponseEntity(apiError);
-//    }
 
     private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
         return new ResponseEntity<>(apiError, apiError.getStatus());

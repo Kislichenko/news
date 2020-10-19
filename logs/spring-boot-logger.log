@@ -1,0 +1,160 @@
+2020-10-19 14:45:35,707 INFO org.hibernate.validator.internal.util.Version [background-preinit] HV000001: Hibernate Validator 6.1.5.Final
+2020-10-19 14:45:40,721 WARN org.springframework.boot.StartupInfoLogger [main] InetAddress.getLocalHost().getHostName() took 5003 milliseconds to respond. Please verify your network configuration (macOS machines may need to add entries to /etc/hosts).
+2020-10-19 14:45:45,760 INFO org.springframework.boot.StartupInfoLogger [main] Starting MainApplication on MacBook-Pro-bogdan.local with PID 67742 (/Users/bogdan/files/mag1/mag-sem3/dist-systems/news/news/target/classes started by bogdan in /Users/bogdan/files/mag1/mag-sem3/dist-systems/news/news)
+2020-10-19 14:45:45,761 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-10-19 14:45:46,291 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-10-19 14:45:46,340 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 43ms. Found 3 JPA repository interfaces.
+2020-10-19 14:45:46,601 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@546621c4' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-10-19 14:45:46,606 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-10-19 14:45:46,858 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2020-10-19 14:45:46,864 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2020-10-19 14:45:46,865 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2020-10-19 14:45:46,865 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-10-19 14:45:46,931 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-10-19 14:45:46,931 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1140 ms
+2020-10-19 14:45:46,995 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-10-19 14:45:47,115 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-10-19 14:45:47,152 INFO org.hibernate.jpa.internal.util.LogHelper [task-1] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-10-19 14:45:47,254 INFO org.hibernate.Version [task-1] HHH000412: Hibernate ORM core version 5.4.20.Final
+2020-10-19 14:45:47,351 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [task-1] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-10-19 14:45:47,435 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Starting...
+2020-10-19 14:45:47,498 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Start completed.
+2020-10-19 14:45:47,512 INFO org.hibernate.dialect.Dialect [task-1] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-10-19 14:45:48,216 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [task-1] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-10-19 14:45:48,225 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [task-1] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-10-19 14:45:49,206 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@24c685e7, org.springframework.security.web.context.SecurityContextPersistenceFilter@2efd2f21, org.springframework.security.web.header.HeaderWriterFilter@29079032, org.springframework.web.filter.CorsFilter@7da635c0, org.springframework.security.web.authentication.logout.LogoutFilter@7069f076, com.kislichenko.news.security.JWTAuthenticationFilter@2ed9f6f8, com.kislichenko.news.errors.FilterChainExceptionHandler@210d2a6c, com.kislichenko.news.errors.FilterChainExceptionHandler@210d2a6c, com.kislichenko.news.security.JWTAuthorizationFilter@251c4280, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@316cda31, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6b5ab2f2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@35650279, org.springframework.security.web.session.SessionManagementFilter@776015fc, org.springframework.security.web.access.ExceptionTranslationFilter@23c767e6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@114a5e0]
+2020-10-19 14:45:49,690 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2020-10-19 14:45:49,711 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2020-10-19 14:45:49,712 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-10-19 14:45:49,746 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-10-19 14:45:49,753 INFO org.springframework.boot.StartupInfoLogger [main] Started MainApplication in 24.268 seconds (JVM running for 29.995)
+2020-10-19 14:45:59,229 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-10-19 14:45:59,231 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-10-19 14:45:59,244 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 13 ms
+2020-10-19 14:45:59,347 INFO com.kislichenko.news.controller.LoggingController [http-nio-8080-exec-1] An INFO Message
+2020-10-19 14:45:59,348 WARN com.kislichenko.news.controller.LoggingController [http-nio-8080-exec-1] A WARN Message
+2020-10-19 14:45:59,348 ERROR com.kislichenko.news.controller.LoggingController [http-nio-8080-exec-1] An ERROR Message
+2020-10-19 14:49:26,721 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringContextShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-10-19 14:49:26,723 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-10-19 14:49:26,724 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown initiated...
+2020-10-19 14:49:26,729 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown completed.
+2020-10-19 14:49:46,862 INFO org.hibernate.validator.internal.util.Version [background-preinit] HV000001: Hibernate Validator 6.1.5.Final
+2020-10-19 14:49:51,875 WARN org.springframework.boot.StartupInfoLogger [main] InetAddress.getLocalHost().getHostName() took 5003 milliseconds to respond. Please verify your network configuration (macOS machines may need to add entries to /etc/hosts).
+2020-10-19 14:49:56,879 INFO org.springframework.boot.StartupInfoLogger [main] Starting MainApplication on MacBook-Pro-bogdan.local with PID 67885 (/Users/bogdan/files/mag1/mag-sem3/dist-systems/news/news/target/classes started by bogdan in /Users/bogdan/files/mag1/mag-sem3/dist-systems/news/news)
+2020-10-19 14:49:56,880 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-10-19 14:49:57,436 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-10-19 14:49:57,484 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 42ms. Found 3 JPA repository interfaces.
+2020-10-19 14:49:57,744 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@546621c4' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-10-19 14:49:57,749 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-10-19 14:49:57,975 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2020-10-19 14:49:57,981 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2020-10-19 14:49:57,982 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2020-10-19 14:49:57,982 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-10-19 14:49:58,037 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-10-19 14:49:58,038 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1097 ms
+2020-10-19 14:49:58,096 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-10-19 14:49:58,210 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-10-19 14:49:58,256 INFO org.hibernate.jpa.internal.util.LogHelper [task-1] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-10-19 14:49:58,364 INFO org.hibernate.Version [task-1] HHH000412: Hibernate ORM core version 5.4.20.Final
+2020-10-19 14:49:58,473 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [task-1] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-10-19 14:49:58,589 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Starting...
+2020-10-19 14:49:58,676 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Start completed.
+2020-10-19 14:49:58,693 INFO org.hibernate.dialect.Dialect [task-1] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-10-19 14:49:59,309 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [task-1] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-10-19 14:49:59,315 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [task-1] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-10-19 14:50:00,263 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@697d6ded, org.springframework.security.web.context.SecurityContextPersistenceFilter@151732fb, org.springframework.security.web.header.HeaderWriterFilter@1b3ab4f9, org.springframework.web.filter.CorsFilter@5d05f453, org.springframework.security.web.authentication.logout.LogoutFilter@5ef85555, com.kislichenko.news.security.JWTAuthenticationFilter@5efeb117, com.kislichenko.news.errors.FilterChainExceptionHandler@5634a861, com.kislichenko.news.errors.FilterChainExceptionHandler@5634a861, com.kislichenko.news.security.JWTAuthorizationFilter@160b4809, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@40ed1802, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7e7743ec, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@149b4d20, org.springframework.security.web.session.SessionManagementFilter@1c8f6c66, org.springframework.security.web.access.ExceptionTranslationFilter@5a08b084, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3d615b2e]
+2020-10-19 14:50:00,851 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2020-10-19 14:50:00,874 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2020-10-19 14:50:00,875 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-10-19 14:50:00,901 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-10-19 14:50:00,909 INFO org.springframework.boot.StartupInfoLogger [main] Started MainApplication in 24.302 seconds (JVM running for 30.075)
+2020-10-19 14:50:02,911 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-10-19 14:50:02,911 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-10-19 14:50:02,938 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 22 ms
+2020-10-19 14:50:03,042 INFO com.kislichenko.news.controller.LoggingController [http-nio-8080-exec-1] An INFO Message
+2020-10-19 14:50:03,042 WARN com.kislichenko.news.controller.LoggingController [http-nio-8080-exec-1] A WARN Message
+2020-10-19 14:50:03,042 ERROR com.kislichenko.news.controller.LoggingController [http-nio-8080-exec-1] An ERROR Message
+2020-10-19 14:50:16,616 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringContextShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-10-19 14:50:16,618 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-10-19 14:50:16,618 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown initiated...
+2020-10-19 14:50:16,622 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown completed.
+2020-10-19 14:50:35,529 INFO org.hibernate.validator.internal.util.Version [background-preinit] HV000001: Hibernate Validator 6.1.5.Final
+2020-10-19 14:50:40,544 WARN org.springframework.boot.StartupInfoLogger [main] InetAddress.getLocalHost().getHostName() took 5005 milliseconds to respond. Please verify your network configuration (macOS machines may need to add entries to /etc/hosts).
+2020-10-19 14:50:45,583 INFO org.springframework.boot.StartupInfoLogger [main] Starting MainApplication on MacBook-Pro-bogdan.local with PID 67928 (/Users/bogdan/files/mag1/mag-sem3/dist-systems/news/news/target/classes started by bogdan in /Users/bogdan/files/mag1/mag-sem3/dist-systems/news/news)
+2020-10-19 14:50:45,583 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.3.3.RELEASE, Spring v5.2.8.RELEASE
+2020-10-19 14:50:45,584 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-10-19 14:50:46,082 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-10-19 14:50:46,130 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 43ms. Found 3 JPA repository interfaces.
+2020-10-19 14:50:46,391 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@64aad6db' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-10-19 14:50:46,396 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-10-19 14:50:46,612 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2020-10-19 14:50:46,620 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2020-10-19 14:50:46,621 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2020-10-19 14:50:46,621 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-10-19 14:50:46,690 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-10-19 14:50:46,690 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1079 ms
+2020-10-19 14:50:46,757 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-10-19 14:50:46,903 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-10-19 14:50:46,947 INFO org.hibernate.jpa.internal.util.LogHelper [task-1] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-10-19 14:50:47,043 INFO org.hibernate.Version [task-1] HHH000412: Hibernate ORM core version 5.4.20.Final
+2020-10-19 14:50:47,140 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [task-1] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-10-19 14:50:47,213 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Starting...
+2020-10-19 14:50:47,277 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Start completed.
+2020-10-19 14:50:47,290 INFO org.hibernate.dialect.Dialect [task-1] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-10-19 14:50:47,878 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [task-1] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-10-19 14:50:47,884 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [task-1] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-10-19 14:50:48,296 DEBUG org.springframework.web.filter.GenericFilterBean [main] Filter 'filterChainExceptionHandler' configured for use
+2020-10-19 14:50:48,773 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@9a20cbd, org.springframework.security.web.context.SecurityContextPersistenceFilter@456f7d9e, org.springframework.security.web.header.HeaderWriterFilter@44286963, org.springframework.web.filter.CorsFilter@1af4955e, org.springframework.security.web.authentication.logout.LogoutFilter@19e21f89, com.kislichenko.news.security.JWTAuthenticationFilter@445821a6, com.kislichenko.news.errors.FilterChainExceptionHandler@37ad042b, com.kislichenko.news.errors.FilterChainExceptionHandler@37ad042b, com.kislichenko.news.security.JWTAuthorizationFilter@2c0c4c0a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@8f40022, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7c90b7b7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@35d26ad2, org.springframework.security.web.session.SessionManagementFilter@2b736fee, org.springframework.security.web.access.ExceptionTranslationFilter@422ad5e2, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4ea17147]
+2020-10-19 14:50:49,233 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2020-10-19 14:50:49,256 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2020-10-19 14:50:49,258 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-10-19 14:50:49,283 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-10-19 14:50:49,291 INFO org.springframework.boot.StartupInfoLogger [main] Started MainApplication in 24.009 seconds (JVM running for 29.708)
+2020-10-19 14:50:53,700 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-10-19 14:50:53,702 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2020-10-19 14:50:53,723 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 20 ms
+2020-10-19 14:50:53,844 TRACE com.kislichenko.news.controller.LoggingController [http-nio-8080-exec-2] A TRACE Message
+2020-10-19 14:50:53,844 DEBUG com.kislichenko.news.controller.LoggingController [http-nio-8080-exec-2] A DEBUG Message
+2020-10-19 14:50:53,844 INFO com.kislichenko.news.controller.LoggingController [http-nio-8080-exec-2] An INFO Message
+2020-10-19 14:50:53,845 WARN com.kislichenko.news.controller.LoggingController [http-nio-8080-exec-2] A WARN Message
+2020-10-19 14:50:53,845 ERROR com.kislichenko.news.controller.LoggingController [http-nio-8080-exec-2] An ERROR Message
+2020-10-19 14:52:22,214 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringContextShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-10-19 14:52:22,217 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-10-19 14:52:22,218 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown initiated...
+2020-10-19 14:52:22,223 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown completed.
+2020-10-19 14:52:57,242 INFO org.hibernate.validator.internal.util.Version [background-preinit] HV000001: Hibernate Validator 6.1.5.Final
+2020-10-19 14:53:02,291 WARN org.springframework.boot.StartupInfoLogger [main] InetAddress.getLocalHost().getHostName() took 5005 milliseconds to respond. Please verify your network configuration (macOS machines may need to add entries to /etc/hosts).
+2020-10-19 14:53:07,298 INFO org.springframework.boot.StartupInfoLogger [main] Starting MainApplication on MacBook-Pro-bogdan.local with PID 68048 (/Users/bogdan/files/mag1/mag-sem3/dist-systems/news/news/target/classes started by bogdan in /Users/bogdan/files/mag1/mag-sem3/dist-systems/news/news)
+2020-10-19 14:53:07,300 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.3.3.RELEASE, Spring v5.2.8.RELEASE
+2020-10-19 14:53:07,302 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-10-19 14:53:07,892 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-10-19 14:53:07,944 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 46ms. Found 3 JPA repository interfaces.
+2020-10-19 14:53:08,223 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@64aad6db' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-10-19 14:53:08,228 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-10-19 14:53:08,452 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2020-10-19 14:53:08,458 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2020-10-19 14:53:08,458 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2020-10-19 14:53:08,459 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-10-19 14:53:08,522 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-10-19 14:53:08,523 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1175 ms
+2020-10-19 14:53:08,590 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-10-19 14:53:08,745 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-10-19 14:53:08,816 INFO org.hibernate.jpa.internal.util.LogHelper [task-1] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-10-19 14:53:08,866 INFO org.hibernate.Version [task-1] HHH000412: Hibernate ORM core version 5.4.20.Final
+2020-10-19 14:53:09,048 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [task-1] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-10-19 14:53:09,124 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Starting...
+2020-10-19 14:53:09,183 INFO com.zaxxer.hikari.HikariDataSource [task-1] HikariPool-1 - Start completed.
+2020-10-19 14:53:09,196 INFO org.hibernate.dialect.Dialect [task-1] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-10-19 14:53:09,763 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [task-1] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-10-19 14:53:09,769 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [task-1] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-10-19 14:53:10,176 DEBUG org.springframework.web.filter.GenericFilterBean [main] Filter 'filterChainExceptionHandler' configured for use
+2020-10-19 14:53:10,675 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@9a20cbd, org.springframework.security.web.context.SecurityContextPersistenceFilter@456f7d9e, org.springframework.security.web.header.HeaderWriterFilter@44286963, org.springframework.web.filter.CorsFilter@1af4955e, org.springframework.security.web.authentication.logout.LogoutFilter@19e21f89, com.kislichenko.news.security.JWTAuthenticationFilter@445821a6, com.kislichenko.news.errors.FilterChainExceptionHandler@37ad042b, com.kislichenko.news.errors.FilterChainExceptionHandler@37ad042b, com.kislichenko.news.security.JWTAuthorizationFilter@2c0c4c0a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@8f40022, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7c90b7b7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@35d26ad2, org.springframework.security.web.session.SessionManagementFilter@2b736fee, org.springframework.security.web.access.ExceptionTranslationFilter@422ad5e2, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4ea17147]
+2020-10-19 14:53:10,970 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2020-10-19 14:53:10,990 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2020-10-19 14:53:10,991 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Triggering deferred initialization of Spring Data repositories…
+2020-10-19 14:53:11,016 INFO org.springframework.data.repository.config.DeferredRepositoryInitializationListener [main] Spring Data repositories initialized!
+2020-10-19 14:53:11,023 INFO org.springframework.boot.StartupInfoLogger [main] Started MainApplication in 23.983 seconds (JVM running for 29.686)
+2020-10-19 14:53:19,896 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-10-19 14:53:19,897 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2020-10-19 14:53:19,914 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 17 ms
+2020-10-19 14:53:20,087 DEBUG com.kislichenko.news.controller.AdminController [http-nio-8080-exec-2] Changing role for test@mail.ru
