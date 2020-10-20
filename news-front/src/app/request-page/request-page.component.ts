@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Params} from '@angular/router';
+import {ReqdataService} from '../shared/reqdata.service';
+import {Observable} from 'rxjs';
+import {ReqData} from '../shared/interfaces';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-request-page',
@@ -7,9 +12,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestPageComponent implements OnInit {
 
-  constructor() { }
+  reqData$: Observable<ReqData>
+
+  constructor(
+    private route: ActivatedRoute,
+    private reqdataService: ReqdataService
+  ) { }
 
   ngOnInit(): void {
+    this.reqData$ = this.route.params
+      .pipe(switchMap((params: Params) => {
+        return this.reqdataService.getById(params['id'])
+      }))
   }
 
 }

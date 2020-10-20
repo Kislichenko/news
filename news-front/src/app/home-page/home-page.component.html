@@ -1,7 +1,15 @@
-<div class="items">
-  <app-post></app-post>
-  <app-post></app-post>
-  <app-post></app-post>
-  <app-post></app-post>
-  <app-post></app-post>
+<div
+  *ngIf="reqDatas$ | async as reqDatas; else loading"
+  class="items">
+  <app-post
+    *ngFor="let reqData of reqDatas"
+    [reqData]="reqData"
+  >
+
+
+  </app-post>
 </div>
+
+<ng-template #loading>
+  <p class="text-center">Идет загрузка постов...</p>
+</ng-template>

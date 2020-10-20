@@ -1,14 +1,14 @@
 <div class="card">
   <div class="card-header">
-    <h2>Item title</h2>
-    <small>02.10.2020</small>
+    <h2>{{reqData.subject}}</h2>
+    <small>{{reqData.creationDate | date:'dd.MM.yyyy hh:mm'}}</small>
   </div>
 
   <div>
-    <small>Bogdan</small>
+    <small>{{reqData.creator}}</small>
   </div>
 
   <button
-    [routerLink]="['/request', 123]"
+    [routerLink]="['/request', reqData.id]"
     class="btn btn-dark">Открыть</button>
 </div>

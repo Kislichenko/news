@@ -1,19 +1,24 @@
-<div class="post">
-  <div class="header">
-    <h1>Request title</h1>
+<div *ngIf="reqData$ | async as reqData; else loading">
+  <div class="post">
+    <div class="header">
+      <h1>{{reqData.subject}}</h1>
 
-    <button routerLink="/" class="btn btn-link">На главную</button>
-  </div>
+      <button class="btn btn-link" routerLink="/">На главную</button>
+    </div>
 
-  <div class="info">
-    <strong>Компания</strong>
-    <small>20.10.2020</small>
-  </div>
+    <div class="info">
+      <strong>{{reqData.creator}}</strong>
+      <small>{{reqData.creationDate | date: 'medium':null:'ru'}}</small>
+    </div>
 
-  <div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet corporis debitis, dolores doloribus dolorum fugit nemo nisi nobis non numquam. At facere, minus! Animi architecto blanditiis, distinctio dolores dolorum facere fugiat fugit illum iure nam natus nesciunt, nihil nostrum nulla odio qui quia recusandae repellendus vero voluptate. Dicta doloremque, quasi.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet corporis debitis, dolores doloribus dolorum fugit nemo nisi nobis non numquam. At facere, minus! Animi architecto blanditiis, distinctio dolores dolorum facere fugiat fugit illum iure nam natus nesciunt, nihil nostrum nulla odio qui quia recusandae repellendus vero voluptate. Dicta doloremque, quasi.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet corporis debitis, dolores doloribus dolorum fugit nemo nisi nobis non numquam. At facere, minus! Animi architecto blanditiis, distinctio dolores dolorum facere fugiat fugit illum iure nam natus nesciunt, nihil nostrum nulla odio qui quia recusandae repellendus vero voluptate. Dicta doloremque, quasi.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet corporis debitis, dolores doloribus dolorum fugit nemo nisi nobis non numquam. At facere, minus! Animi architecto blanditiis, distinctio dolores dolorum facere fugiat fugit illum iure nam natus nesciunt, nihil nostrum nulla odio qui quia recusandae repellendus vero voluptate. Dicta doloremque, quasi.</p>
+    <div>
+      <quill-view-html [content]="reqData.wishes">
+
+      </quill-view-html>
+    </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <p class="text-center">Идет загрузка поста...</p>
+</ng-template>

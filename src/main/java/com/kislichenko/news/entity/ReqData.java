@@ -21,6 +21,8 @@ public class ReqData {
     private Date startDate;
     private Date endDate;
     private String legalData;
+
+    @Column(columnDefinition = "TEXT")
     private String wishes;
 
     @Column(unique = true)
