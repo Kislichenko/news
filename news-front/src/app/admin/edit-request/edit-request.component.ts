@@ -61,7 +61,7 @@ export class EditRequestComponent implements OnInit, OnDestroy {
 
     this.form.controls['startDate'].setValue(moment.from(this.form.value.startDate, 'ru','DD-MM-YYYY'));
     this.form.controls['endDate'].setValue(moment.from(this.form.value.endDate, 'ru','DD-MM-YYYY'));
-    
+
     this.uSub = this.reqdataService.update({
       ...this.reqData,
       id: this.reqData.id,

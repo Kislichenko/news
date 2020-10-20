@@ -49,14 +49,11 @@ public class ReqDataService {
 
     public List<ReqDataDto> getAllRequests() {
         List<ReqData> reqDatas = reqDataRepository.findAll();
-        System.out.println(reqDatas.size());
         List<ReqDataDto> reqDataDtos = new ArrayList<>();
         for (ReqData reqData : reqDatas) {
             ReqDataDto reqDataDto = modelMapper.map(reqData, ReqDataDto.class);
             reqDataDto.setCreator(reqData.getCreator().getUsername());
             reqDataDtos.add(reqDataDto);
-            System.out.println(reqData.isConfirm());
-            System.out.println(reqDataDto.isConfirm());
         }
 
         return reqDataDtos;
