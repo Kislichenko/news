@@ -25,8 +25,7 @@ public class UserController {
         logger.debug("SIGN-UP");
         appUserService.registration(user);
     }
-
-
+    
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String registration() {
         return "Hello World";
