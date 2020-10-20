@@ -1,5 +1,40 @@
-<p>advertiser-dashboard works!</p>
+<div *ngIf="reqDatas.length; else loading">
+  <div class="form-control">
+    <input type="text" placeholder="Найти заявку...">
+  </div>
+  <table>
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Дата создания</th>
+      <th>Тематика</th>
+      <th>Тип рекламного блока</th>
+      <th>Дата начала размещения</th>
+      <th>Дата окончания размещения</th>
+      <th>Действие</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let reqData of reqDatas; let idx = index">
+      <td>{{idx + 1}}</td>
+      <td>{{reqData.subject}}</td>
+      <td>{{reqData.creationDate | date: 'medium'}}</td>
+      <td>{{reqData.type}}</td>
+      <td>{{reqData.startDate | date: 'medium'}}</td>
+      <td>{{reqData.endDate | date: 'medium'}}</td>
+      <td>
+        <button
+          class="btn btn-link open"
+          [routerLink]="['/cabinet', 'user', 'request', reqData.id, 'edit']">
+          Открыть
+        </button>
+        <a (click)="remove(reqData.id)">Удалить</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 
-<button (click)="test()">Test token</button>
-
-
+<ng-template #loading>
+  <p class="text-center">Идет загрузка...</p>
+</ng-template>
