@@ -1,6 +1,6 @@
 <div *ngIf="reqDatas.length; else loading">
   <div class="form-control">
-    <input type="text" placeholder="Найти заявку...">
+    <input type="text" placeholder="Найти заявку..." [(ngModel)]="searchStr">
   </div>
   <table>
     <thead>
@@ -15,10 +15,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let reqData of reqDatas; let idx = index">
+    <tr *ngFor="let reqData of reqDatas | searchReqDatas:searchStr; let idx = index">
       <td>{{idx + 1}}</td>
-      <td>{{reqData.subject}}</td>
       <td>{{reqData.creationDate | date: 'medium'}}</td>
+      <td>{{reqData.subject}}</td>
       <td>{{reqData.type}}</td>
       <td>{{reqData.startDate | date: 'medium'}}</td>
       <td>{{reqData.endDate | date: 'medium'}}</td>

@@ -14,6 +14,7 @@ import {SharedModule} from '../shared/shared.module';
 import {AuthGuard} from './shared/services/auth.guard';
 import { RegPageComponent } from './reg-page/reg-page.component';
 import {DpDatePickerModule} from 'ng2-date-picker';
+import {SearchPipe} from './shared/pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {DpDatePickerModule} from 'ng2-date-picker';
     ReportDashboardComponent,
     CreateReportComponent,
     EditReportComponent,
-    RegPageComponent
+    RegPageComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,

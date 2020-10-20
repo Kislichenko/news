@@ -13,6 +13,7 @@ export class AdvertiserDashboardComponent implements OnInit, OnDestroy {
 
   reqDatas: ReqData[] = []
   pSub: Subscription
+  searchStr = ''
 
   constructor(
     private auth: AuthService,
