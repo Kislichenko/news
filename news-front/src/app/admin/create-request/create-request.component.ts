@@ -30,24 +30,12 @@ export class CreateRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      subject: new FormControl(null, [
-        Validators.required
-      ]),
-      legalData: new FormControl(null, [
-        Validators.required
-      ]),
-      wishes: new FormControl(null, [
-        Validators.required
-      ]),
-      startDate: new FormControl(null, [
-        Validators.required
-      ]),
-      endDate: new FormControl(null, [
-        Validators.required
-      ]),
-      type: new FormControl(null, [
-        Validators.required
-      ])
+      subject: new FormControl(null, [Validators.required]),
+      legalData: new FormControl(null, [Validators.required]),
+      wishes: new FormControl(null, [Validators.required]),
+      startDate: new FormControl(null, [Validators.required]),
+      endDate: new FormControl(null, [Validators.required]),
+      type: new FormControl(null, [Validators.required])
     })
   }
 
@@ -63,7 +51,8 @@ export class CreateRequestComponent implements OnInit {
       legalData: this.form.value.legalData,
       creationDate: new Date(),
       type: this.form.value.type,
-      creator: this.auth.username
+      creator: this.auth.username,
+      wishes: this.form.value.wishes
     }
     this.reqdataService.create(reqData).subscribe(()=>{
       this.form.reset()

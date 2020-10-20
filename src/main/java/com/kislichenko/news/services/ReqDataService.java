@@ -28,6 +28,15 @@ public class ReqDataService {
         reqDataRepository.deleteById(id);
     }
 
+    public ReqDataDto getRequestById(Long id){
+        if (reqDataRepository.findById(id).isPresent()) {
+            ReqDataDto reqDataDto = modelMapper.map(reqDataRepository.findById(id).get(), ReqDataDto.class);
+            return reqDataDto;
+        } else {
+            return null;
+        }
+    }
+
     public void addNewRequest(ReqDataDto reqDataDto) {
         ReqData reqData = modelMapper.map(reqDataDto, ReqData.class);
         AppUser appUser = appUserRepository.findByUsername(reqDataDto.getCreator());

@@ -1,6 +1,5 @@
 package com.kislichenko.news.controller;
 
-import com.kislichenko.news.dto.ChangeRole;
 import com.kislichenko.news.dto.ReqDataDto;
 import com.kislichenko.news.services.ReqDataService;
 import org.slf4j.Logger;
@@ -16,7 +15,7 @@ public class ReqDataController {
 
     ReqDataService reqDataService;
 
-    public ReqDataController(ReqDataService reqDataService){
+    public ReqDataController(ReqDataService reqDataService) {
         this.reqDataService = reqDataService;
     }
 
@@ -38,8 +37,16 @@ public class ReqDataController {
     @Secured("ROLE_USER")
     @DeleteMapping("requests/{id}")
     public ResponseEntity<Object> deleteRequest(@PathVariable Long id) {
-        logger.debug("Deleting request by id = "+id);
+        logger.debug("Deleting request by id = " + id);
         reqDataService.deleteRequestById(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @Secured("ROLE_USER")
+    @GetMapping("requests/{id}")
+    public ResponseEntity<ReqDataDto> getRequestById(@PathVariable Long id) {
+        logger.debug("Getting request by id = " + id);
+        ReqDataDto reqDataDto = reqDataService.getRequestById(id);
+        return new ResponseEntity<>(reqDataDto, HttpStatus.OK);
     }
 }

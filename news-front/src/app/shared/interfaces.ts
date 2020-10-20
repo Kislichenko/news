@@ -38,4 +38,5 @@ export interface ReqData {
   creationDate: Date
   type: Role
   creator: string
+  wishes: string
 }

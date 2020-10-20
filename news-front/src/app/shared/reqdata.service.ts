@@ -17,16 +17,20 @@ export class ReqdataService{
 
   getAll(): Observable<ReqData[]>{
     return this.http.get(`${environment.backendUrl}/requests`)
-      .pipe(
-        tap(response => {
-          console.log(response)
-        }),
-        map( (response: {[key: string]: any}) =>{
-          console.log(response[1])
+      .pipe(map( (response: {[key: string]: any}) =>{
         return Object.keys(response).map(key => ({
           ...response[key],
           id: response[key].id
         }))
+      }))
+  }
+
+  getById(id: string): Observable<ReqData>{
+    return this.http.get<ReqData>(`${environment.backendUrl}/requests/${id}`)
+      .pipe(map( (reqData: ReqData) =>{
+        return {
+          ...reqData, id
+        }
       }))
   }
 

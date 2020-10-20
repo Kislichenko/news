@@ -29,5 +29,7 @@ public class ReqDataDto {
 
     @NotBlank(message = "creator username is mandatory")
     private String creator;
+
+    private String wishes;
 }
 
