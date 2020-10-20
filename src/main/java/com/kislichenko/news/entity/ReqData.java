@@ -22,6 +22,12 @@ public class ReqData {
     private Date endDate;
     private String legalData;
 
+    @Column(nullable = false)
+    private boolean payed;
+
+    @Column(nullable = false)
+    private boolean confirm;
+
     @Column(columnDefinition = "TEXT")
     private String wishes;
 

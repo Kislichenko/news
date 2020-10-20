@@ -50,27 +50,40 @@ export class EditRequestComponent implements OnInit, OnDestroy {
     })
   }
 
-  submit() {
-    if(this.form.invalid){
-      return
-    }
+  public buy(event){
+    this.reqData.payed = true
+    this.updateRequest('Блок был оплачен!')
+  }
 
+  private updateRequest(infoText: string){
     this.submitted = true
+
+    console.log(this.form.value.startDate)
+    console.log(new Date(this.form.value.startDate))
+    console.log(new Date(Date.parse(this.form.value.startDate)))
+    console.log(Date.parse(this.form.value.startDate))
 
     this.uSub = this.reqdataService.update({
       ...this.reqData,
       id: this.reqData.id,
       subject: this.form.value.subject,
       startDate: new Date(this.form.value.startDate),
-      endDate: new Date(this.form.value.endDate),
+      endDate: new Date(Date.parse(this.form.value.endDate)),
       legalData: this.form.value.legalData,
       type: this.form.value.type,
-      wishes: this.form.value.wishes
+      wishes: this.form.value.wishes,
+      payed: this.reqData.payed
     }).subscribe(()=>{
       this.submitted = false
-      this.alertService.success('Пост был обновлен!')
+      this.alertService.success(infoText)
     })
+  }
 
+  submit() {
+    if(this.form.invalid){
+      return
+    }
+    this.updateRequest('Заявка была обновлена!')
   }
 
   ngOnDestroy(): void {

@@ -15,6 +15,7 @@ export class AdvertiserDashboardComponent implements OnInit, OnDestroy {
   reqDatas: ReqData[] = []
   pSub: Subscription
   dSub: Subscription
+  uSub: Subscription
   searchStr = ''
 
   constructor(
@@ -37,6 +38,9 @@ export class AdvertiserDashboardComponent implements OnInit, OnDestroy {
     if(this.dSub){
       this.dSub.unsubscribe()
     }
+    if(this.uSub){
+      this.uSub.unsubscribe()
+    }
   }
 
   remove(id: string){
@@ -46,4 +50,14 @@ export class AdvertiserDashboardComponent implements OnInit, OnDestroy {
     })
   }
 
+
+  buy($event: MouseEvent, reqData: ReqData) {
+    this.uSub = this.reqdataService.update({
+      ...reqData,
+      payed: true
+    }).subscribe(() => {
+      this.alertService.success('Блок был оплачен')
+      this.ngOnInit();
+    })
+  }
 }

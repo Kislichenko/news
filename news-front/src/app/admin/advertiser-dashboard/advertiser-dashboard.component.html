@@ -12,12 +12,14 @@
       <th>Дата начала размещения</th>
       <th>Дата окончания размещения</th>
       <th>Действие</th>
+      <th>Оплата</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let reqData of reqDatas | searchReqDatas:searchStr; let idx = index">
       <td>{{idx + 1}}</td>
-      <td>{{reqData.creationDate | date: 'medium': null: 'ru'}}</td>
+<!--      <td>{{reqData.creationDate | date: 'medium': null: 'ru'}}</td>-->
+      <td>{{reqData.creationDate | date: 'dd-MM-yyyy hh:mm'}}
       <td>{{reqData.subject}}</td>
       <td>{{reqData.type}}</td>
       <td>{{reqData.startDate | date: 'dd-MM-yyyy'}}</td>
@@ -29,6 +31,13 @@
           Открыть
         </button>
         <a (click)="remove(reqData.id)">Удалить</a>
+      </td>
+      <td>
+        <button *ngIf="reqData.confirm && !reqData.payed"
+                class="btn btn-dark"
+                (click)="buy($event, reqData)">
+          Оплатить
+        </button>
       </td>
     </tr>
     </tbody>

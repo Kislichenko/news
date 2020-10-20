@@ -1,4 +1,10 @@
 <div *ngIf="form; else loading">
+  <button *ngIf="reqData.confirm && !reqData.payed"
+    class="btn btn-dark"
+    (click)="buy($event)">
+    Оплатить рекламный блок
+  </button>
+
   <form [formGroup]="form" (ngSubmit)="submit()">
 
     <div

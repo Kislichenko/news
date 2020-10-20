@@ -39,4 +39,6 @@ export interface ReqData {
   type: Role
   creator: string
   wishes: string
+  payed: boolean
+  confirm: boolean
 }

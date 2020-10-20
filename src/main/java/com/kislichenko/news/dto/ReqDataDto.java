@@ -31,5 +31,7 @@ public class ReqDataDto {
     private String creator;
 
     private String wishes;
+    private boolean payed;
+    private boolean confirm;
 }
 

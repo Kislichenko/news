@@ -54,14 +54,14 @@ export class CreateRequestComponent implements OnInit {
       creationDate: new Date(),
       type: this.form.value.type,
       creator: this.auth.username,
-      wishes: this.form.value.wishes
+      wishes: this.form.value.wishes,
+      payed: false,
+      confirm: false
     }
     this.reqdataService.create(reqData).subscribe(()=>{
       this.form.reset()
-      this.alert.success('Пост был создан!')
+      this.alert.success('Заявка была создана!')
     })
-
-    console.log(reqData)
   }
 
 }
