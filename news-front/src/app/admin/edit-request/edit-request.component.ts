@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common'
 import {AuthService} from '../shared/services/auth.service';
 import {Subscription} from 'rxjs';
 import {Alert, AlertService} from '../shared/services/alert.service';
+import * as moment from 'jalali-moment';
 
 const adBlockType: Array<string> = Object.keys(AdBlockType).filter(key => isNaN(+key));
 
@@ -58,11 +59,9 @@ export class EditRequestComponent implements OnInit, OnDestroy {
   private updateRequest(infoText: string){
     this.submitted = true
 
-    console.log(this.form.value.startDate)
-    console.log(new Date(this.form.value.startDate))
-    console.log(new Date(Date.parse(this.form.value.startDate)))
-    console.log(Date.parse(this.form.value.startDate))
-
+    this.form.controls['startDate'].setValue(moment.from(this.form.value.startDate, 'ru','DD-MM-YYYY'));
+    this.form.controls['endDate'].setValue(moment.from(this.form.value.endDate, 'ru','DD-MM-YYYY'));
+    
     this.uSub = this.reqdataService.update({
       ...this.reqData,
       id: this.reqData.id,
