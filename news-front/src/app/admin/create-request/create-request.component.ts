@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdBlockType, ReqData, Role} from '../../shared/interfaces';
 import {ReqdataService} from '../../shared/reqdata.service';
+import {AuthService} from '../shared/services/auth.service';
 
 const adBlockType: Array<string> = Object.keys(AdBlockType).filter(key => isNaN(+key));
 
@@ -16,7 +17,8 @@ export class CreateRequestComponent implements OnInit {
   ePropertyType = adBlockType;
 
   constructor(
-    private reqdataService: ReqdataService
+    private reqdataService: ReqdataService,
+    private auth: AuthService
   ) {
 
   }
@@ -31,16 +33,16 @@ export class CreateRequestComponent implements OnInit {
       subject: new FormControl(null, [
         Validators.required
       ]),
-      legaldata: new FormControl(null, [
+      legalData: new FormControl(null, [
         Validators.required
       ]),
       wishes: new FormControl(null, [
         Validators.required
       ]),
-      startdate: new FormControl(null, [
+      startDate: new FormControl(null, [
         Validators.required
       ]),
-      enddate: new FormControl(null, [
+      endDate: new FormControl(null, [
         Validators.required
       ]),
       type: new FormControl(null, [
@@ -56,11 +58,12 @@ export class CreateRequestComponent implements OnInit {
 
     const reqData: ReqData ={
       subject: this.form.value.subject,
-      startdate: this.form.value.startdate._d,
-      enddate: this.form.value.enddate._d,
-      legaldata: this.form.value.legaldata,
-      creationdate: new Date(),
-      type: this.form.value.type
+      startDate: this.form.value.startDate._d,
+      endDate: this.form.value.endDate._d,
+      legalData: this.form.value.legalData,
+      creationDate: new Date(),
+      type: this.form.value.type,
+      creator: this.auth.username
     }
     this.reqdataService.create(reqData).subscribe(()=>{
       this.form.reset()

@@ -32,9 +32,10 @@ export enum AdBlockType{
 export interface ReqData {
   id?: string
   subject: string
-  startdate: Date
-  enddate: Date
-  legaldata: string
-  creationdate: Date
+  startDate: Date
+  endDate: Date
+  legalData: string
+  creationDate: Date
   type: Role
+  creator: string
 }

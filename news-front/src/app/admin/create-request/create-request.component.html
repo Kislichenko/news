@@ -34,13 +34,13 @@
 
   <div
     class="form-control"
-    [ngClass]="{invalid: form.get('startdate').touched && form.get('startdate').invalid}">
-    <label for="startdate">Дата начала размещения: </label>
-    <dp-date-picker id="startdate" #dayPicker theme="dp-material" formControlName="startdate"></dp-date-picker>
+    [ngClass]="{invalid: form.get('startDate').touched && form.get('startDate').invalid}">
+    <label for="startDate">Дата начала размещения: </label>
+    <dp-date-picker id="startDate" #dayPicker theme="dp-material" formControlName="startDate"></dp-date-picker>
     <div
-      *ngIf="form.get('startdate').touched && form.get('startdate').invalid"
+      *ngIf="form.get('startDate').touched && form.get('startDate').invalid"
       class="validation">
-      <small *ngIf="form.get('startdate').errors.required">
+      <small *ngIf="form.get('startDate').errors.required">
         Введите дату начала размещения рекламного блока
       </small>
     </div>
@@ -48,13 +48,13 @@
 
   <div
     class="form-control"
-    [ngClass]="{invalid: form.get('enddate').touched && form.get('enddate').invalid}">
-    <label for="enddate">Дата окончания размещения: </label>
-    <dp-date-picker id="enddate" #dayPicker theme="dp-material" formControlName="enddate"></dp-date-picker>
+    [ngClass]="{invalid: form.get('endDate').touched && form.get('endDate').invalid}">
+    <label for="endDate">Дата окончания размещения: </label>
+    <dp-date-picker id="endDate" #dayPicker theme="dp-material" formControlName="endDate"></dp-date-picker>
     <div
-      *ngIf="form.get('enddate').touched && form.get('enddate').invalid"
+      *ngIf="form.get('endDate').touched && form.get('endDate').invalid"
       class="validation">
-      <small *ngIf="form.get('enddate').errors.required">
+      <small *ngIf="form.get('endDate').errors.required">
         Введите дату окончания размещения рекламного блока
       </small>
     </div>
@@ -62,13 +62,13 @@
 
   <div
     class="form-control"
-    [ngClass]="{invalid: form.get('legaldata').touched && form.get('legaldata').invalid}">
-    <label for="legaldata">Юридические данные:</label>
-    <input id="legaldata" type="text" formControlName="legaldata">
+    [ngClass]="{invalid: form.get('legalData').touched && form.get('legalData').invalid}">
+    <label for="legalData">Юридические данные:</label>
+    <input id="legalData" type="text" formControlName="legalData">
     <div
-      *ngIf="form.get('legaldata').touched && form.get('legaldata').invalid"
+      *ngIf="form.get('legalData').touched && form.get('legalData').invalid"
       class="validation">
-      <small *ngIf="form.get('legaldata').errors.required">
+      <small *ngIf="form.get('legalData').errors.required">
         Введите юридические данные
       </small>
     </div>
