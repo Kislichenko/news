@@ -45,31 +45,31 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     //handler для отлова невалидных входных аргументов в контроллерах
-//    @Override
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    protected ResponseEntity<Object> handleMethodArgumentNotValid(
-//            MethodArgumentNotValidException ex,
-//            HttpHeaders headers,
-//            HttpStatus status,
-//            WebRequest request) {
-//        final List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
-//
-//        Map<String, Set<String>> errorsMap = fieldErrors.stream().collect(
-//                Collectors.groupingBy(FieldError::getField,
-//                        Collectors.mapping(FieldError::getDefaultMessage, Collectors.toSet())
-//                )
-//        );
-//
-//        ApiError apiError = new ApiError(status);
-//        apiError.setError("ARGUMENT_NOT_VALID");
-//
-//        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-//
-//            apiError.setMessage(errorsMap.toString());
-//
-//
-//        return new ResponseEntity(apiError, headers, status);
-//    }
+    @Override
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
+        final List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
+
+        Map<String, Set<String>> errorsMap = fieldErrors.stream().collect(
+                Collectors.groupingBy(FieldError::getField,
+                        Collectors.mapping(FieldError::getDefaultMessage, Collectors.toSet())
+                )
+        );
+
+        ApiError apiError = new ApiError(status);
+        apiError.setError("ARGUMENT_NOT_VALID");
+
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+
+            apiError.setMessage(errorsMap.toString());
+
+
+        return new ResponseEntity(apiError, headers, status);
+    }
 
     @ExceptionHandler(JWTVerificationException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
@@ -83,29 +83,29 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(apiError);
     }
 
-//    @ExceptionHandler(JDBCException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public ResponseEntity<Object> processJDBCException(JDBCException ex) {
-//        logger.debug("processJDBCException is catched!");
-//
-//        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
-//        apiError.setError(getErrorFromJDBCException(ex.getSQLException().getMessage()));
-//        apiError.setMessage(getErrorFromJDBCException(ex.getSQLException().getMessage()));
-//
-//        return buildResponseEntity(apiError);
-//    }
-//
-//    @ExceptionHandler(ClientNotFoundException.class)
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    public ResponseEntity<Object> processClientNotFoundException(ClientNotFoundException ex) {
-//        logger.debug("ClientNotFoundException is catched!");
-//
-//        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND);
-//        apiError.setError("NOT_FOUND");
-//        apiError.setMessage(ex.getMessage());
-//
-//        return buildResponseEntity(apiError);
-//    }
+    @ExceptionHandler(JDBCException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Object> processJDBCException(JDBCException ex) {
+        logger.debug("processJDBCException is catched!");
+
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
+        apiError.setError(getErrorFromJDBCException(ex.getSQLException().getMessage()));
+        apiError.setMessage(getErrorFromJDBCException(ex.getSQLException().getMessage()));
+
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(ClientNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Object> processClientNotFoundException(ClientNotFoundException ex) {
+        logger.debug("ClientNotFoundException is catched!");
+
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND);
+        apiError.setError("NOT_FOUND");
+        apiError.setMessage(ex.getMessage());
+
+        return buildResponseEntity(apiError);
+    }
 
     private String getErrorFromJDBCException(String message) {
         String tmp = "";

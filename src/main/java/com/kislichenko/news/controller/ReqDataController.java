@@ -8,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ReqDataController {
@@ -29,5 +26,12 @@ public class ReqDataController {
         logger.debug("Adding new request by " + reqDataDto.getCreator());
         reqDataService.addNewRequest(reqDataDto);
         return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @Secured("ROLE_USER")
+    @GetMapping("requests")
+    public ResponseEntity<Object> getRoles() {
+        logger.debug("Getting all requests");
+        return new ResponseEntity<>(reqDataService.getAllRequests(), HttpStatus.OK);
     }
 }
