@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {ReqdataService} from '../../shared/reqdata.service';
 import {switchMap} from 'rxjs/operators';
 import {AdBlockType, ReqData} from '../../shared/interfaces';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { DatePipe } from '@angular/common'
+import {AuthService} from '../shared/services/auth.service';
+import {Subscription} from 'rxjs';
+import {Alert, AlertService} from '../shared/services/alert.service';
 
 const adBlockType: Array<string> = Object.keys(AdBlockType).filter(key => isNaN(+key));
 
@@ -13,16 +16,20 @@ const adBlockType: Array<string> = Object.keys(AdBlockType).filter(key => isNaN(
   templateUrl: './edit-request.component.html',
   styleUrls: ['./edit-request.component.scss']
 })
-export class EditRequestComponent implements OnInit {
+export class EditRequestComponent implements OnInit, OnDestroy {
 
   form: FormGroup
   ePropertyType = adBlockType
   reqData: ReqData
+  submitted = false
+
+  uSub: Subscription
 
   constructor(
     private route: ActivatedRoute,
     private reqdataService: ReqdataService,
-    private datepipe: DatePipe
+    private datepipe: DatePipe,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +51,31 @@ export class EditRequestComponent implements OnInit {
   }
 
   submit() {
+    if(this.form.invalid){
+      return
+    }
 
+    this.submitted = true
+
+    this.uSub = this.reqdataService.update({
+      ...this.reqData,
+      id: this.reqData.id,
+      subject: this.form.value.subject,
+      startDate: new Date(this.form.value.startDate),
+      endDate: new Date(this.form.value.endDate),
+      legalData: this.form.value.legalData,
+      type: this.form.value.type,
+      wishes: this.form.value.wishes
+    }).subscribe(()=>{
+      this.submitted = false
+      this.alertService.success('Пост был обновлен!')
+    })
+
+  }
+
+  ngOnDestroy(): void {
+    if(this.uSub){
+      this.uSub.unsubscribe()
+    }
   }
 }

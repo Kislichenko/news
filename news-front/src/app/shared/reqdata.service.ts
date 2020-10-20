@@ -37,4 +37,8 @@ export class ReqdataService{
   remove(id: string):Observable<void>{
     return this.http.delete<void>(`${environment.backendUrl}/requests/${id}`)
   }
+
+  update(reqData: ReqData): Observable<ReqData>{
+    return this.http.patch<ReqData>(`${environment.backendUrl}/requests/${reqData.id}`, reqData)
+  }
 }

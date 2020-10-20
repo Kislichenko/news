@@ -15,6 +15,8 @@ import {AuthGuard} from './shared/services/auth.guard';
 import { RegPageComponent } from './reg-page/reg-page.component';
 import {DpDatePickerModule} from 'ng2-date-picker';
 import {SearchPipe} from './shared/pipes/search.pipe';
+import { AlertComponent } from './shared/components/alert/alert.component';
+import {AlertService} from './shared/services/alert.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import {SearchPipe} from './shared/pipes/search.pipe';
     CreateReportComponent,
     EditReportComponent,
     RegPageComponent,
-    SearchPipe
+    SearchPipe,
+    AlertComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +63,7 @@ import {SearchPipe} from './shared/pipes/search.pipe';
     ])
   ],
   exports: [RouterModule],
-  providers: [AuthGuard, DatePipe]
+  providers: [AuthGuard, DatePipe, AlertService]
 })
 export class AdminModule {
 

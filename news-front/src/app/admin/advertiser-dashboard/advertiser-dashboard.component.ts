@@ -3,6 +3,7 @@ import {AuthService} from '../shared/services/auth.service';
 import {ReqdataService} from '../../shared/reqdata.service';
 import {ReqData} from '../../shared/interfaces';
 import {Observable, Subscription} from 'rxjs';
+import {AlertService} from '../shared/services/alert.service';
 
 @Component({
   selector: 'app-advertiser-dashboard',
@@ -18,7 +19,8 @@ export class AdvertiserDashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private auth: AuthService,
-    private reqdataService: ReqdataService
+    private reqdataService: ReqdataService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ export class AdvertiserDashboardComponent implements OnInit, OnDestroy {
   remove(id: string){
     this.dSub = this.reqdataService.remove(id).subscribe(() => {
       this.reqDatas = this.reqDatas.filter(reqData => reqData.id !== id)
+      this.alertService.warning('Пост был удален!')
     })
   }
 

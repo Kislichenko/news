@@ -71,6 +71,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", config.applyPermitDefaultValues());
         config.setExposedHeaders(Arrays.asList("Authorization"));
         config.addAllowedMethod("DELETE");
+        config.addAllowedMethod("PATCH");
 
         return source;
     }

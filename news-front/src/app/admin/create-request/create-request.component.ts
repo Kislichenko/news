@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdBlockType, ReqData, Role} from '../../shared/interfaces';
 import {ReqdataService} from '../../shared/reqdata.service';
 import {AuthService} from '../shared/services/auth.service';
+import {AlertService} from '../shared/services/alert.service';
 
 const adBlockType: Array<string> = Object.keys(AdBlockType).filter(key => isNaN(+key));
 
@@ -18,7 +19,8 @@ export class CreateRequestComponent implements OnInit {
 
   constructor(
     private reqdataService: ReqdataService,
-    private auth: AuthService
+    private auth: AuthService,
+    private alert: AlertService
   ) {
 
   }
@@ -56,6 +58,7 @@ export class CreateRequestComponent implements OnInit {
     }
     this.reqdataService.create(reqData).subscribe(()=>{
       this.form.reset()
+      this.alert.success('Пост был создан!')
     })
 
     console.log(reqData)

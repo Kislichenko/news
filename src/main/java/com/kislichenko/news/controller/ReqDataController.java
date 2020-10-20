@@ -28,6 +28,14 @@ public class ReqDataController {
     }
 
     @Secured("ROLE_USER")
+    @RequestMapping(value = "/requests/{id}", method = RequestMethod.PATCH)
+    public ResponseEntity<String> patchRequestById(@PathVariable Long id, @RequestBody ReqDataDto reqDataDto) {
+        logger.debug("Patching the request by " + reqDataDto.getCreator());
+        reqDataService.addNewRequest(reqDataDto);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @Secured("ROLE_USER")
     @GetMapping("requests")
     public ResponseEntity<Object> getRequests() {
         logger.debug("Getting all requests");

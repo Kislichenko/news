@@ -7,6 +7,11 @@
     </div>
 
     <div
+      class="form-control">
+      <label for="startDate">Создатель заявки: {{reqData.creator}}</label>
+    </div>
+
+    <div
       class="form-control"
       [ngClass]="{invalid: form.get('type').touched && form.get('type').invalid}">
       <label for="subject">Тип рекламного блока:</label>
@@ -87,7 +92,7 @@
     <button
       class="btn btn-primary"
       type="submit"
-      [disabled]="form.invalid">
+      [disabled]="form.invalid || submitted">
       Обновить
     </button>
 

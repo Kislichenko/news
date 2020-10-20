@@ -30,7 +30,9 @@ public class ReqDataService {
 
     public ReqDataDto getRequestById(Long id){
         if (reqDataRepository.findById(id).isPresent()) {
-            ReqDataDto reqDataDto = modelMapper.map(reqDataRepository.findById(id).get(), ReqDataDto.class);
+            ReqData reqData = reqDataRepository.findById(id).get();
+            ReqDataDto reqDataDto = modelMapper.map(reqData, ReqDataDto.class);
+            reqDataDto.setCreator(reqData.getCreator().getUsername());
             return reqDataDto;
         } else {
             return null;
