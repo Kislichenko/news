@@ -15,6 +15,8 @@ import java.util.Date;
 @Setter
 @ToString
 public class ReqDataDto {
+    private Long id;
+
     @NotBlank(message = "subject is mandatory")
     private String subject;
     private Date startDate;

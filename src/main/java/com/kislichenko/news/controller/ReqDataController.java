@@ -22,7 +22,7 @@ public class ReqDataController {
 
     @Secured("ROLE_USER")
     @RequestMapping(value = "/requests", method = RequestMethod.POST)
-    public ResponseEntity<String> changeRole(@RequestBody ReqDataDto reqDataDto) {
+    public ResponseEntity<String> addNewRequest(@RequestBody ReqDataDto reqDataDto) {
         logger.debug("Adding new request by " + reqDataDto.getCreator());
         reqDataService.addNewRequest(reqDataDto);
         return new ResponseEntity<>("", HttpStatus.OK);
@@ -30,8 +30,16 @@ public class ReqDataController {
 
     @Secured("ROLE_USER")
     @GetMapping("requests")
-    public ResponseEntity<Object> getRoles() {
+    public ResponseEntity<Object> getRequests() {
         logger.debug("Getting all requests");
         return new ResponseEntity<>(reqDataService.getAllRequests(), HttpStatus.OK);
+    }
+
+    @Secured("ROLE_USER")
+    @DeleteMapping("requests/{id}")
+    public ResponseEntity<Object> deleteRequest(@PathVariable Long id) {
+        logger.debug("Deleting request by id = "+id);
+        reqDataService.deleteRequestById(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

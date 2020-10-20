@@ -24,6 +24,10 @@ public class ReqDataService {
         this.appUserRepository = appUserRepository;
     }
 
+    public void deleteRequestById(Long id){
+        reqDataRepository.deleteById(id);
+    }
+
     public void addNewRequest(ReqDataDto reqDataDto) {
         ReqData reqData = modelMapper.map(reqDataDto, ReqData.class);
         AppUser appUser = appUserRepository.findByUsername(reqDataDto.getCreator());

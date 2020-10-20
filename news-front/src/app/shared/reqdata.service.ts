@@ -25,8 +25,12 @@ export class ReqdataService{
           console.log(response[1])
         return Object.keys(response).map(key => ({
           ...response[key],
-          id: key
+          id: response[key].id
         }))
       }))
+  }
+
+  remove(id: string):Observable<void>{
+    return this.http.delete<void>(`${environment.backendUrl}/requests/${id}`)
   }
 }
