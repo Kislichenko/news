@@ -27,7 +27,7 @@ public class ReqDataController {
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_AD_MANAGER"})
     @RequestMapping(value = "/requests/{id}", method = RequestMethod.PATCH)
     public ResponseEntity<String> patchRequestById(@PathVariable Long id, @RequestBody ReqDataDto reqDataDto) {
         logger.debug("Patching the request by " + reqDataDto.getCreator());
@@ -50,7 +50,7 @@ public class ReqDataController {
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_AD_MANAGER"})
     @GetMapping("requests/{id}")
     public ResponseEntity<ReqDataDto> getRequestById(@PathVariable Long id) {
         logger.debug("Getting request by id = " + id);

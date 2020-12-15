@@ -3,7 +3,7 @@ import {CommonModule, DatePipe} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { AdvertiserDashboardComponent } from './advertiser-dashboard/advertiser-dashboard.component';
+import { ReqDashboardComponent } from './req-dashboard/req-dashboard.component';
 import { CreateRequestComponent } from './create-request/create-request.component';
 import { EditRequestComponent } from './edit-request/edit-request.component';
 import { ReportDashboardComponent } from './report-dashboard/report-dashboard.component';
@@ -17,13 +17,12 @@ import {DpDatePickerModule} from 'ng2-date-picker';
 import {SearchPipe} from './shared/pipes/search.pipe';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import {AlertService} from './shared/services/alert.service';
-import { AdmanagerDashboardComponent } from './admanager-dashboard/admanager-dashboard.component';
 
 @NgModule({
   declarations: [
     AdminLayoutComponent,
     LoginPageComponent,
-    AdvertiserDashboardComponent,
+    ReqDashboardComponent,
     CreateRequestComponent,
     EditRequestComponent,
     ReportDashboardComponent,
@@ -31,8 +30,7 @@ import { AdmanagerDashboardComponent } from './admanager-dashboard/admanager-das
     EditReportComponent,
     RegPageComponent,
     SearchPipe,
-    AlertComponent,
-    AdmanagerDashboardComponent
+    AlertComponent
   ],
   imports: [
     CommonModule,
@@ -49,10 +47,10 @@ import { AdmanagerDashboardComponent } from './admanager-dashboard/admanager-das
           {path: 'sign-up', component: RegPageComponent},
           {path: 'login', component: LoginPageComponent},
           //{path: 'admin/dashboard', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_ADMIN'}}
-          {path: 'user/dashboard', component: AdvertiserDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
+          {path: 'user/dashboard', component: ReqDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
           {path: 'user/create', component: CreateRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
           {path: 'user/request/:id/edit', component: EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
-          {path: 'admanager/dashboard', component: AdmanagerDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_AD_MANAGER'}},
+          {path: 'admanager/dashboard', component: ReqDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_AD_MANAGER'}},
           {path: 'admanager/request/:id/edit', component: EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_AD_MANAGER'}},
           //{path: 'reporter/dashboard', component:EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
           {path: 'reporter/report/:id/edit', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},

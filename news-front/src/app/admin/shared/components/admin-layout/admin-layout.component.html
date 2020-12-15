@@ -9,6 +9,9 @@
     <li routerLinkActive="active" *ngIf="auth.checkRole(role.User)">
       <a [routerLink]="['/cabinet', 'user','dashboard']">Главная</a>
     </li>
+    <li routerLinkActive="active" *ngIf="auth.checkRole(role.AdManager)">
+      <a [routerLink]="['/cabinet', 'admanager','dashboard']">Главная</a>
+    </li>
     <li routerLinkActive="active" *ngIf="auth.checkRole(role.User)">
       <a [routerLink]="['/cabinet', 'user','create']">Создать</a>
     </li>

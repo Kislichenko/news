@@ -1,16 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ReqData} from '../../shared/interfaces';
-import {Subscription} from 'rxjs';
 import {AuthService} from '../shared/services/auth.service';
 import {ReqdataService} from '../../shared/reqdata.service';
+import {ReqData, Role} from '../../shared/interfaces';
+import {Observable, Subscription} from 'rxjs';
 import {AlertService} from '../shared/services/alert.service';
 
 @Component({
-  selector: 'app-admanager-dashboard',
-  templateUrl: './admanager-dashboard.component.html',
-  styleUrls: ['./admanager-dashboard.component.scss']
+  selector: 'app-req-dashboard',
+  templateUrl: './req-dashboard.component.html',
+  styleUrls: ['./req-dashboard.component.scss']
 })
-export class AdmanagerDashboardComponent implements OnInit, OnDestroy{
+export class ReqDashboardComponent implements OnInit, OnDestroy {
 
   reqDatas: ReqData[] = []
   pSub: Subscription
@@ -60,5 +60,8 @@ export class AdmanagerDashboardComponent implements OnInit, OnDestroy{
       this.ngOnInit();
     })
   }
-}
 
+  public get role(): typeof Role {
+    return Role;
+  }
+}

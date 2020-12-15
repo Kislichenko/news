@@ -18,18 +18,29 @@
     <tbody>
     <tr *ngFor="let reqData of reqDatas | searchReqDatas:searchStr; let idx = index">
       <td>{{idx + 1}}</td>
-<!--      <td>{{reqData.creationDate | date: 'medium': null: 'ru'}}</td>-->
+      <!--      <td>{{reqData.creationDate | date: 'medium': null: 'ru'}}</td>-->
       <td>{{reqData.creationDate | date: 'dd-MM-yyyy hh:mm'}}
       <td>{{reqData.subject}}</td>
       <td>{{reqData.type}}</td>
       <td>{{reqData.startDate | date: 'dd-MM-yyyy'}}</td>
       <td>{{reqData.endDate | date: 'dd-MM-yyyy'}}</td>
+
+
       <td>
-        <button
-          class="btn btn-link open"
-          [routerLink]="['/cabinet', 'user', 'request', reqData.id, 'edit']">
-          Открыть
-        </button>
+        <div *ngIf="auth.checkRole(role.AdManager)">
+          <button
+            class="btn btn-link open"
+            [routerLink]="['/cabinet', 'admanager', 'request', reqData.id, 'edit']">
+            Открыть
+          </button>
+        </div>
+        <div *ngIf="auth.checkRole(role.User)">
+          <button
+            class="btn btn-link open"
+            [routerLink]="['/cabinet', 'user', 'request', reqData.id, 'edit']">
+            Открыть
+          </button>
+        </div>
         <a (click)="remove(reqData.id)">Удалить</a>
       </td>
       <td>
