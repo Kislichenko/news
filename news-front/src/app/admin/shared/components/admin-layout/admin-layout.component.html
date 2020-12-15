@@ -12,6 +12,12 @@
     <li routerLinkActive="active" *ngIf="auth.checkRole(role.AdManager)">
       <a [routerLink]="['/cabinet', 'admanager','dashboard']">Главная</a>
     </li>
+    <li routerLinkActive="active" *ngIf="auth.checkRole(role.InfoManager)">
+      <a [routerLink]="['/cabinet', 'infomanager','news']">Главная</a>
+    </li>
+    <li routerLinkActive="active" *ngIf="auth.checkRole(role.InfoManager)">
+      <a [routerLink]="['/cabinet', 'infomanager','report']">Репортажи</a>
+    </li>
     <li routerLinkActive="active" *ngIf="auth.checkRole(role.User)">
       <a [routerLink]="['/cabinet', 'user','create']">Создать</a>
     </li>
