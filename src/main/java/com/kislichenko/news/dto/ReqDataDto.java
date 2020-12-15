@@ -26,6 +26,7 @@ public class ReqDataDto {
     private String legalData;
     private Date creationDate;
     private AdBlockTypes type;
+    private Integer cost;
 
     @NotBlank(message = "creator username is mandatory")
     private String creator;

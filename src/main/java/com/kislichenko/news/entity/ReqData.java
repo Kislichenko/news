@@ -37,6 +37,8 @@ public class ReqData {
     @Column(columnDefinition = "TEXT")
     private String wishes;
 
+    private Integer cost;
+
     @Column(unique = true)
     private Date creationDate;
 

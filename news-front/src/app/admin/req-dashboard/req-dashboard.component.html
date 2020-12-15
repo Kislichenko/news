@@ -36,10 +36,10 @@
           </button>
           <button *ngIf="reqData.confirm && reqData.contract"
                   class="btn btn-success"
-                  (click)="buy($event, reqData)">
+                  [routerLink]="['/cabinet', 'admanager', 'contract', reqData.id]">
             Посмотреть
           </button>
-          </div>
+        </div>
 
         <div *ngIf="auth.checkRole(role.User)">
           <div *ngIf="!reqData.contract">
@@ -52,7 +52,7 @@
           </button>
           <button *ngIf="reqData.contract && reqData.signature"
                   class="btn btn-success"
-                  (click)="buy($event, reqData)">
+                  [routerLink]="['/cabinet', 'user', 'contract', reqData.id]">
             Посмотреть
           </button>
         </div>

@@ -43,5 +43,5 @@ export interface ReqData {
   confirm: boolean
   contract: boolean
   signature: boolean
-  cost: string
+  cost: number
 }

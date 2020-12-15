@@ -4,6 +4,7 @@ import {AdBlockType, ReqData, Role} from '../../shared/interfaces';
 import {ReqdataService} from '../../shared/reqdata.service';
 import {AuthService} from '../shared/services/auth.service';
 import {AlertService} from '../shared/services/alert.service';
+import {compareNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
 
 const adBlockType: Array<string> = Object.keys(AdBlockType).filter(key => isNaN(+key));
 
@@ -59,7 +60,7 @@ export class CreateRequestComponent implements OnInit {
       confirm: false,
       contract: false,
       signature: false,
-      cost: "-"
+      cost: 0
     }
     this.reqdataService.create(reqData).subscribe(()=>{
       this.form.reset()

@@ -1,10 +1,10 @@
 package com.kislichenko.news.entity;
 
 public enum AdBlockTypes {
-    Simple ("SIMPLE"),
-    Big ("BIG"),
-    Header ("HEADER"),
-    Footer ("FOOTER");
+    Simple ("Simple"),
+    Big ("Big"),
+    Header ("Header"),
+    Footer ("Footer");
 
     private String code;
     AdBlockTypes(String code){
