@@ -13,6 +13,7 @@
       <th>Дата окончания размещения</th>
       <th>Действие</th>
       <th>Оплата</th>
+      <th *ngIf="auth.checkRole(role.AdManager)">Подтверждение</th>
     </tr>
     </thead>
     <tbody>
@@ -25,30 +26,51 @@
       <td>{{reqData.startDate | date: 'dd-MM-yyyy'}}</td>
       <td>{{reqData.endDate | date: 'dd-MM-yyyy'}}</td>
 
-
       <td>
-        <div *ngIf="auth.checkRole(role.AdManager)">
-          <button
-            class="btn btn-link open"
-            [routerLink]="['/cabinet', 'admanager', 'request', reqData.id, 'edit']">
-            Открыть
-          </button>
-        </div>
-        <div *ngIf="auth.checkRole(role.User)">
-          <button
-            class="btn btn-link open"
-            [routerLink]="['/cabinet', 'user', 'request', reqData.id, 'edit']">
-            Открыть
-          </button>
-        </div>
+        <button *ngIf="auth.checkRole(role.AdManager)"
+                class="btn btn-link open"
+                [routerLink]="['/cabinet', 'admanager', 'request', reqData.id, 'edit']">
+          Открыть
+        </button>
+        <button *ngIf="auth.checkRole(role.User)"
+                class="btn btn-link open"
+                [routerLink]="['/cabinet', 'user', 'request', reqData.id, 'edit']">
+          Открыть
+        </button>
         <a (click)="remove(reqData.id)">Удалить</a>
       </td>
       <td>
-        <button *ngIf="reqData.confirm && !reqData.payed"
-                class="btn btn-dark"
-                (click)="buy($event, reqData)">
-          Оплатить
+        <div *ngIf="auth.checkRole(role.User)">
+          <button *ngIf="reqData.confirm && !reqData.payed"
+                  class="btn btn-success"
+                  (click)="buy($event, reqData)">
+            Оплатить
+          </button>
+        </div>
+
+        <div *ngIf="auth.checkRole(role.AdManager)">
+          <div *ngIf="reqData.confirm && !reqData.payed">
+            Ожидает оплаты...
+          </div>
+        </div>
+
+        <div *ngIf="!reqData.confirm && !reqData.payed">
+          Ожидает подтверждения...
+        </div>
+        <div *ngIf="reqData.confirm && reqData.payed">
+          Оплачено
+        </div>
+
+      </td>
+      <td *ngIf="auth.checkRole(role.AdManager)">
+        <button *ngIf="!reqData.confirm"
+                class="btn btn-success"
+                (click)="confirm($event, reqData)">
+          Подтвердить заявку
         </button>
+        <div *ngIf="reqData.confirm">
+          Заявка подтверждена!
+        </div>
       </td>
     </tr>
     </tbody>
