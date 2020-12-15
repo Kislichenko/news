@@ -17,6 +17,7 @@ import {DpDatePickerModule} from 'ng2-date-picker';
 import {SearchPipe} from './shared/pipes/search.pipe';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import {AlertService} from './shared/services/alert.service';
+import { AdcontractComponent } from './adcontract/adcontract.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {AlertService} from './shared/services/alert.service';
     EditReportComponent,
     RegPageComponent,
     SearchPipe,
-    AlertComponent
+    AlertComponent,
+    AdcontractComponent
   ],
   imports: [
     CommonModule,

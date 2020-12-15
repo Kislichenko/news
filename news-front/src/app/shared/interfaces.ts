@@ -41,4 +41,7 @@ export interface ReqData {
   wishes: string
   payed: boolean
   confirm: boolean
+  contract: boolean
+  signature: boolean
+  cost: string
 }

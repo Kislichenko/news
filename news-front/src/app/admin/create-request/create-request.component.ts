@@ -56,7 +56,10 @@ export class CreateRequestComponent implements OnInit {
       creator: this.auth.username,
       wishes: this.form.value.wishes,
       payed: false,
-      confirm: false
+      confirm: false,
+      contract: false,
+      signature: false,
+      cost: "-"
     }
     this.reqdataService.create(reqData).subscribe(()=>{
       this.form.reset()

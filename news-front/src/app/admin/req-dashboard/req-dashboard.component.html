@@ -9,11 +9,11 @@
       <th>Дата создания</th>
       <th>Тематика</th>
       <th>Тип рекламного блока</th>
-      <th>Дата начала размещения</th>
-      <th>Дата окончания размещения</th>
-      <th>Действие</th>
+      <th>Начало и конец размещения</th>
+      <th>Договор</th>
       <th>Оплата</th>
       <th *ngIf="auth.checkRole(role.AdManager)">Подтверждение</th>
+      <th>Действие</th>
     </tr>
     </thead>
     <tbody>
@@ -23,29 +23,51 @@
       <td>{{reqData.creationDate | date: 'dd-MM-yyyy hh:mm'}}
       <td>{{reqData.subject}}</td>
       <td>{{reqData.type}}</td>
-      <td>{{reqData.startDate | date: 'dd-MM-yyyy'}}</td>
-      <td>{{reqData.endDate | date: 'dd-MM-yyyy'}}</td>
-
+      <td>{{reqData.startDate | date: 'dd-MM-yyyy'}} до {{reqData.endDate | date: 'dd-MM-yyyy'}}</td>
       <td>
-        <button *ngIf="auth.checkRole(role.AdManager)"
-                class="btn btn-link open"
-                [routerLink]="['/cabinet', 'admanager', 'request', reqData.id, 'edit']">
-          Открыть
-        </button>
-        <button *ngIf="auth.checkRole(role.User)"
-                class="btn btn-link open"
-                [routerLink]="['/cabinet', 'user', 'request', reqData.id, 'edit']">
-          Открыть
-        </button>
-        <a (click)="remove(reqData.id)">Удалить</a>
+        <div *ngIf="auth.checkRole(role.AdManager)">
+          <div *ngIf="!reqData.confirm">
+            Заявка ожидает подтверждения...
+          </div>
+          <button *ngIf="reqData.confirm && !reqData.contract"
+                  class="btn btn-success"
+                  (click)="contract($event, reqData)">
+            Сформировать
+          </button>
+          <button *ngIf="reqData.confirm && reqData.contract"
+                  class="btn btn-success"
+                  (click)="buy($event, reqData)">
+            Посмотреть
+          </button>
+          </div>
+
+        <div *ngIf="auth.checkRole(role.User)">
+          <div *ngIf="!reqData.contract">
+            Формируется...
+          </div>
+          <button *ngIf="reqData.contract && !reqData.signature"
+                  class="btn btn-success"
+                  (click)="signature($event, reqData)">
+            Подписать
+          </button>
+          <button *ngIf="reqData.contract && reqData.signature"
+                  class="btn btn-success"
+                  (click)="buy($event, reqData)">
+            Посмотреть
+          </button>
+        </div>
       </td>
       <td>
         <div *ngIf="auth.checkRole(role.User)">
-          <button *ngIf="reqData.confirm && !reqData.payed"
+          <button *ngIf="reqData.confirm && !reqData.payed && reqData.signature"
                   class="btn btn-success"
                   (click)="buy($event, reqData)">
             Оплатить
           </button>
+
+          <div *ngIf="reqData.confirm && !reqData.payed && !reqData.signature">
+            Подпишите договор
+          </div>
         </div>
 
         <div *ngIf="auth.checkRole(role.AdManager)">
@@ -71,6 +93,24 @@
         <div *ngIf="reqData.confirm">
           Заявка подтверждена!
         </div>
+      </td>
+
+      <td>
+        <button *ngIf="auth.checkRole(role.AdManager)"
+                class="btn btn-light open"
+                [routerLink]="['/cabinet', 'admanager', 'request', reqData.id, 'edit']">
+          Открыть
+        </button>
+        <button *ngIf="auth.checkRole(role.User)"
+                class="btn btn-light open"
+                [routerLink]="['/cabinet', 'user', 'request', reqData.id, 'edit']">
+          Открыть
+        </button>
+
+        <button class="btn btn-danger"
+                (click)="remove(reqData.id)">
+          Удалить
+        </button>
       </td>
     </tr>
     </tbody>

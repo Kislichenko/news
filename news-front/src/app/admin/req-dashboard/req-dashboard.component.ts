@@ -62,6 +62,26 @@ export class ReqDashboardComponent implements OnInit, OnDestroy {
     });
   }
 
+  contract($event: MouseEvent, reqData: ReqData) {
+    this.uSub = this.reqdataService.update({
+      ...reqData,
+      contract: true
+    }).subscribe(() => {
+      this.alertService.success('Договор был сформирован');
+      this.ngOnInit();
+    });
+  }
+
+  signature($event: MouseEvent, reqData: ReqData) {
+    this.uSub = this.reqdataService.update({
+      ...reqData,
+      signature: true
+    }).subscribe(() => {
+      this.alertService.success('Договор был подписан');
+      this.ngOnInit();
+    });
+  }
+
   confirm($event: MouseEvent, reqData: ReqData) {
     this.uSub = this.reqdataService.update({
       ...reqData,

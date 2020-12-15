@@ -26,6 +26,12 @@ public class ReqData {
     private boolean payed;
 
     @Column(nullable = false)
+    private boolean contract;
+
+    @Column(nullable = false)
+    private boolean signature;
+
+    @Column(nullable = false)
     private boolean confirm;
 
     @Column(columnDefinition = "TEXT")

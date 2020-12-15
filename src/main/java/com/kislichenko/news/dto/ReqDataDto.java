@@ -33,5 +33,7 @@ public class ReqDataDto {
     private String wishes;
     private boolean payed;
     private boolean confirm;
+    private boolean contract;
+    private boolean signature;
 }
 

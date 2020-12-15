@@ -71,7 +71,10 @@ export class EditRequestComponent implements OnInit, OnDestroy {
       legalData: this.form.value.legalData,
       type: this.form.value.type,
       wishes: this.form.value.wishes,
-      payed: this.reqData.payed
+      payed: this.reqData.payed,
+      contract: this.reqData.contract,
+      signature: this.reqData.signature,
+      cost: this.reqData.cost
     }).subscribe(()=>{
       this.submitted = false
       this.alertService.success(infoText)
