@@ -50,12 +50,8 @@ public class ReqDataService {
         AppUser appUser = appUserRepository.findByUsername(reqDataDto.getCreator());
         reqData.setCreator(appUser);
         try {
-            System.out.println(reqData.getLegalData());
-            System.out.println(reqData.getType());
             Price price = priceRepository.findPriceByType(reqData.getType());
-
             reqData.setCost(price.getCost());
-            System.out.println(reqData.getCost());
             reqDataRepository.save(reqData);
         }catch (Exception e){
             e.printStackTrace();
