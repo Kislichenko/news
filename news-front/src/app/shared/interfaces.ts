@@ -45,3 +45,11 @@ export interface ReqData {
   signature: boolean
   cost: number
 }
+
+export interface News {
+  id?: string
+  article: string
+  body: string
+  bad: boolean
+  realization: boolean
+}

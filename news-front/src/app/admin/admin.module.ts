@@ -19,6 +19,9 @@ import { AlertComponent } from './shared/components/alert/alert.component';
 import {AlertService} from './shared/services/alert.service';
 import { AdcontractComponent } from './adcontract/adcontract.component';
 import { NewsComponent } from './news/news.component';
+import {SearchNewsPipe} from './shared/pipes/searchnews.pipe';
+import {StripHtmlPipe} from './shared/pipes/striphtml.pipe';
+import { NewsPageComponent } from './news-page/news-page.component';
 
 @NgModule({
   declarations: [
@@ -32,9 +35,12 @@ import { NewsComponent } from './news/news.component';
     EditReportComponent,
     RegPageComponent,
     SearchPipe,
+    SearchNewsPipe,
+    StripHtmlPipe,
     AlertComponent,
     AdcontractComponent,
-    NewsComponent
+    NewsComponent,
+    NewsPageComponent
   ],
   imports: [
     CommonModule,
@@ -61,6 +67,7 @@ import { NewsComponent } from './news/news.component';
           //{path: 'reporter/dashboard', component:EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
           {path: 'reporter/report/:id/edit', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
           {path: 'infomanager/news', component:NewsComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}},
+          {path: 'infomanager/reader/:id', component:NewsPageComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}},
           //{path: 'infomanager/create', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}},
           {path: 'infomanager/report/:id/edit', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}}
 

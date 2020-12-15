@@ -21,5 +21,8 @@ public class News {
     private String body;
 
     @Column(nullable = false)
-    private boolean good;
+    private boolean bad;
+
+    @Column(nullable = false)
+    private boolean realization;
 }

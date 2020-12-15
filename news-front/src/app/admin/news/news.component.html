@@ -1,1 +1,55 @@
-<p>news works!</p>
+<div *ngIf="news.length; else loading">
+  <div class="form-control">
+    <input type="text" placeholder="Найти новость..." [(ngModel)]="searchStr">
+  </div>
+  <table>
+    <thead>
+    <tr>
+<!--      <th>#</th>-->
+      <th>Заголовок</th>
+      <th>Аннотация</th>
+      <th>Просмотр</th>
+      <th>Репортаж</th>
+      <th>Блок</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tmpNews of news| searchNews:searchStr; let idx = index">
+<!--      <td *ngIf="tmpNews.bad != true">{{idx + 1}}</td>-->
+      <td *ngIf="tmpNews.bad != true && tmpNews.realization != true">{{tmpNews.article}}
+      <td *ngIf="tmpNews.bad != true && tmpNews.realization != true">
+        <div>
+
+          <quill-view-html [content]="(tmpNews.body | striphtml | slice:0:100) + '...'">
+          </quill-view-html>
+        </div>
+      </td>
+
+      <td *ngIf="tmpNews.bad != true && tmpNews.realization != true">
+        <button class="btn btn-light open"
+                [routerLink]="['/cabinet', 'infomanager', 'reader', tmpNews.id]">
+          Открыть
+        </button>
+
+
+      </td>
+      <td *ngIf="tmpNews.bad != true && tmpNews.realization != true">
+        <button class="btn btn-success open"
+                (click)="realization($event, tmpNews)">
+          Реализовать
+        </button>
+      </td>
+      <td *ngIf="tmpNews.bad != true && tmpNews.realization != true">
+        <button class="btn btn-danger"
+                (click)="block($event, tmpNews)">
+          Блок
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loading>
+  <p class="text-center">Идет загрузка...</p>
+</ng-template>

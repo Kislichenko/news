@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {News, ReqData, Role} from '../../shared/interfaces';
+import {Subscription} from 'rxjs';
+import {AuthService} from '../shared/services/auth.service';
+import {ReqdataService} from '../../shared/reqdata.service';
+import {AlertService} from '../shared/services/alert.service';
+import {NewsService} from '../../shared/news.servive';
 
 @Component({
   selector: 'app-news',
@@ -7,9 +13,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsComponent implements OnInit {
 
-  constructor() { }
+  news: News[] = [];
+  pSub: Subscription;
+  dSub: Subscription;
+  uSub: Subscription;
+  searchStr = '';
 
-  ngOnInit(): void {
+  constructor(
+    private auth: AuthService,
+    private newsService: NewsService,
+    private alertService: AlertService
+  ) {
   }
 
+  ngOnInit(): void {
+    this.pSub = this.newsService.getAll().subscribe(news => {
+      this.news = news;
+    });
+  }
+
+  ngOnDestroy(): void {
+    //для того, чтобы не было утечек памяти, нужно очищать подписку
+    if (this.pSub) {
+      this.pSub.unsubscribe();
+    }
+    if (this.uSub) {
+      this.uSub.unsubscribe();
+    }
+  }
+
+  block($event: MouseEvent, news: News) {
+    this.uSub = this.newsService.update({
+      ...news,
+      bad: true
+    }).subscribe(() => {
+      this.alertService.success('Новость была заблокирована');
+      this.ngOnInit();
+    });
+  }
+
+  realization($event: MouseEvent, news: News) {
+    this.uSub = this.newsService.update({
+      ...news,
+      realization: true
+    }).subscribe(() => {
+      this.alertService.success('Новость отправлена на реализацию');
+      this.ngOnInit();
+    });
+  }
 }
