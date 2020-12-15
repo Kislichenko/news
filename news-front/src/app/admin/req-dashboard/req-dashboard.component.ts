@@ -44,6 +44,10 @@ export class ReqDashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  filterItemsOfType(username){
+    return this.reqDatas.filter(reqData => reqData.creator == username);
+  }
+
   remove(id: string) {
     this.dSub = this.reqdataService.remove(id).subscribe(() => {
       this.reqDatas = this.reqDatas.filter(reqData => reqData.id !== id);

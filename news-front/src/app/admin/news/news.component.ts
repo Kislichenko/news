@@ -42,6 +42,10 @@ export class NewsComponent implements OnInit {
     }
   }
 
+  filterNewsByAvailability(){
+    return this.news.filter(tmpNews => tmpNews.bad != true && tmpNews.realization != true);
+  }
+
   block($event: MouseEvent, news: News) {
     this.uSub = this.newsService.update({
       ...news,

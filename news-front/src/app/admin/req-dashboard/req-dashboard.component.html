@@ -17,7 +17,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let reqData of reqDatas | searchReqDatas:searchStr; let idx = index">
+    <tr *ngFor="let reqData of filterItemsOfType(auth.username) | searchReqDatas:searchStr; let idx = index">
       <td>{{idx + 1}}</td>
       <!--      <td>{{reqData.creationDate | date: 'medium': null: 'ru'}}</td>-->
       <td>{{reqData.creationDate | date: 'dd-MM-yyyy hh:mm'}}
