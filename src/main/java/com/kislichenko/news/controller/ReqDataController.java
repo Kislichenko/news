@@ -35,14 +35,14 @@ public class ReqDataController {
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_AD_MANAGER"})
     @GetMapping("requests")
     public ResponseEntity<Object> getRequests() {
         logger.debug("Getting all requests");
         return new ResponseEntity<>(reqDataService.getAllRequests(), HttpStatus.OK);
     }
 
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_AD_MANAGER"})
     @DeleteMapping("requests/{id}")
     public ResponseEntity<Object> deleteRequest(@PathVariable Long id) {
         logger.debug("Deleting request by id = " + id);

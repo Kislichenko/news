@@ -17,6 +17,7 @@ import {DpDatePickerModule} from 'ng2-date-picker';
 import {SearchPipe} from './shared/pipes/search.pipe';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import {AlertService} from './shared/services/alert.service';
+import { AdmanagerDashboardComponent } from './admanager-dashboard/admanager-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {AlertService} from './shared/services/alert.service';
     EditReportComponent,
     RegPageComponent,
     SearchPipe,
-    AlertComponent
+    AlertComponent,
+    AdmanagerDashboardComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,7 @@ import {AlertService} from './shared/services/alert.service';
           {path: 'user/dashboard', component: AdvertiserDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
           {path: 'user/create', component: CreateRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
           {path: 'user/request/:id/edit', component: EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
-          //{path: 'admanager/dashboard', component: AdmanagerDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_AD_MANAGER'}},
+          {path: 'admanager/dashboard', component: AdmanagerDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_AD_MANAGER'}},
           {path: 'admanager/request/:id/edit', component: EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_AD_MANAGER'}},
           //{path: 'reporter/dashboard', component:EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
           {path: 'reporter/report/:id/edit', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},

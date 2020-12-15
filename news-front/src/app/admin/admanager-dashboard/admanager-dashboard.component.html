@@ -1,0 +1,49 @@
+<div *ngIf="reqDatas.length; else loading">
+  <div class="form-control">
+    <input type="text" placeholder="Найти заявку..." [(ngModel)]="searchStr">
+  </div>
+  <table>
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Дата создания</th>
+      <th>Тематика</th>
+      <th>Тип рекламного блока</th>
+      <th>Дата начала размещения</th>
+      <th>Дата окончания размещения</th>
+      <th>Действие</th>
+      <th>Оплата</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let reqData of reqDatas | searchReqDatas:searchStr; let idx = index">
+      <td>{{idx + 1}}</td>
+      <!--      <td>{{reqData.creationDate | date: 'medium': null: 'ru'}}</td>-->
+      <td>{{reqData.creationDate | date: 'dd-MM-yyyy hh:mm'}}
+      <td>{{reqData.subject}}</td>
+      <td>{{reqData.type}}</td>
+      <td>{{reqData.startDate | date: 'dd-MM-yyyy'}}</td>
+      <td>{{reqData.endDate | date: 'dd-MM-yyyy'}}</td>
+      <td>
+        <button
+          class="btn btn-link open"
+          [routerLink]="['/cabinet', 'user', 'request', reqData.id, 'edit']">
+          Открыть
+        </button>
+        <a (click)="remove(reqData.id)">Удалить</a>
+      </td>
+      <td>
+        <button *ngIf="reqData.confirm && !reqData.payed"
+                class="btn btn-dark"
+                (click)="buy($event, reqData)">
+          Оплатить
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loading>
+  <p class="text-center">Идет загрузка...</p>
+</ng-template>
