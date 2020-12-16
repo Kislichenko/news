@@ -33,6 +33,7 @@ public class AppUserService {
             admin.setPassword(bCryptPasswordEncoder.encode("password"));
             Set<Role> roles = new HashSet<>();
             roles.add(roleRepository.findByName("ROLE_ADMIN"));
+            System.out.println(roleRepository.findByName("ROLE_ADMIN").getId());
             admin.setRoles(roles);
             appUserRepository.save(admin);
         }
