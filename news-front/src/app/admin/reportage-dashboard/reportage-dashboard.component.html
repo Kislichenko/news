@@ -23,7 +23,7 @@
       <!--      <td>{{reportage.startDate | date: 'dd-MM-yyyy hh:mm'}}-->
       <td>{{reportage.status}}</td>
       <td *ngIf="reportage.comment==null" style="text-align: center;">-</td>
-      <td *ngIf="reportage.comment != null">{{reportage.comment}}</td>
+      <td *ngIf="reportage.comment != null"><span [innerHTML]="reportage.comment"></span></td>
       <td>{{reportage.infoManager}}</td>
       <td *ngIf="auth.checkRole(role.Reporter)">
         <div>
