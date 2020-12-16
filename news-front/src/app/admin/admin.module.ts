@@ -67,10 +67,12 @@ import {ReportageDashboardComponent} from './reportage-dashboard/reportage-dashb
           {path: 'reporter/report', component:ReportageDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
           {path: 'reporter/dashboard', component:ReportageDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
           {path: 'reporter/report/:id/edit', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
+          {path: 'reporter/reportage/:id', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
           {path: 'infomanager/news', component:NewsComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}},
           {path: 'infomanager/report', component:ReportageDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}},
           {path: 'infomanager/reader/:id', component:NewsPageComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}},
-          {path: 'infomanager/report/:id/edit', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}}
+          {path: 'infomanager/report/:id/edit', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}},
+          {path: 'infomanager/reportage/:id', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}}
         ]},
 
     ])
