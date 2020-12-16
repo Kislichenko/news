@@ -19,7 +19,6 @@ export class ReportageService{
     return this.http.get(`${environment.backendUrl}/reportages`)
       .pipe(
         map( (response: {[key: string]: any}) =>{
-          console.log(response)
         return Object.keys(response).map(key => ({
           ...response[key],
           id: response[key].id

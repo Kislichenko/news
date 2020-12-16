@@ -73,4 +73,5 @@ export interface Reportage {
   confirm: boolean
   status: ReportageStatus
   news: string
+  newsArticle: string
 }

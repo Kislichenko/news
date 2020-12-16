@@ -32,5 +32,6 @@ public class ReportageDTO {
 
     private ReportageStatus status;
     private Long newsId;
+    private String newsArticle;
 }
 

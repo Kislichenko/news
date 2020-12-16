@@ -70,6 +70,7 @@ public class ReportageService {
                 reportageDTO.setReporter(reportage.getReporter().getUsername());
             }
             reportageDTO.setNewsId(reportage.getNews().getId());
+            reportageDTO.setNewsArticle(reportage.getNews().getArticle());
             reportageDTOS.add(reportageDTO);
         }
         System.out.println("SIZE2: " + reportageDTOS.size());

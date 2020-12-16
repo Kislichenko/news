@@ -7,6 +7,7 @@
     <tr>
       <th>#</th>
       <th>Дата создания</th>
+      <th>Тема</th>
       <th>Статус</th>
       <th>Комментарий</th>
       <th>Инфо менеджер</th>
@@ -16,8 +17,9 @@
     <tbody>
     <tr *ngFor="let reportage of reports; let idx = index">
       <td>{{idx + 1}}</td>
-<!--      <td>{{reportage.startDate | date: 'medium': null: 'ru'}}</td>-->
-      <td>{{reportage.startDate | date: 'dd-MM-yyyy hh:mm'}}
+      <td>{{reportage.startDate | date: 'medium': null: 'ru'}}</td>
+      <td>{{reportage.newsArticle}}</td>
+<!--      <td>{{reportage.startDate | date: 'dd-MM-yyyy hh:mm'}}-->
       <td>{{reportage.status}}</td>
       <td>{{reportage.comment}}</td>
       <td>{{reportage.infoManager}}</td>
