@@ -1,6 +1,8 @@
 <div *ngIf="news != null; else loading">
-  <h1><quill-view-html [content]="news.article">
-  </quill-view-html></h1>
+  <h1>
+    <quill-view-html [content]="news.article">
+    </quill-view-html>
+  </h1>
   <quill-view-html [content]="news.body">
   </quill-view-html>
 </div>

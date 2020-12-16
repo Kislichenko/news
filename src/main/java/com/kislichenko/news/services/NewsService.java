@@ -17,7 +17,7 @@ public class NewsService {
     ModelMapper modelMapper = new ModelMapper();
 
     public NewsService(NewsRepository newsRepository,
-                       AppUserRepository appUserRepository){
+                       AppUserRepository appUserRepository) {
         this.newsRepository = newsRepository;
         this.appUserRepository = appUserRepository;
     }
@@ -32,7 +32,7 @@ public class NewsService {
     public NewsDTO getNewsDtoById(Long id) {
         if (newsRepository.findById(id).isPresent()) {
             News news = newsRepository.findById(id).get();
-            NewsDTO newsDto= modelMapper.map(news, NewsDTO.class);
+            NewsDTO newsDto = modelMapper.map(news, NewsDTO.class);
             return newsDto;
         } else {
             return null;
@@ -51,11 +51,11 @@ public class NewsService {
     public void addNewNews(NewsDTO newsDto) {
         News news = modelMapper.map(newsDto, News.class);
         try {
-            if(appUserRepository.findByUsername(newsDto.getInfoManager()) !=null){
+            if (appUserRepository.findByUsername(newsDto.getInfoManager()) != null) {
                 news.setInfoManager(appUserRepository.findByUsername(newsDto.getInfoManager()));
             }
             newsRepository.save(news);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

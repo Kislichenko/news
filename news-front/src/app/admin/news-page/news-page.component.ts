@@ -1,11 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {switchMap} from 'rxjs/operators';
 import {ActivatedRoute, Params} from '@angular/router';
-import {News, ReqData} from '../../shared/interfaces';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ReqdataService} from '../../shared/reqdata.service';
-import {DatePipe} from '@angular/common';
-import {AlertService} from '../shared/services/alert.service';
+import {News} from '../../shared/interfaces';
 import {NewsService} from '../../shared/news.servive';
 
 @Component({
@@ -15,21 +11,22 @@ import {NewsService} from '../../shared/news.servive';
 })
 export class NewsPageComponent implements OnInit {
 
-  news: News
+  news: News;
 
   constructor(
     private route: ActivatedRoute,
     private newsServise: NewsService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.params.pipe(
-      switchMap((params: Params) =>{
-        return this.newsServise.getById(params['id'])
+      switchMap((params: Params) => {
+        return this.newsServise.getById(params['id']);
       })
     ).subscribe((news: News) => {
-      this.news = news
-    })
+      this.news = news;
+    });
   }
 
 

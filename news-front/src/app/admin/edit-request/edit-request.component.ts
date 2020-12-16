@@ -4,10 +4,9 @@ import {ReqdataService} from '../../shared/reqdata.service';
 import {switchMap} from 'rxjs/operators';
 import {AdBlockType, ReqData} from '../../shared/interfaces';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import { DatePipe } from '@angular/common'
-import {AuthService} from '../shared/services/auth.service';
+import {DatePipe} from '@angular/common';
 import {Subscription} from 'rxjs';
-import {Alert, AlertService} from '../shared/services/alert.service';
+import {AlertService} from '../shared/services/alert.service';
 import * as moment from 'jalali-moment';
 
 const adBlockType: Array<string> = Object.keys(AdBlockType).filter(key => isNaN(+key));
@@ -19,27 +18,28 @@ const adBlockType: Array<string> = Object.keys(AdBlockType).filter(key => isNaN(
 })
 export class EditRequestComponent implements OnInit, OnDestroy {
 
-  form: FormGroup
-  ePropertyType = adBlockType
-  reqData: ReqData
-  submitted = false
+  form: FormGroup;
+  ePropertyType = adBlockType;
+  reqData: ReqData;
+  submitted = false;
 
-  uSub: Subscription
+  uSub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private reqdataService: ReqdataService,
     private datepipe: DatePipe,
     private alertService: AlertService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.params.pipe(
-      switchMap((params: Params) =>{
-        return this.reqdataService.getById(params['id'])
+      switchMap((params: Params) => {
+        return this.reqdataService.getById(params['id']);
       })
     ).subscribe((reqData: ReqData) => {
-      this.reqData = reqData
+      this.reqData = reqData;
       this.form = new FormGroup({
         subject: new FormControl(reqData.subject, [Validators.required]),
         legalData: new FormControl(reqData.legalData, [Validators.required]),
@@ -47,20 +47,33 @@ export class EditRequestComponent implements OnInit, OnDestroy {
         startDate: new FormControl(this.datepipe.transform(reqData.startDate, 'dd-MM-yyyy'), [Validators.required]),
         endDate: new FormControl(this.datepipe.transform(reqData.endDate, 'dd-MM-yyyy'), [Validators.required]),
         type: new FormControl(reqData.type, [Validators.required])
-      })
-    })
+      });
+    });
   }
 
-  public buy(event){
-    this.reqData.payed = true
-    this.updateRequest('Блок был оплачен!')
+  public buy(event) {
+    this.reqData.payed = true;
+    this.updateRequest('Блок был оплачен!');
   }
 
-  private updateRequest(infoText: string){
-    this.submitted = true
+  submit() {
+    if (this.form.invalid) {
+      return;
+    }
+    this.updateRequest('Заявка была обновлена!');
+  }
 
-    this.form.controls['startDate'].setValue(moment.from(this.form.value.startDate, 'ru','DD-MM-YYYY'));
-    this.form.controls['endDate'].setValue(moment.from(this.form.value.endDate, 'ru','DD-MM-YYYY'));
+  ngOnDestroy(): void {
+    if (this.uSub) {
+      this.uSub.unsubscribe();
+    }
+  }
+
+  private updateRequest(infoText: string) {
+    this.submitted = true;
+
+    this.form.controls['startDate'].setValue(moment.from(this.form.value.startDate, 'ru', 'DD-MM-YYYY'));
+    this.form.controls['endDate'].setValue(moment.from(this.form.value.endDate, 'ru', 'DD-MM-YYYY'));
 
     this.uSub = this.reqdataService.update({
       ...this.reqData,
@@ -75,22 +88,9 @@ export class EditRequestComponent implements OnInit, OnDestroy {
       contract: this.reqData.contract,
       signature: this.reqData.signature,
       cost: this.reqData.cost
-    }).subscribe(()=>{
-      this.submitted = false
-      this.alertService.success(infoText)
-    })
-  }
-
-  submit() {
-    if(this.form.invalid){
-      return
-    }
-    this.updateRequest('Заявка была обновлена!')
-  }
-
-  ngOnDestroy(): void {
-    if(this.uSub){
-      this.uSub.unsubscribe()
-    }
+    }).subscribe(() => {
+      this.submitted = false;
+      this.alertService.success(infoText);
+    });
   }
 }

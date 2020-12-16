@@ -27,12 +27,20 @@ export class ReportageDashboardComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  filterReportsOfUser(){
-    if (this.router.url === '/cabinet/reporter/dashboard' && this.auth.checkRole(this.role.Reporter)){
-      return this.reports.filter(reportage => reportage.reporter == this.auth.username && reportage.publish == false)
-    }else {
+  public get reportageStatus(): typeof ReportageStatus {
+    return ReportageStatus;
+  }
+
+  public get role(): typeof Role {
+    return Role;
+  }
+
+  filterReportsOfUser() {
+    if (this.router.url === '/cabinet/reporter/dashboard' && this.auth.checkRole(this.role.Reporter)) {
+      return this.reports.filter(reportage => reportage.reporter == this.auth.username && reportage.publish == false);
+    } else {
       return this.reports.filter(reportage => (reportage.status == this.reportageStatus.Created || reportage.confirm == true)
-        && reportage.publish == false)
+        && reportage.publish == false);
     }
 
   }
@@ -62,7 +70,6 @@ export class ReportageDashboardComponent implements OnInit, OnDestroy {
       this.alertService.warning('Пост был удален!');
     });
   }
-
 
   lock($event: MouseEvent, reportage: Reportage) {
     this.uSub = this.reportageService.update({
@@ -109,19 +116,10 @@ export class ReportageDashboardComponent implements OnInit, OnDestroy {
     this.uSub = this.reportageService.update({
       ...reportage,
       status: this.reportageStatus.Created,
-      reporter: ""
+      reporter: ''
     }).subscribe(() => {
       this.alertService.success('Репортаж был разблокирован');
       this.ngOnInit();
     });
-  }
-
-
-  public get reportageStatus(): typeof ReportageStatus {
-    return ReportageStatus;
-  }
-
-  public get role(): typeof Role {
-    return Role;
   }
 }

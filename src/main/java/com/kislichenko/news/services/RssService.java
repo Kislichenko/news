@@ -7,15 +7,12 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -25,7 +22,7 @@ public class RssService {
 
     NewsRepository newsRepository;
 
-    public RssService(NewsRepository newsRepository){
+    public RssService(NewsRepository newsRepository) {
         this.newsRepository = newsRepository;
 
         URL url = null;
@@ -33,7 +30,7 @@ public class RssService {
         try {
             url = new URL("https://www.mchs.gov.ru/deyatelnost/press-centr/novosti/rss");
             news = getFeedNews(url);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -63,8 +60,6 @@ public class RssService {
             Document doc = null;
             if (entry.getForeignMarkup().get(0).toString().contains("yandex")) {
                 doc = Jsoup.parse(entry.getForeignMarkup().get(0).getContent().get(0).getValue());
-                //System.out.println(doc);
-
             } else {
                 doc = Jsoup.parse(entry.getContents().get(0).getValue());
             }

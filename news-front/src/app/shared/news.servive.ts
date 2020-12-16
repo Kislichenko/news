@@ -1,36 +1,37 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {News, ReqData} from './interfaces';
+import {News} from './interfaces';
 import {environment} from '../../environments/environment';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
-export class NewsService{
+export class NewsService {
   constructor(
     private http: HttpClient
-  ) {}
+  ) {
+  }
 
-  getAll(): Observable<News[]>{
+  getAll(): Observable<News[]> {
     return this.http.get(`${environment.backendUrl}/news`)
-      .pipe(map( (response: {[key: string]: any}) =>{
+      .pipe(map((response: { [key: string]: any }) => {
         return Object.keys(response).map(key => ({
           ...response[key],
           id: response[key].id
-        }))
-      }))
+        }));
+      }));
   }
 
-  getById(id: string): Observable<News>{
+  getById(id: string): Observable<News> {
     return this.http.get<News>(`${environment.backendUrl}/news/${id}`)
-      .pipe(map( (news: News) =>{
+      .pipe(map((news: News) => {
         return {
           ...news, id
-        }
-      }))
+        };
+      }));
   }
 
-  update(news: News): Observable<News>{
-    return this.http.patch<News>(`${environment.backendUrl}/news/${news.id}`, news)
+  update(news: News): Observable<News> {
+    return this.http.patch<News>(`${environment.backendUrl}/news/${news.id}`, news);
   }
 }

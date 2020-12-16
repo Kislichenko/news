@@ -1,14 +1,14 @@
 <div *ngIf="form; else loading">
-  <button *ngIf="reqData.confirm && !reqData.payed"
-    class="btn btn-dark"
-    (click)="buy($event)">
+  <button (click)="buy($event)"
+          *ngIf="reqData.confirm && !reqData.payed"
+          class="btn btn-dark">
     Оплатить рекламный блок
   </button>
 
-  <form [formGroup]="form" (ngSubmit)="submit()">
+  <form (ngSubmit)="submit()" [formGroup]="form">
 
     <div
-    class="form-control">
+      class="form-control">
       <label for="startDate">Дата создания заявки: {{reqData.creationDate | date: 'dd-MM-yyyy'}}</label>
     </div>
 
@@ -18,10 +18,10 @@
     </div>
 
     <div
-      class="form-control"
-      [ngClass]="{invalid: form.get('type').touched && form.get('type').invalid}">
+      [ngClass]="{invalid: form.get('type').touched && form.get('type').invalid}"
+      class="form-control">
       <label for="subject">Тип рекламного блока:</label>
-      <select id="type" formControlName="type">
+      <select formControlName="type" id="type">
         <option [value]="null">Select one...</option>
         <option *ngFor="let type of ePropertyType | keyvalue" [ngValue]="type.value">{{type.value}}</option>
       </select>
@@ -35,10 +35,10 @@
     </div>
 
     <div
-      class="form-control"
-      [ngClass]="{invalid: form.get('subject').touched && form.get('subject').invalid}">
+      [ngClass]="{invalid: form.get('subject').touched && form.get('subject').invalid}"
+      class="form-control">
       <label for="subject">Тематика:</label>
-      <input id="subject" type="text" formControlName="subject">
+      <input formControlName="subject" id="subject" type="text">
       <div
         *ngIf="form.get('subject').touched && form.get('subject').invalid"
         class="validation">
@@ -49,10 +49,10 @@
     </div>
 
     <div
-      class="form-control"
-      [ngClass]="{invalid: form.get('startDate').touched && form.get('startDate').invalid}">
+      [ngClass]="{invalid: form.get('startDate').touched && form.get('startDate').invalid}"
+      class="form-control">
       <label for="startDate">Дата начала размещения: </label>
-      <dp-date-picker id="startDate" #dayPicker theme="dp-material" formControlName="startDate"></dp-date-picker>
+      <dp-date-picker #dayPicker formControlName="startDate" id="startDate" theme="dp-material"></dp-date-picker>
       <div
         *ngIf="form.get('startDate').touched && form.get('startDate').invalid"
         class="validation">
@@ -63,10 +63,10 @@
     </div>
 
     <div
-      class="form-control"
-      [ngClass]="{invalid: form.get('endDate').touched && form.get('endDate').invalid}">
+      [ngClass]="{invalid: form.get('endDate').touched && form.get('endDate').invalid}"
+      class="form-control">
       <label for="endDate">Дата окончания размещения: </label>
-      <dp-date-picker id="endDate" #dayPicker theme="dp-material" formControlName="endDate"></dp-date-picker>
+      <dp-date-picker #dayPicker formControlName="endDate" id="endDate" theme="dp-material"></dp-date-picker>
       <div
         *ngIf="form.get('endDate').touched && form.get('endDate').invalid"
         class="validation">
@@ -77,10 +77,10 @@
     </div>
 
     <div
-      class="form-control"
-      [ngClass]="{invalid: form.get('legalData').touched && form.get('legalData').invalid}">
+      [ngClass]="{invalid: form.get('legalData').touched && form.get('legalData').invalid}"
+      class="form-control">
       <label for="legalData">Юридические данные:</label>
-      <input id="legalData" type="text" formControlName="legalData">
+      <input formControlName="legalData" id="legalData" type="text">
       <div
         *ngIf="form.get('legalData').touched && form.get('legalData').invalid"
         class="validation">
@@ -96,9 +96,9 @@
     </div>
 
     <button
+      [disabled]="form.invalid || submitted"
       class="btn btn-primary"
-      type="submit"
-      [disabled]="form.invalid || submitted">
+      type="submit">
       Обновить
     </button>
 

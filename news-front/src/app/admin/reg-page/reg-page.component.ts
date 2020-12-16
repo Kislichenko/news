@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../shared/services/auth.service';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../shared/interfaces';
 
 @Component({
@@ -11,15 +11,16 @@ import {User} from '../../shared/interfaces';
 })
 export class RegPageComponent implements OnInit {
 
-  form: FormGroup
-  submitted = false
-  message: string
+  form: FormGroup;
+  submitted = false;
+  message: string;
 
   constructor(
     public auth: AuthService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -46,21 +47,21 @@ export class RegPageComponent implements OnInit {
       ])
     }, {
       validators: this.password.bind(this)
-    })
+    });
   }
 
   password(formGroup: FormGroup) {
-    const { value: password } = formGroup.get('password');
-    const { value: confirmPassword } = formGroup.get('confirmPassword');
-    return password === confirmPassword ? null : { passwordNotMatch: true };
+    const {value: password} = formGroup.get('password');
+    const {value: confirmPassword} = formGroup.get('confirmPassword');
+    return password === confirmPassword ? null : {passwordNotMatch: true};
   }
 
-  submit(){
-    if (this.form.invalid){
-      return
+  submit() {
+    if (this.form.invalid) {
+      return;
     }
 
-    this.submitted = true
+    this.submitted = true;
 
     const user: User = {
       username: this.form.value.username,
@@ -69,15 +70,15 @@ export class RegPageComponent implements OnInit {
       name: this.form.value.name,
       surname: this.form.value.surname,
       confirmPassword: this.form.value.confirmPassword
-    }
+    };
 
-    this.auth.register(user).subscribe(()=>{
-      this.form.reset()
-      this.router.navigate(['/cabinet', 'login'])
-      this.submitted = false
+    this.auth.register(user).subscribe(() => {
+      this.form.reset();
+      this.router.navigate(['/cabinet', 'login']);
+      this.submitted = false;
     }, () => {
-      this.submitted = false
-    })
+      this.submitted = false;
+    });
   }
 
 }

@@ -74,7 +74,6 @@ public class ReportageService {
         }
         return reportageDTOS;
 
-
     }
 
     public void createReportageByNews(News news) {

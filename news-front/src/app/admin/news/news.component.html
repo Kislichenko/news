@@ -1,6 +1,6 @@
 <div *ngIf="news.length; else loading">
   <div class="form-control">
-    <input type="text" placeholder="Найти новость..." [(ngModel)]="searchStr">
+    <input [(ngModel)]="searchStr" placeholder="Найти новость..." type="text">
   </div>
   <table>
     <thead>
@@ -25,22 +25,22 @@
       </td>
 
       <td>
-        <button class="btn btn-light open"
-                [routerLink]="['/cabinet', 'infomanager', 'reader', tmpNews.id]">
+        <button [routerLink]="['/cabinet', 'infomanager', 'reader', tmpNews.id]"
+                class="btn btn-light open">
           Открыть
         </button>
       </td>
 
       <td>
-        <button class="btn btn-success open"
-                (click)="realization($event, tmpNews)">
+        <button (click)="realization($event, tmpNews)"
+                class="btn btn-success open">
           Реализовать
         </button>
       </td>
 
       <td>
-        <button class="btn btn-danger"
-                (click)="block($event, tmpNews)">
+        <button (click)="block($event, tmpNews)"
+                class="btn btn-danger">
           Блок
         </button>
       </td>

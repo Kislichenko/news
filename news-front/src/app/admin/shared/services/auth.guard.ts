@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate{
+export class AuthGuard implements CanActivate {
 
   constructor(
     private auth: AuthService,
@@ -35,12 +35,12 @@ export class AuthGuard implements CanActivate{
     if (this.auth.isAuthenticated()) {
       const userRole = this.auth.role;
       if (route.data.role && route.data.role.indexOf(userRole) === -1) {
-        this.auth.logout()
+        this.auth.logout();
         this.router.navigate(['/cabinet', 'login'], {
-          queryParams:{
+          queryParams: {
             loginAgain: true
           }
-        })
+        });
         return false;
       }
       return true;

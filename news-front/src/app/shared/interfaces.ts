@@ -13,26 +13,26 @@ export interface FbAuthResponse {
   expiresIn: string
 }
 
-export enum Role{
-  Admin = "ROLE_ADMIN",
-  User = "ROLE_USER",
-  AdManager = "ROLE_AD_MANAGER",
-  InfoManager = "ROLE_INFO_MANAGER",
-  Reporter = "ROLE_REPORTER"
+export enum Role {
+  Admin = 'ROLE_ADMIN',
+  User = 'ROLE_USER',
+  AdManager = 'ROLE_AD_MANAGER',
+  InfoManager = 'ROLE_INFO_MANAGER',
+  Reporter = 'ROLE_REPORTER'
 }
 
-export enum ReportageStatus{
-  Created ="Created",
-  Inwork = "Inwork",
-  Fixing = "Fixing",
-  Closed = "Closed"
+export enum ReportageStatus {
+  Created = 'Created',
+  Inwork = 'Inwork',
+  Fixing = 'Fixing',
+  Closed = 'Closed'
 }
 
-export enum AdBlockType{
-  Simple = "SIMPLE",
-  Big = "BIG",
-  Header = "HEADER",
-  Footer = "FOOTER"
+export enum AdBlockType {
+  Simple = 'SIMPLE',
+  Big = 'BIG',
+  Header = 'HEADER',
+  Footer = 'FOOTER'
 }
 
 

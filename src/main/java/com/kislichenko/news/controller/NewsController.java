@@ -2,7 +2,6 @@ package com.kislichenko.news.controller;
 
 import com.kislichenko.news.dto.NewsDTO;
 import com.kislichenko.news.entity.News;
-import com.kislichenko.news.entity.Reportage;
 import com.kislichenko.news.services.NewsService;
 import com.kislichenko.news.services.ReportageService;
 import org.slf4j.Logger;
@@ -38,11 +37,9 @@ public class NewsController {
         logger.debug("Patching the news by info_manager");
         newsService.addNewNews(newsDto);
         News news = newsService.getNewsById(newsDto.getId());
-        if (newsDto.isRealization() && news != null){
-            System.out.println("New Reportage created!");
+        if (newsDto.isRealization() && news != null) {
             reportageService.createReportageByNews(news);
         }
-
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 

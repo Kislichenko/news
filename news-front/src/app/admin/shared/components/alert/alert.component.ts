@@ -10,33 +10,34 @@ import {Subscription} from 'rxjs';
 export class AlertComponent implements OnInit, OnDestroy {
 
   //длительность отображения алерта
-  @Input() delay = 3000
+  @Input() delay = 3000;
 
-  public text: string
-  public type = 'success'
+  public text: string;
+  public type = 'success';
 
-  aSub: Subscription
+  aSub: Subscription;
 
   constructor(
     private alertService: AlertService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
 
     this.aSub = this.alertService.alert$.subscribe(alert => {
-      this.text = alert.text
-      this.type = alert.type
+      this.text = alert.text;
+      this.type = alert.type;
 
       const timeout = setTimeout(() => {
-        clearTimeout()
-        this.text = ''
-      }, this.delay)
-    })
+        clearTimeout();
+        this.text = '';
+      }, this.delay);
+    });
   }
 
   ngOnDestroy(): void {
-    if(this.aSub){
-      this.aSub.unsubscribe()
+    if (this.aSub) {
+      this.aSub.unsubscribe();
     }
   }
 

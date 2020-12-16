@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
 import {RequestPageComponent} from './request-page/request-page.component';
 import {HomePageComponent} from './home-page/home-page.component';
@@ -28,4 +28,5 @@ const routes: Routes = [
   })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

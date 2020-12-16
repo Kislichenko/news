@@ -1,10 +1,8 @@
 package com.kislichenko.news.errors;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.kislichenko.news.exceptions.ClientNotFoundException;
 import org.hibernate.JDBCException;
 import org.slf4j.Logger;
@@ -65,7 +63,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 
-            apiError.setMessage(errorsMap.toString());
+        apiError.setMessage(errorsMap.toString());
 
 
         return new ResponseEntity(apiError, headers, status);

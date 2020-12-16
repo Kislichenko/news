@@ -2,9 +2,6 @@ package com.kislichenko.news.dto;
 
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

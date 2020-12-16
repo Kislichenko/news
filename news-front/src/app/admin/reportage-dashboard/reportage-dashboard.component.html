@@ -1,6 +1,6 @@
 <div *ngIf="reports.length; else loading">
   <div class="form-control">
-    <input type="text" placeholder="Найти репортаж..." [(ngModel)]="searchStr">
+    <input [(ngModel)]="searchStr" placeholder="Найти репортаж..." type="text">
   </div>
   <table>
     <thead>
@@ -23,20 +23,20 @@
       <td>{{reportage.startDate | date: 'medium': null: 'ru'}}</td>
       <td>{{reportage.newsArticle}}</td>
       <!--      <td>{{reportage.startDate | date: 'dd-MM-yyyy hh:mm'}}-->
-<!--      <td>{{reportage.status}}</td>-->
+      <!--      <td>{{reportage.status}}</td>-->
       <td *ngIf="reportage.comment=='-'" style="text-align: center;">-</td>
       <td *ngIf="reportage.comment != '-'"><span [innerHTML]="reportage.comment"></span></td>
       <td>{{reportage.infoManager}}</td>
       <td *ngIf="auth.checkRole(role.Reporter)">
         <div>
-          <button *ngIf="reportage.status == reportageStatus.Created"
-                  class="btn btn-success"
-                  (click)="lock($event, reportage)">
+          <button (click)="lock($event, reportage)"
+                  *ngIf="reportage.status == reportageStatus.Created"
+                  class="btn btn-success">
             Забрать
           </button>
-          <button *ngIf="reportage.status == reportageStatus.Inwork"
-                  class="btn btn-danger"
-                  (click)="unlock($event, reportage)">
+          <button (click)="unlock($event, reportage)"
+                  *ngIf="reportage.status == reportageStatus.Inwork"
+                  class="btn btn-danger">
             Разблокировать
           </button>
 
@@ -44,25 +44,25 @@
       </td>
       <td>
         <button *ngIf="reportage.reporter == this.auth.username"
-                class="btn btn-success"
-                [routerLink]="['/cabinet', 'reporter', 'report', reportage.id, 'edit']">
+                [routerLink]="['/cabinet', 'reporter', 'report', reportage.id, 'edit']"
+                class="btn btn-success">
           Редактировать
         </button>
         <button *ngIf="reportage.reporter != this.auth.username && this.auth.checkRole(role.Reporter)"
-                class="btn btn-light"
-                [routerLink]="['/cabinet', 'reporter', 'reportage', reportage.id]">
+                [routerLink]="['/cabinet', 'reporter', 'reportage', reportage.id]"
+                class="btn btn-light">
           Посмотреть
         </button>
         <button *ngIf="reportage.reporter != this.auth.username && this.auth.checkRole(role.InfoManager)"
-                class="btn btn-light"
-                [routerLink]="['/cabinet', 'infomanager', 'reportage', reportage.id]">
+                [routerLink]="['/cabinet', 'infomanager', 'reportage', reportage.id]"
+                class="btn btn-light">
           Посмотреть
         </button>
       </td>
       <td *ngIf="auth.checkRole(role.Reporter)">
-        <button *ngIf="reportage.text != null && reportage.text.length>100 && !reportage.confirm"
-                class="btn btn-light"
-                (click)="sendCheck($event, reportage)">
+        <button (click)="sendCheck($event, reportage)"
+                *ngIf="reportage.text != null && reportage.text.length>100 && !reportage.confirm"
+                class="btn btn-light">
           Отправить
         </button>
         <div *ngIf="reportage.text == null || reportage.text != null && reportage.text.length<100">
@@ -73,9 +73,9 @@
         </div>
       </td>
       <td *ngIf="auth.checkRole(role.InfoManager)">
-        <button *ngIf="reportage.confirm == true"
-                class="btn btn-danger"
-                (click)="publish($event, reportage)">
+        <button (click)="publish($event, reportage)"
+                *ngIf="reportage.confirm == true"
+                class="btn btn-danger">
           Опубликовать
         </button>
         <div *ngIf="reportage.confirm == false">
@@ -83,9 +83,9 @@
         </div>
       </td>
       <td *ngIf="auth.checkRole(role.InfoManager)">
-        <button *ngIf="reportage.confirm == true"
-                class="btn btn-success"
-                (click)="remake($event, reportage)">
+        <button (click)="remake($event, reportage)"
+                *ngIf="reportage.confirm == true"
+                class="btn btn-success">
           На доработку
         </button>
         <div *ngIf="reportage.confirm == false">

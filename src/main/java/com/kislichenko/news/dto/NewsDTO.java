@@ -2,7 +2,6 @@ package com.kislichenko.news.dto;
 
 import lombok.*;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 
 @AllArgsConstructor

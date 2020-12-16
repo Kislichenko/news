@@ -1,11 +1,8 @@
 package com.kislichenko.news.dto;
 
-import com.kislichenko.news.entity.AppUser;
-import com.kislichenko.news.entity.News;
 import com.kislichenko.news.entity.ReportageStatus;
 import lombok.*;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 

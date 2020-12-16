@@ -25,6 +25,10 @@ export class ReqDashboardComponent implements OnInit, OnDestroy {
   ) {
   }
 
+  public get role(): typeof Role {
+    return Role;
+  }
+
   ngOnInit(): void {
     this.pSub = this.reqdataService.getAll().subscribe(reqDatas => {
       this.reqDatas = reqDatas;
@@ -44,7 +48,7 @@ export class ReqDashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  filterItemsOfType(username){
+  filterItemsOfType(username) {
     return this.reqDatas.filter(reqData => reqData.creator == username || this.auth.checkRole(this.role.AdManager));
   }
 
@@ -54,7 +58,6 @@ export class ReqDashboardComponent implements OnInit, OnDestroy {
       this.alertService.warning('Пост был удален!');
     });
   }
-
 
   buy($event: MouseEvent, reqData: ReqData) {
     this.uSub = this.reqdataService.update({
@@ -94,9 +97,5 @@ export class ReqDashboardComponent implements OnInit, OnDestroy {
       this.alertService.success('Заявка на рекламу была подтверждена');
       this.ngOnInit();
     });
-  }
-
-  public get role(): typeof Role {
-    return Role;
   }
 }

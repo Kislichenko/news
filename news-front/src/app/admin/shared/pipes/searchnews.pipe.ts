@@ -1,17 +1,17 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {News, ReqData} from '../../../shared/interfaces';
+import {News} from '../../../shared/interfaces';
 
 @Pipe({
   name: 'searchNews'
 })
-export class SearchNewsPipe implements PipeTransform{
+export class SearchNewsPipe implements PipeTransform {
   transform(news: News[], search = ''): News[] {
-    if(!search.trim()){
-      return news
-    }else{
+    if (!search.trim()) {
+      return news;
+    } else {
       return news.filter(tmpNews => {
-        return tmpNews.article.toLowerCase().includes(search.toLowerCase())
-      })
+        return tmpNews.article.toLowerCase().includes(search.toLowerCase());
+      });
     }
   }
 

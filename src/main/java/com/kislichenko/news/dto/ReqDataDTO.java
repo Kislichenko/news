@@ -1,11 +1,8 @@
 package com.kislichenko.news.dto;
 
 import com.kislichenko.news.entity.AdBlockTypes;
-import com.kislichenko.news.entity.AppUser;
-import com.kislichenko.news.entity.ReqData;
 import lombok.*;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 

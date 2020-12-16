@@ -1,19 +1,19 @@
-<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+<form (ngSubmit)="submit()" [formGroup]="form" class="card">
   <h2>Регистрация</h2>
 
-  <div class="alert alert-danger" *ngIf="auth.error$ | async as error">
+  <div *ngIf="auth.error$ | async as error" class="alert alert-danger">
     {{error}}
   </div>
 
-  <div class="alert alert-info" *ngIf="message">
+  <div *ngIf="message" class="alert alert-info">
     {{message}}
   </div>
 
   <div
-    class="form-control"
-    [ngClass]="{invalid: form.get('username').touched && form.get('username').invalid}">
+    [ngClass]="{invalid: form.get('username').touched && form.get('username').invalid}"
+    class="form-control">
     <label for="username">Логин:</label>
-    <input id="username" type="text" formControlName="username">
+    <input formControlName="username" id="username" type="text">
     <div
       *ngIf="form.get('username').touched && form.get('username').invalid"
       class="validation">
@@ -24,10 +24,10 @@
   </div>
 
   <div
-    class="form-control"
-    [ngClass]="{invalid: form.get('email').touched && form.get('email').invalid}">
+    [ngClass]="{invalid: form.get('email').touched && form.get('email').invalid}"
+    class="form-control">
     <label for="email">Email:</label>
-    <input id="email" type="email" formControlName="email">
+    <input formControlName="email" id="email" type="email">
     <div
       *ngIf="form.get('email').touched && form.get('email').invalid"
       class="validation">
@@ -41,10 +41,10 @@
   </div>
 
   <div
-    class="form-control"
-    [ngClass]="{invalid: form.get('name').touched && form.get('name').invalid}">
+    [ngClass]="{invalid: form.get('name').touched && form.get('name').invalid}"
+    class="form-control">
     <label for="name">Имя:</label>
-    <input id="name" type="text" formControlName="name">
+    <input formControlName="name" id="name" type="text">
     <div
       *ngIf="form.get('name').touched && form.get('name').invalid"
       class="validation">
@@ -55,10 +55,10 @@
   </div>
 
   <div
-    class="form-control"
-    [ngClass]="{invalid: form.get('surname').touched && form.get('surname').invalid}">
+    [ngClass]="{invalid: form.get('surname').touched && form.get('surname').invalid}"
+    class="form-control">
     <label for="surname">Фамилия:</label>
-    <input id="surname" type="text" formControlName="surname">
+    <input formControlName="surname" id="surname" type="text">
     <div
       *ngIf="form.get('surname').touched && form.get('surname').invalid"
       class="validation">
@@ -69,10 +69,10 @@
   </div>
 
   <div
-    class="form-control"
-    [ngClass]="{invalid: form.get('password').touched && form.get('password').invalid}">
+    [ngClass]="{invalid: form.get('password').touched && form.get('password').invalid}"
+    class="form-control">
     <label for="password">Пароль:</label>
-    <input id="password" type="password" formControlName="password">
+    <input formControlName="password" id="password" type="password">
     <div
       *ngIf="form.get('password').touched && form.get('password').invalid"
       class="validation">
@@ -90,10 +90,10 @@
   </div>
 
   <div
-    class="form-control"
-    [ngClass]="{invalid: form.get('confirmPassword').touched && form.get('confirmPassword').invalid}">
+    [ngClass]="{invalid: form.get('confirmPassword').touched && form.get('confirmPassword').invalid}"
+    class="form-control">
     <label for="confirmPassword">Повторите пароль:</label>
-    <input id="confirmPassword" type="password" formControlName="confirmPassword">
+    <input formControlName="confirmPassword" id="confirmPassword" type="password">
     <div
       *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').invalid
       || form.get('confirmPassword').touched && form.errors != null && form.errors.passwordNotMatch == true"
@@ -105,7 +105,8 @@
   </div>
 
   <button
-    type="submit"
+    [disabled]="form.invalid || submitted"
     class="btn btn-primary"
-    [disabled]="form.invalid || submitted"> Зарегистрироваться </button>
+    type="submit"> Зарегистрироваться
+  </button>
 </form>

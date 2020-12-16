@@ -8,9 +8,10 @@ import {ReqData} from '../../interfaces';
 })
 export class PostComponent implements OnInit {
 
-  @Input() reqData: ReqData
+  @Input() reqData: ReqData;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

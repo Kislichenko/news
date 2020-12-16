@@ -40,7 +40,6 @@ public class ReportageController {
     @GetMapping("reportages")
     public ResponseEntity<Object> getReportages() {
         logger.debug("Getting all reportages");
-        //System.out.println(reportageService.getAllReportages());
         return new ResponseEntity<>(reportageService.getAllReportages(), HttpStatus.OK);
     }
 

@@ -1,19 +1,19 @@
-<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+<form (ngSubmit)="submit()" [formGroup]="form" class="card">
   <h2>Войти в панель администратора</h2>
 
-  <div class="alert alert-danger" *ngIf="auth.error$ | async as error">
+  <div *ngIf="auth.error$ | async as error" class="alert alert-danger">
     {{error}}
   </div>
 
-  <div class="alert alert-info" *ngIf="message">
+  <div *ngIf="message" class="alert alert-info">
     {{message}}
   </div>
 
   <div
-    class="form-control"
-    [ngClass]="{invalid: form.get('username').touched && form.get('username').invalid}">
+    [ngClass]="{invalid: form.get('username').touched && form.get('username').invalid}"
+    class="form-control">
     <label for="username">Логин:</label>
-    <input id="username" type="text" formControlName="username">
+    <input formControlName="username" id="username" type="text">
     <div
       *ngIf="form.get('username').touched && form.get('username').invalid"
       class="validation">
@@ -24,10 +24,10 @@
   </div>
 
   <div
-    class="form-control"
-    [ngClass]="{invalid: form.get('password').touched && form.get('password').invalid}">
+    [ngClass]="{invalid: form.get('password').touched && form.get('password').invalid}"
+    class="form-control">
     <label for="password">Пароль:</label>
-    <input id="password" type="password" formControlName="password">
+    <input formControlName="password" id="password" type="password">
     <div
       *ngIf="form.get('password').touched && form.get('password').invalid"
       class="validation">
@@ -45,7 +45,8 @@
   </div>
 
   <button
-    type="submit"
+    [disabled]="form.invalid || submitted"
     class="btn btn-primary"
-    [disabled]="form.invalid || submitted">Войти</button>
+    type="submit">Войти
+  </button>
 </form>

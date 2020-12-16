@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {News, ReqData, Role} from '../../shared/interfaces';
+import {Component, OnInit} from '@angular/core';
+import {News} from '../../shared/interfaces';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../shared/services/auth.service';
-import {ReqdataService} from '../../shared/reqdata.service';
 import {AlertService} from '../shared/services/alert.service';
 import {NewsService} from '../../shared/news.servive';
 
@@ -42,7 +41,7 @@ export class NewsComponent implements OnInit {
     }
   }
 
-  filterNewsByAvailability(){
+  filterNewsByAvailability() {
     return this.news.filter(tmpNews => tmpNews.bad != true && tmpNews.realization != true);
   }
 

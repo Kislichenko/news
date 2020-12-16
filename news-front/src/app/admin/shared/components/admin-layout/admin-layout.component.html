@@ -6,36 +6,36 @@
   </h1>
 
   <ul *ngIf="auth.isAuthenticated()">
-    <li routerLinkActive="active" *ngIf="auth.checkRole(role.User)">
+    <li *ngIf="auth.checkRole(role.User)" routerLinkActive="active">
       <a [routerLink]="['/cabinet', 'user','dashboard']">Главная</a>
     </li>
-    <li routerLinkActive="active" *ngIf="auth.checkRole(role.AdManager)">
+    <li *ngIf="auth.checkRole(role.AdManager)" routerLinkActive="active">
       <a [routerLink]="['/cabinet', 'admanager','dashboard']">Главная</a>
     </li>
-    <li routerLinkActive="active" *ngIf="auth.checkRole(role.InfoManager)">
+    <li *ngIf="auth.checkRole(role.InfoManager)" routerLinkActive="active">
       <a [routerLink]="['/cabinet', 'infomanager','news']">Главная</a>
     </li>
     <li routerLinkActive="active">
       <a [routerLink]="['/cabinet','profile']">Профиль</a>
     </li>
-    <li routerLinkActive="active" *ngIf="auth.checkRole(role.InfoManager)">
+    <li *ngIf="auth.checkRole(role.InfoManager)" routerLinkActive="active">
       <a [routerLink]="['/cabinet', 'infomanager','report']">Репортажи</a>
     </li>
-    <li routerLinkActive="active" *ngIf="auth.checkRole(role.Reporter)">
+    <li *ngIf="auth.checkRole(role.Reporter)" routerLinkActive="active">
       <a [routerLink]="['/cabinet', 'reporter','report']">Репортажи</a>
     </li>
-    <li routerLinkActive="active" *ngIf="auth.checkRole(role.Reporter)">
+    <li *ngIf="auth.checkRole(role.Reporter)" routerLinkActive="active">
       <a [routerLink]="['/cabinet', 'reporter','dashboard']">Текущие репортажи</a>
     </li>
-    <li routerLinkActive="active" *ngIf="auth.checkRole(role.User)">
+    <li *ngIf="auth.checkRole(role.User)" routerLinkActive="active">
       <a [routerLink]="['/cabinet', 'user','create']">Создать</a>
     </li>
     <li>
-      <a href="#" (click)="logout($event)">Выйти</a>
+      <a (click)="logout($event)" href="#">Выйти</a>
     </li>
   </ul>
 
-  <ul *ngIf = "auth.isAuthenticated() == false">
+  <ul *ngIf="auth.isAuthenticated() == false">
     <li routerLinkActive="active">
       <a [routerLink]="['/cabinet', 'sign-up']">Регистрация</a>
     </li>

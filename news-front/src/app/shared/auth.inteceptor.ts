@@ -3,10 +3,10 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor,
 import {Observable, throwError} from 'rxjs';
 import {AuthService} from '../admin/shared/services/auth.service';
 import {Router} from '@angular/router';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 
 @Injectable()
-export class AuthInteceptor implements HttpInterceptor{
+export class AuthInteceptor implements HttpInterceptor {
   constructor(
     private auth: AuthService,
     private router: Router
@@ -14,30 +14,30 @@ export class AuthInteceptor implements HttpInterceptor{
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if(this.auth.isAuthenticated()){
+    if (this.auth.isAuthenticated()) {
       const headers = new HttpHeaders({
         'Authorization': this.auth.token,
         'Content-Type': 'application/json'
       });
 
-      req = req.clone({headers})
+      req = req.clone({headers});
     }
 
     return next.handle(req)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          console.log('[Interceptor Error]: ', error)
-          if(error.status === 401){
-            this.auth.logout()
+          console.log('[Interceptor Error]: ', error);
+          if (error.status === 401) {
+            this.auth.logout();
             this.router.navigate(['/cabinet', 'login'], {
-              queryParams:{
+              queryParams: {
                 authFailed: true
               }
-            })
+            });
           }
-          return throwError(error)
+          return throwError(error);
         })
-      )
+      );
   }
 
 }

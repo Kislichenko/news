@@ -10,17 +10,17 @@ export interface Alert {
 
 @Injectable()
 export class AlertService {
-  public alert$ = new Subject<Alert>()
+  public alert$ = new Subject<Alert>();
 
-  success(text: string){
-    this.alert$.next({type: 'success', text})
+  success(text: string) {
+    this.alert$.next({type: 'success', text});
   }
 
-  warning(text: string){
-    this.alert$.next({type: 'warning', text})
+  warning(text: string) {
+    this.alert$.next({type: 'warning', text});
   }
 
-  danger(text: string){
-    this.alert$.next({type: 'danger', text})
+  danger(text: string) {
+    this.alert$.next({type: 'danger', text});
   }
 }

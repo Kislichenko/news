@@ -1,6 +1,6 @@
 <div *ngIf="form; else loading">
 
-  <form [formGroup]="form" (ngSubmit)="submit()">
+  <form (ngSubmit)="submit()" [formGroup]="form">
     <div
       class="form-control">
       <label>id репортажа: {{reportage.id}}</label>
@@ -32,10 +32,10 @@
     </div>
 
     <div *ngIf="auth.checkRole(role.Reporter)"
-      class="form-control"
-      [ngClass]="{invalid: form.get('text').touched && form.get('text').invalid}">
+         [ngClass]="{invalid: form.get('text').touched && form.get('text').invalid}"
+         class="form-control">
       <label for="text">Статья:</label>
-      <quill-editor id="text" type="text" formControlName="text"></quill-editor>
+      <quill-editor formControlName="text" id="text" type="text"></quill-editor>
       <div
         *ngIf="form.get('text').touched && form.get('text').invalid"
         class="validation">
@@ -56,9 +56,9 @@
     </div>
 
     <button
+      [disabled]="form.invalid || submitted"
       class="btn btn-primary"
-      type="submit"
-      [disabled]="form.invalid || submitted">
+      type="submit">
       Обновить
     </button>
 

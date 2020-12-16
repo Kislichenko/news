@@ -52,7 +52,7 @@ public class ReqDataService {
             Price price = priceRepository.findPriceByType(reqData.getType());
             reqData.setCost(price.getCost());
             reqDataRepository.save(reqData);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

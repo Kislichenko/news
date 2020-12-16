@@ -3,7 +3,6 @@ package com.kislichenko.news.services;
 import com.kislichenko.news.dao.AppUserRepository;
 import com.kislichenko.news.dao.RoleRepository;
 import com.kislichenko.news.dto.AppUserDTO;
-import com.kislichenko.news.dto.ReqDataDTO;
 import com.kislichenko.news.entity.AppUser;
 import com.kislichenko.news.entity.Role;
 import org.modelmapper.ModelMapper;
@@ -11,15 +10,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class AppUserService {
+    ModelMapper modelMapper = new ModelMapper();
     private AppUserRepository appUserRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private RoleRepository roleRepository;
-    ModelMapper modelMapper = new ModelMapper();
 
     public AppUserService(
             AppUserRepository appUserRepository,
@@ -50,13 +48,10 @@ public class AppUserService {
         appUserRepository.save(user);
     }
 
-    public AppUserDTO getUserByUsername(String username){
+    public AppUserDTO getUserByUsername(String username) {
         AppUser appUser = appUserRepository.findByUsername(username);
-        System.out.println("NAme1: "+appUser.getEmail());
-        if(appUser != null){
-            System.out.println("NAme2: "+appUser.getEmail());
+        if (appUser != null) {
             AppUserDTO appUserDTO = modelMapper.map(appUser, AppUserDTO.class);
-            System.out.println("NAme3: "+appUserDTO.getEmail());
             return appUserDTO;
         }
         return null;

@@ -1,6 +1,6 @@
 <div *ngIf="reqDatas.length; else loading">
   <div class="form-control">
-    <input type="text" placeholder="Найти заявку..." [(ngModel)]="searchStr">
+    <input [(ngModel)]="searchStr" placeholder="Найти заявку..." type="text">
   </div>
   <table>
     <thead>
@@ -29,14 +29,14 @@
           <div *ngIf="!reqData.confirm">
             Заявка ожидает подтверждения...
           </div>
-          <button *ngIf="reqData.confirm && !reqData.contract"
-                  class="btn btn-success"
-                  (click)="contract($event, reqData)">
+          <button (click)="contract($event, reqData)"
+                  *ngIf="reqData.confirm && !reqData.contract"
+                  class="btn btn-success">
             Сформировать
           </button>
           <button *ngIf="reqData.confirm && reqData.contract"
-                  class="btn btn-success"
-                  [routerLink]="['/cabinet', 'admanager', 'contract', reqData.id]">
+                  [routerLink]="['/cabinet', 'admanager', 'contract', reqData.id]"
+                  class="btn btn-success">
             Посмотреть
           </button>
         </div>
@@ -45,23 +45,23 @@
           <div *ngIf="!reqData.contract">
             Формируется...
           </div>
-          <button *ngIf="reqData.contract && !reqData.signature"
-                  class="btn btn-success"
-                  (click)="signature($event, reqData)">
+          <button (click)="signature($event, reqData)"
+                  *ngIf="reqData.contract && !reqData.signature"
+                  class="btn btn-success">
             Подписать
           </button>
           <button *ngIf="reqData.contract && reqData.signature"
-                  class="btn btn-success"
-                  [routerLink]="['/cabinet', 'user', 'contract', reqData.id]">
+                  [routerLink]="['/cabinet', 'user', 'contract', reqData.id]"
+                  class="btn btn-success">
             Посмотреть
           </button>
         </div>
       </td>
       <td>
         <div *ngIf="auth.checkRole(role.User)">
-          <button *ngIf="reqData.confirm && !reqData.payed && reqData.signature"
-                  class="btn btn-success"
-                  (click)="buy($event, reqData)">
+          <button (click)="buy($event, reqData)"
+                  *ngIf="reqData.confirm && !reqData.payed && reqData.signature"
+                  class="btn btn-success">
             Оплатить
           </button>
 
@@ -85,9 +85,9 @@
 
       </td>
       <td *ngIf="auth.checkRole(role.AdManager)">
-        <button *ngIf="!reqData.confirm"
-                class="btn btn-success"
-                (click)="confirm($event, reqData)">
+        <button (click)="confirm($event, reqData)"
+                *ngIf="!reqData.confirm"
+                class="btn btn-success">
           Подтвердить заявку
         </button>
         <div *ngIf="reqData.confirm">
@@ -97,18 +97,18 @@
 
       <td>
         <button *ngIf="auth.checkRole(role.AdManager)"
-                class="btn btn-light open"
-                [routerLink]="['/cabinet', 'admanager', 'request', reqData.id, 'edit']">
+                [routerLink]="['/cabinet', 'admanager', 'request', reqData.id, 'edit']"
+                class="btn btn-light open">
           Открыть
         </button>
         <button *ngIf="auth.checkRole(role.User)"
-                class="btn btn-light open"
-                [routerLink]="['/cabinet', 'user', 'request', reqData.id, 'edit']">
+                [routerLink]="['/cabinet', 'user', 'request', reqData.id, 'edit']"
+                class="btn btn-light open">
           Открыть
         </button>
 
-        <button class="btn btn-danger"
-                (click)="remove(reqData.id)">
+        <button (click)="remove(reqData.id)"
+                class="btn btn-danger">
           Удалить
         </button>
       </td>
