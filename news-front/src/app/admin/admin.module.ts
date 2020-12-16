@@ -22,6 +22,7 @@ import {SearchNewsPipe} from './shared/pipes/searchnews.pipe';
 import {StripHtmlPipe} from './shared/pipes/striphtml.pipe';
 import { NewsPageComponent } from './news-page/news-page.component';
 import {ReportageDashboardComponent} from './reportage-dashboard/reportage-dashboard.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {ReportageDashboardComponent} from './reportage-dashboard/reportage-dashb
     AlertComponent,
     AdcontractComponent,
     NewsComponent,
-    NewsPageComponent
+    NewsPageComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -56,6 +58,7 @@ import {ReportageDashboardComponent} from './reportage-dashboard/reportage-dashb
           {path: '', redirectTo: '/cabinet/login', pathMatch: 'full'},
           {path: 'sign-up', component: RegPageComponent},
           {path: 'login', component: LoginPageComponent},
+          {path: 'profile', component: ProfileComponent},
           //{path: 'admin/dashboard', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_ADMIN'}}
           {path: 'user/dashboard', component: ReqDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
           {path: 'user/create', component: CreateRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_USER'}},
