@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {FbAuthResponse, Role, User} from '../../../shared/interfaces';
+import {FbAuthResponse, ReqData, Role, User} from '../../../shared/interfaces';
 import {Observable, Subject, throwError} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
@@ -46,6 +46,15 @@ export class AuthService{
         catchError(this.hadleError.bind(this)))
 
     return tmp
+  }
+
+  getUserByUserName(username: string): Observable<User>{
+    return this.http.get<User>(`${environment.backendUrl}/users/${username}`)
+      .pipe(map( (user: User) =>{
+        return {
+          ...user
+        }
+      }))
   }
 
   login(user: User): Observable<any>{

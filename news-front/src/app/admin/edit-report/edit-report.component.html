@@ -31,7 +31,7 @@
       <label>Тема: {{reportage.newsArticle}}</label>
     </div>
 
-    <div
+    <div *ngIf="auth.checkRole(role.Reporter)"
       class="form-control"
       [ngClass]="{invalid: form.get('text').touched && form.get('text').invalid}">
       <label for="text">Статья:</label>
@@ -43,6 +43,11 @@
           Нужно написать статью
         </small>
       </div>
+    </div>
+
+    <div *ngIf="auth.checkRole(role.InfoManager)">
+      <quill-view-html [content]="reportage.text">
+      </quill-view-html>
     </div>
 
     <div class="form-control">

@@ -51,12 +51,9 @@ public class NewsService {
     public void addNewNews(NewsDTO newsDto) {
         News news = modelMapper.map(newsDto, News.class);
         try {
-            System.out.println("1: "+newsDto.getInfoManager());
-            System.out.println("2: "+appUserRepository.findByUsername(newsDto.getInfoManager()));
             if(appUserRepository.findByUsername(newsDto.getInfoManager()) !=null){
                 news.setInfoManager(appUserRepository.findByUsername(newsDto.getInfoManager()));
             }
-            System.out.println(news.getInfoManager().getUsername());
             newsRepository.save(news);
         }catch (Exception e){
             e.printStackTrace();

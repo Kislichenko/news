@@ -1,1 +1,12 @@
-<p>profile works!</p>
+<div style="text-align: center;"><H1>Ваш Профиль</H1>
+
+  <div *ngIf="user !=null">
+    <label>Логин пользователя: {{user.username}}</label>
+    <br>
+    <label>E-mail пользователя: {{user.email}}</label>
+    <br>
+    <label>Имя пользователя: {{user.name}}</label>
+    <br>
+    <label>Фамилия пользователя: {{user.surname}}</label>
+  </div>
+</div>

@@ -45,7 +45,7 @@ export class ReqDashboardComponent implements OnInit, OnDestroy {
   }
 
   filterItemsOfType(username){
-    return this.reqDatas.filter(reqData => reqData.creator == username);
+    return this.reqDatas.filter(reqData => reqData.creator == username || this.auth.checkRole(this.role.AdManager));
   }
 
   remove(id: string) {

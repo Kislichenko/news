@@ -1,10 +1,14 @@
 package com.kislichenko.news.controller;
 
+import com.kislichenko.news.dto.AppUserDTO;
+import com.kislichenko.news.dto.ReqDataDTO;
 import com.kislichenko.news.entity.AppUser;
 import com.kislichenko.news.services.AppUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,9 +30,14 @@ public class UserController {
         appUserService.registration(user);
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String registration() {
-        return "Hello World";
+    @Secured({"ROLE_USER", "ROLE_AD_MANAGER", "ROLE_REPORTER", "ROLE_INFO_MANAGER"})
+    @GetMapping("users/{username}")
+    public ResponseEntity<AppUserDTO> getUserById(@PathVariable String username) {
+        logger.debug("Getting user by username = " + username);
+        AppUserDTO appUserDTO = appUserService.getUserByUsername(username);
+        System.out.println(appUserDTO);
+        return new ResponseEntity<>(appUserDTO, HttpStatus.OK);
     }
+
 }
 

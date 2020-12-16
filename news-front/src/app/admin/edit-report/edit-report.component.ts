@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AdBlockType, Reportage, ReportageStatus, ReqData} from '../../shared/interfaces';
+import {AdBlockType, Reportage, ReportageStatus, ReqData, Role} from '../../shared/interfaces';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
 import {ReqdataService} from '../../shared/reqdata.service';
@@ -9,6 +9,7 @@ import {AlertService} from '../shared/services/alert.service';
 import {switchMap} from 'rxjs/operators';
 import * as moment from 'jalali-moment';
 import {ReportageService} from '../../shared/reportage.service';
+import {AuthService} from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-edit-report',
@@ -26,6 +27,7 @@ export class EditReportComponent implements OnInit , OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private reportageService: ReportageService,
+    private auth: AuthService,
     private datepipe: DatePipe,
     private alertService: AlertService
   ) { }
@@ -77,5 +79,9 @@ export class EditReportComponent implements OnInit , OnDestroy {
     if(this.uSub){
       this.uSub.unsubscribe()
     }
+  }
+
+  public get role(): typeof Role {
+    return Role;
   }
 }
