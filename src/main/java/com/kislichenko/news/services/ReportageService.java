@@ -83,7 +83,7 @@ public class ReportageService {
         reportage.setNews(news);
         reportage.setStartDate(new Date());
         reportage.setStatus(ReportageStatus.Created);
-//        reportage.setText("NaN");
+        reportage.setText("NaN");
         reportage.setComment("-");
         reportageRepository.save(reportage);
     }

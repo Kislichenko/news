@@ -44,7 +44,7 @@ export class EditReportComponent implements OnInit , OnDestroy {
     })
   }
 
-  private updateRequest(infoText: string){
+  private updateReportage(infoText: string){
     this.submitted = true
 
     this.uSub = this.reportageService.update({
@@ -70,7 +70,7 @@ export class EditReportComponent implements OnInit , OnDestroy {
     if(this.form.invalid){
       return
     }
-    this.updateRequest('Репортаж был обновлен!')
+    this.updateReportage('Репортаж был обновлен!')
   }
 
   ngOnDestroy(): void {

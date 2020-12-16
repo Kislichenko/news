@@ -74,4 +74,5 @@ export interface Reportage {
   status: ReportageStatus
   news: string
   newsArticle: string
+  publish: boolean
 }

@@ -29,11 +29,17 @@ public class Reportage {
     private Date startDate;
     private Date endDate;
 
+    @Column(columnDefinition = "TEXT")
     private String text;
+
+    @Column(columnDefinition = "TEXT")
     private String comment;
 
     @Column(nullable = false)
     private boolean confirm;
+
+    @Column(nullable = false)
+    private boolean publish;
 
     private ReportageStatus status;
 }

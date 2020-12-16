@@ -29,6 +29,7 @@ public class ReportageDTO {
     private String text;
     private String comment;
     private boolean confirm;
+    private boolean publish;
 
     private ReportageStatus status;
     private Long newsId;

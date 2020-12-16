@@ -8,11 +8,13 @@
       <th>#</th>
       <th>Дата создания</th>
       <th>Тема</th>
-      <th>Статус</th>
       <th>Комментарий</th>
       <th>Инфо менеджер</th>
       <th *ngIf="auth.checkRole(role.Reporter)">Блокировка</th>
       <th>Действие</th>
+      <th *ngIf="auth.checkRole(role.Reporter)">Проверка</th>
+      <th *ngIf="auth.checkRole(role.InfoManager)">Публикация</th>
+      <th *ngIf="auth.checkRole(role.InfoManager)">Корректность</th>
     </tr>
     </thead>
     <tbody>
@@ -21,7 +23,7 @@
       <td>{{reportage.startDate | date: 'medium': null: 'ru'}}</td>
       <td>{{reportage.newsArticle}}</td>
       <!--      <td>{{reportage.startDate | date: 'dd-MM-yyyy hh:mm'}}-->
-      <td>{{reportage.status}}</td>
+<!--      <td>{{reportage.status}}</td>-->
       <td *ngIf="reportage.comment==null" style="text-align: center;">-</td>
       <td *ngIf="reportage.comment != null"><span [innerHTML]="reportage.comment"></span></td>
       <td>{{reportage.infoManager}}</td>
@@ -56,6 +58,39 @@
                 [routerLink]="['/cabinet', 'infomanager', 'reportage', reportage.id]">
           Посмотреть
         </button>
+      </td>
+      <td *ngIf="auth.checkRole(role.Reporter)">
+        <button *ngIf="reportage.text != null && reportage.text.length>100 && !reportage.confirm"
+                class="btn btn-light"
+                (click)="sendCheck($event, reportage)">
+          Отправить
+        </button>
+        <div *ngIf="reportage.text == null || reportage.text != null && reportage.text.length<100">
+          Нужно написать статью
+        </div>
+        <div *ngIf="reportage.confirm">
+          Отправлено
+        </div>
+      </td>
+      <td *ngIf="auth.checkRole(role.InfoManager)">
+        <button *ngIf="reportage.confirm == true"
+                class="btn btn-danger"
+                (click)="publish($event, reportage)">
+          Опубликовать
+        </button>
+        <div *ngIf="reportage.confirm == false">
+          Статья еще не готова
+        </div>
+      </td>
+      <td *ngIf="auth.checkRole(role.InfoManager)">
+        <button *ngIf="reportage.confirm == true"
+                class="btn btn-success"
+                (click)="remake($event, reportage)">
+          На доработку
+        </button>
+        <div *ngIf="reportage.confirm == false">
+          Статья еще не готова
+        </div>
       </td>
     </tr>
     </tbody>

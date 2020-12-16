@@ -29,9 +29,10 @@ export class ReportageDashboardComponent implements OnInit, OnDestroy {
 
   filterReportsOfUser(){
     if (this.router.url === '/cabinet/reporter/dashboard' && this.auth.checkRole(this.role.Reporter)){
-      return this.reports.filter(reportage => reportage.reporter == this.auth.username)
+      return this.reports.filter(reportage => reportage.reporter == this.auth.username && reportage.publish == false)
     }else {
-      return this.reports.filter(reportage => reportage.status == this.reportageStatus.Created)
+      return this.reports.filter(reportage => (reportage.status == this.reportageStatus.Created || reportage.confirm == true)
+        && reportage.publish == false)
     }
 
   }
@@ -70,6 +71,36 @@ export class ReportageDashboardComponent implements OnInit, OnDestroy {
       reporter: this.auth.username
     }).subscribe(() => {
       this.alertService.success('Репортаж был заблокирован');
+      this.ngOnInit();
+    });
+  }
+
+  sendCheck($event: MouseEvent, reportage: Reportage) {
+    this.uSub = this.reportageService.update({
+      ...reportage,
+      confirm: true
+    }).subscribe(() => {
+      this.alertService.success('Репортаж был отправлен на проверку');
+      this.ngOnInit();
+    });
+  }
+
+  remake($event: MouseEvent, reportage: Reportage) {
+    this.uSub = this.reportageService.update({
+      ...reportage,
+      confirm: false
+    }).subscribe(() => {
+      this.alertService.success('Репортаж был отправлен на переделку');
+      this.ngOnInit();
+    });
+  }
+
+  publish($event: MouseEvent, reportage: Reportage) {
+    this.uSub = this.reportageService.update({
+      ...reportage,
+      publish: true
+    }).subscribe(() => {
+      this.alertService.success('Репортаж был опубликован');
       this.ngOnInit();
     });
   }
