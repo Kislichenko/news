@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ContextConfiguration(initializers = {AppUserRepositoryTest.Initializer.class})
+@ContextConfiguration(initializers = {PriceRepositoryTest.Initializer.class})
 public class PriceRepositoryTest {
 
     @Autowired
