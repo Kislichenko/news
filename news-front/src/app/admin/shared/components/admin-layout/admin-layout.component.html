@@ -19,7 +19,10 @@
       <a [routerLink]="['/cabinet', 'infomanager','report']">Репортажи</a>
     </li>
     <li routerLinkActive="active" *ngIf="auth.checkRole(role.Reporter)">
-      <a [routerLink]="['/cabinet', 'reporter','dashboard']">Репортажи</a>
+      <a [routerLink]="['/cabinet', 'reporter','report']">Репортажи</a>
+    </li>
+    <li routerLinkActive="active" *ngIf="auth.checkRole(role.Reporter)">
+      <a [routerLink]="['/cabinet', 'reporter','dashboard']">Текущие репортажи</a>
     </li>
     <li routerLinkActive="active" *ngIf="auth.checkRole(role.User)">
       <a [routerLink]="['/cabinet', 'user','create']">Создать</a>

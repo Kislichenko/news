@@ -64,14 +64,13 @@ import {ReportageDashboardComponent} from './reportage-dashboard/reportage-dashb
           {path: 'admanager/dashboard', component: ReqDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_AD_MANAGER'}},
           {path: 'admanager/request/:id/edit', component: EditRequestComponent, canActivate: [AuthGuard], data: {role:'ROLE_AD_MANAGER'}},
           {path: 'admanager/contract/:id', component: AdcontractComponent, canActivate: [AuthGuard], data: {role:'ROLE_AD_MANAGER'}},
+          {path: 'reporter/report', component:ReportageDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
           {path: 'reporter/dashboard', component:ReportageDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
           {path: 'reporter/report/:id/edit', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_REPORTER'}},
           {path: 'infomanager/news', component:NewsComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}},
           {path: 'infomanager/report', component:ReportageDashboardComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}},
           {path: 'infomanager/reader/:id', component:NewsPageComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}},
-          //{path: 'infomanager/create', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}},
           {path: 'infomanager/report/:id/edit', component:EditReportComponent, canActivate: [AuthGuard], data: {role:'ROLE_INFO_MANAGER'}}
-
         ]},
 
     ])

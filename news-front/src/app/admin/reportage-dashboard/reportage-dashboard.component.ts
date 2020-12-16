@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../shared/services/auth.service';
-import {Reportage, ReportageStatus} from '../../shared/interfaces';
+import {Reportage, ReportageStatus, Role} from '../../shared/interfaces';
 import {Subscription} from 'rxjs';
 import {AlertService} from '../shared/services/alert.service';
 import {ReportageService} from '../../shared/reportage.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-reportage-dashboard',
@@ -21,8 +22,18 @@ export class ReportageDashboardComponent implements OnInit, OnDestroy {
   constructor(
     private auth: AuthService,
     private reportageService: ReportageService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router
   ) {
+  }
+
+  filterReportsOfUser(){
+    if (this.router.url === '/cabinet/reporter/dashboard' && this.auth.checkRole(this.role.Reporter)){
+      return this.reports.filter(reportage => reportage.reporter == this.auth.username)
+    }else {
+      return this.reports.filter(reportage => reportage.status == this.reportageStatus.Created)
+    }
+
   }
 
   ngOnInit(): void {
@@ -51,19 +62,35 @@ export class ReportageDashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  //
-  // signature($event: MouseEvent, reqData: ReqData) {
-  //   this.uSub = this.reqdataService.update({
-  //     ...reqData,
-  //     signature: true
-  //   }).subscribe(() => {
-  //     this.alertService.success('Договор был подписан');
-  //     this.ngOnInit();
-  //   });
-  // }
+
+  lock($event: MouseEvent, reportage: Reportage) {
+    this.uSub = this.reportageService.update({
+      ...reportage,
+      status: this.reportageStatus.Inwork,
+      reporter: this.auth.username
+    }).subscribe(() => {
+      this.alertService.success('Репортаж был заблокирован');
+      this.ngOnInit();
+    });
+  }
+
+  unlock($event: MouseEvent, reportage: Reportage) {
+    this.uSub = this.reportageService.update({
+      ...reportage,
+      status: this.reportageStatus.Created,
+      reporter: ""
+    }).subscribe(() => {
+      this.alertService.success('Репортаж был разблокирован');
+      this.ngOnInit();
+    });
+  }
 
 
   public get reportageStatus(): typeof ReportageStatus {
     return ReportageStatus;
+  }
+
+  public get role(): typeof Role {
+    return Role;
   }
 }

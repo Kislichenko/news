@@ -12,10 +12,11 @@
       <th>Комментарий</th>
       <th>Инфо менеджер</th>
       <th>Репортер</th>
+      <th *ngIf="auth.checkRole(role.Reporter)">Действие</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let reportage of reports; let idx = index">
+    <tr *ngFor="let reportage of filterReportsOfUser(); let idx = index">
       <td>{{idx + 1}}</td>
       <td>{{reportage.startDate | date: 'medium': null: 'ru'}}</td>
       <td>{{reportage.newsArticle}}</td>
@@ -24,22 +25,19 @@
       <td>{{reportage.comment}}</td>
       <td>{{reportage.infoManager}}</td>
       <td>{{reportage.reporter}}</td>
-<!--      <td>-->
-<!--        <div *ngIf="auth.checkRole(role.AdManager)">-->
-<!--          <div *ngIf="!reqData.confirm">-->
-<!--            Заявка ожидает подтверждения...-->
-<!--          </div>-->
-<!--          <button *ngIf="reqData.confirm && !reqData.contract"-->
-<!--                  class="btn btn-success"-->
-<!--                  (click)="contract($event, reqData)">-->
-<!--            Сформировать-->
-<!--          </button>-->
-<!--          <button *ngIf="reqData.confirm && reqData.contract"-->
-<!--                  class="btn btn-success"-->
-<!--                  [routerLink]="['/cabinet', 'admanager', 'contract', reqData.id]">-->
-<!--            Посмотреть-->
-<!--          </button>-->
-<!--        </div>-->
+      <td *ngIf="auth.checkRole(role.Reporter)">
+        <div>
+          <button *ngIf="reportage.status == reportageStatus.Created"
+                  class="btn btn-success"
+                  (click)="lock($event, reportage)">
+            Забрать
+          </button>
+          <button *ngIf="reportage.status == reportageStatus.Inwork"
+                  class="btn btn-danger"
+                  (click)="unlock($event, reportage)">
+            Разблокировать
+          </button>
+        </div>
 
 <!--        <div *ngIf="auth.checkRole(role.User)">-->
 <!--          <div *ngIf="!reqData.contract">-->

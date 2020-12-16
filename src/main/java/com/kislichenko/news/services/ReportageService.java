@@ -61,7 +61,6 @@ public class ReportageService {
     public List<ReportageDTO> getAllReportages() {
 
         List<Reportage> reportageList = reportageRepository.findAll();
-        System.out.println("SIZE1: " + reportageList.size());
         List<ReportageDTO> reportageDTOS = new ArrayList<>();
         for (Reportage reportage : reportageList) {
             ReportageDTO reportageDTO = modelMapper.map(reportage, ReportageDTO.class);
@@ -73,7 +72,6 @@ public class ReportageService {
             reportageDTO.setNewsArticle(reportage.getNews().getArticle());
             reportageDTOS.add(reportageDTO);
         }
-        System.out.println("SIZE2: " + reportageDTOS.size());
         return reportageDTOS;
 
 
