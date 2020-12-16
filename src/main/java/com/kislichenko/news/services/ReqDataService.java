@@ -3,13 +3,12 @@ package com.kislichenko.news.services;
 import com.kislichenko.news.dao.AppUserRepository;
 import com.kislichenko.news.dao.PriceRepository;
 import com.kislichenko.news.dao.ReqDataRepository;
-import com.kislichenko.news.dto.ReqDataDto;
+import com.kislichenko.news.dto.ReqDataDTO;
 import com.kislichenko.news.entity.AppUser;
 import com.kislichenko.news.entity.Price;
 import com.kislichenko.news.entity.ReqData;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.tags.form.InputTag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +33,10 @@ public class ReqDataService {
         reqDataRepository.deleteById(id);
     }
 
-    public ReqDataDto getRequestById(Long id) {
+    public ReqDataDTO getRequestById(Long id) {
         if (reqDataRepository.findById(id).isPresent()) {
             ReqData reqData = reqDataRepository.findById(id).get();
-            ReqDataDto reqDataDto = modelMapper.map(reqData, ReqDataDto.class);
+            ReqDataDTO reqDataDto = modelMapper.map(reqData, ReqDataDTO.class);
             reqDataDto.setCreator(reqData.getCreator().getUsername());
             return reqDataDto;
         } else {
@@ -45,7 +44,7 @@ public class ReqDataService {
         }
     }
 
-    public void addNewRequest(ReqDataDto reqDataDto) {
+    public void addNewRequest(ReqDataDTO reqDataDto) {
         ReqData reqData = modelMapper.map(reqDataDto, ReqData.class);
         AppUser appUser = appUserRepository.findByUsername(reqDataDto.getCreator());
         reqData.setCreator(appUser);
@@ -58,17 +57,15 @@ public class ReqDataService {
         }
     }
 
-    public List<ReqDataDto> getAllRequests() {
+    public List<ReqDataDTO> getAllRequests() {
         List<ReqData> reqDatas = reqDataRepository.findAll();
-        List<ReqDataDto> reqDataDtos = new ArrayList<>();
+        List<ReqDataDTO> reqDataDtos = new ArrayList<>();
         for (ReqData reqData : reqDatas) {
-            ReqDataDto reqDataDto = modelMapper.map(reqData, ReqDataDto.class);
+            ReqDataDTO reqDataDto = modelMapper.map(reqData, ReqDataDTO.class);
             reqDataDto.setCreator(reqData.getCreator().getUsername());
             reqDataDtos.add(reqDataDto);
         }
 
         return reqDataDtos;
     }
-
-
 }

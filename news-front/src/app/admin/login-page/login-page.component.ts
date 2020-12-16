@@ -61,6 +61,8 @@ export class LoginPageComponent implements OnInit {
         this.router.navigate(['/cabinet', 'admanager','dashboard'])
       }else if(this.auth.role.includes(Role.InfoManager)){
         this.router.navigate(['/cabinet', 'infomanager','news'])
+      }else if(this.auth.role.includes(Role.Reporter)){
+        this.router.navigate(['/cabinet', 'reporter','dashboard'])
       }
       this.submitted = false
     }, () => {

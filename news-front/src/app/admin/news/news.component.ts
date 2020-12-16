@@ -59,6 +59,7 @@ export class NewsComponent implements OnInit {
   realization($event: MouseEvent, news: News) {
     this.uSub = this.newsService.update({
       ...news,
+      infoManager: this.auth.username,
       realization: true
     }).subscribe(() => {
       this.alertService.success('Новость отправлена на реализацию');

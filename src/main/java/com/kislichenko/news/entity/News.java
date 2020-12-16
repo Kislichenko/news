@@ -25,4 +25,7 @@ public class News {
 
     @Column(nullable = false)
     private boolean realization;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private AppUser infoManager;
 }

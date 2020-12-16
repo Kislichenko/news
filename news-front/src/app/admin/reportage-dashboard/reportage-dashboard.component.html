@@ -1,0 +1,120 @@
+<div *ngIf="reports.length; else loading">
+  <div class="form-control">
+    <input type="text" placeholder="Найти репортаж..." [(ngModel)]="searchStr">
+  </div>
+  <table>
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Дата создания</th>
+      <th>Статус</th>
+      <th>Комментарий</th>
+      <th>Инфо менеджер</th>
+      <th>Репортер</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let reportage of reports; let idx = index">
+      <td>{{idx + 1}}</td>
+<!--      <td>{{reportage.startDate | date: 'medium': null: 'ru'}}</td>-->
+      <td>{{reportage.startDate | date: 'dd-MM-yyyy hh:mm'}}
+      <td>{{reportage.status}}</td>
+      <td>{{reportage.comment}}</td>
+      <td>{{reportage.infoManager}}</td>
+      <td>{{reportage.reporter}}</td>
+<!--      <td>-->
+<!--        <div *ngIf="auth.checkRole(role.AdManager)">-->
+<!--          <div *ngIf="!reqData.confirm">-->
+<!--            Заявка ожидает подтверждения...-->
+<!--          </div>-->
+<!--          <button *ngIf="reqData.confirm && !reqData.contract"-->
+<!--                  class="btn btn-success"-->
+<!--                  (click)="contract($event, reqData)">-->
+<!--            Сформировать-->
+<!--          </button>-->
+<!--          <button *ngIf="reqData.confirm && reqData.contract"-->
+<!--                  class="btn btn-success"-->
+<!--                  [routerLink]="['/cabinet', 'admanager', 'contract', reqData.id]">-->
+<!--            Посмотреть-->
+<!--          </button>-->
+<!--        </div>-->
+
+<!--        <div *ngIf="auth.checkRole(role.User)">-->
+<!--          <div *ngIf="!reqData.contract">-->
+<!--            Формируется...-->
+<!--          </div>-->
+<!--          <button *ngIf="reqData.contract && !reqData.signature"-->
+<!--                  class="btn btn-success"-->
+<!--                  (click)="signature($event, reqData)">-->
+<!--            Подписать-->
+<!--          </button>-->
+<!--          <button *ngIf="reqData.contract && reqData.signature"-->
+<!--                  class="btn btn-success"-->
+<!--                  [routerLink]="['/cabinet', 'user', 'contract', reqData.id]">-->
+<!--            Посмотреть-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        <div *ngIf="auth.checkRole(role.User)">-->
+<!--          <button *ngIf="reqData.confirm && !reqData.payed && reqData.signature"-->
+<!--                  class="btn btn-success"-->
+<!--                  (click)="buy($event, reqData)">-->
+<!--            Оплатить-->
+<!--          </button>-->
+
+<!--          <div *ngIf="reqData.confirm && !reqData.payed && !reqData.signature">-->
+<!--            Подпишите договор-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div *ngIf="auth.checkRole(role.AdManager)">-->
+<!--          <div *ngIf="reqData.confirm && !reqData.payed">-->
+<!--            Ожидает оплаты...-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div *ngIf="!reqData.confirm && !reqData.payed">-->
+<!--          Ожидает подтверждения...-->
+<!--        </div>-->
+<!--        <div *ngIf="reqData.confirm && reqData.payed">-->
+<!--          Оплачено-->
+<!--        </div>-->
+
+<!--      </td>-->
+<!--      <td *ngIf="auth.checkRole(role.AdManager)">-->
+<!--        <button *ngIf="!reqData.confirm"-->
+<!--                class="btn btn-success"-->
+<!--                (click)="confirm($event, reqData)">-->
+<!--          Подтвердить заявку-->
+<!--        </button>-->
+<!--        <div *ngIf="reqData.confirm">-->
+<!--          Заявка подтверждена!-->
+<!--        </div>-->
+<!--      </td>-->
+
+<!--      <td>-->
+<!--        <button *ngIf="auth.checkRole(role.AdManager)"-->
+<!--                class="btn btn-light open"-->
+<!--                [routerLink]="['/cabinet', 'admanager', 'request', reqData.id, 'edit']">-->
+<!--          Открыть-->
+<!--        </button>-->
+<!--        <button *ngIf="auth.checkRole(role.User)"-->
+<!--                class="btn btn-light open"-->
+<!--                [routerLink]="['/cabinet', 'user', 'request', reqData.id, 'edit']">-->
+<!--          Открыть-->
+<!--        </button>-->
+
+<!--        <button class="btn btn-danger"-->
+<!--                (click)="remove(reqData.id)">-->
+<!--          Удалить-->
+<!--        </button>-->
+<!--      </td>-->
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loading>
+  <p class="text-center">Идет загрузка...</p>
+</ng-template>

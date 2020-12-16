@@ -18,7 +18,14 @@ export enum Role{
   User = "ROLE_USER",
   AdManager = "ROLE_AD_MANAGER",
   InfoManager = "ROLE_INFO_MANAGER",
-  Repoter = "REPORTER"
+  Reporter = "ROLE_REPORTER"
+}
+
+export enum ReportageStatus{
+  Created ="Created",
+  Inwork = "Inwork",
+  Fixing = "Fixing",
+  Closed = "Closed"
 }
 
 export enum AdBlockType{
@@ -52,4 +59,18 @@ export interface News {
   body: string
   bad: boolean
   realization: boolean
+  infoManager?: string
+}
+
+export interface Reportage {
+  id?: string
+  infoManager: string
+  reporter: string
+  startDate: Date
+  endDate: Date
+  text: string
+  comment: string
+  confirm: boolean
+  status: ReportageStatus
+  news: string
 }

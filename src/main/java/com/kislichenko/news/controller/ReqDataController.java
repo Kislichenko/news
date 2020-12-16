@@ -1,6 +1,6 @@
 package com.kislichenko.news.controller;
 
-import com.kislichenko.news.dto.ReqDataDto;
+import com.kislichenko.news.dto.ReqDataDTO;
 import com.kislichenko.news.services.ReqDataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class ReqDataController {
 
     @Secured("ROLE_USER")
     @RequestMapping(value = "/requests", method = RequestMethod.POST)
-    public ResponseEntity<String> addNewRequest(@RequestBody ReqDataDto reqDataDto) {
+    public ResponseEntity<String> addNewRequest(@RequestBody ReqDataDTO reqDataDto) {
         logger.debug("Adding new request by " + reqDataDto.getCreator());
         reqDataService.addNewRequest(reqDataDto);
         return new ResponseEntity<>("", HttpStatus.OK);
@@ -29,7 +29,7 @@ public class ReqDataController {
 
     @Secured({"ROLE_USER", "ROLE_AD_MANAGER"})
     @RequestMapping(value = "/requests/{id}", method = RequestMethod.PATCH)
-    public ResponseEntity<String> patchRequestById(@PathVariable Long id, @RequestBody ReqDataDto reqDataDto) {
+    public ResponseEntity<String> patchRequestById(@PathVariable Long id, @RequestBody ReqDataDTO reqDataDto) {
         logger.debug("Patching the request by " + reqDataDto.getCreator());
         reqDataService.addNewRequest(reqDataDto);
         return new ResponseEntity<>("", HttpStatus.OK);
@@ -52,9 +52,9 @@ public class ReqDataController {
 
     @Secured({"ROLE_USER", "ROLE_AD_MANAGER"})
     @GetMapping("requests/{id}")
-    public ResponseEntity<ReqDataDto> getRequestById(@PathVariable Long id) {
+    public ResponseEntity<ReqDataDTO> getRequestById(@PathVariable Long id) {
         logger.debug("Getting request by id = " + id);
-        ReqDataDto reqDataDto = reqDataService.getRequestById(id);
+        ReqDataDTO reqDataDto = reqDataService.getRequestById(id);
         return new ResponseEntity<>(reqDataDto, HttpStatus.OK);
     }
 }

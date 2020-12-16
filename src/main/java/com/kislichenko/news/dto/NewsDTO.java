@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @ToString
-public class NewsDto {
+public class NewsDTO {
     private Long id;
 
     @NotBlank(message = "article is mandatory")
@@ -19,4 +19,5 @@ public class NewsDto {
     private String body;
     private boolean bad;
     private boolean realization;
+    private String infoManager;
 }

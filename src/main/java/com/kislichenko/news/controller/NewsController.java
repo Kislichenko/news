@@ -1,9 +1,10 @@
 package com.kislichenko.news.controller;
 
-import com.kislichenko.news.dto.NewsDto;
-import com.kislichenko.news.dto.ReqDataDto;
+import com.kislichenko.news.dto.NewsDTO;
+import com.kislichenko.news.entity.News;
+import com.kislichenko.news.entity.Reportage;
 import com.kislichenko.news.services.NewsService;
-import com.kislichenko.news.services.ReqDataService;
+import com.kislichenko.news.services.ReportageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,9 +17,12 @@ public class NewsController {
 
     Logger logger = LoggerFactory.getLogger(AdminController.class);
     NewsService newsService;
+    ReportageService reportageService;
 
-    public NewsController(NewsService newsService) {
+    public NewsController(NewsService newsService,
+                          ReportageService reportageService) {
         this.newsService = newsService;
+        this.reportageService = reportageService;
     }
 
     @Secured("ROLE_INFO_MANAGER")
@@ -30,17 +34,23 @@ public class NewsController {
 
     @Secured("ROLE_INFO_MANAGER")
     @RequestMapping(value = "/news/{id}", method = RequestMethod.PATCH)
-    public ResponseEntity<String> patchNewsById(@PathVariable Long id, @RequestBody NewsDto newsDto) {
+    public ResponseEntity<String> patchNewsById(@PathVariable Long id, @RequestBody NewsDTO newsDto) {
         logger.debug("Patching the news by info_manager");
         newsService.addNewNews(newsDto);
+        News news = newsService.getNewsById(newsDto.getId());
+        if (newsDto.isRealization() && news != null){
+            System.out.println("New Reportage created!");
+            reportageService.createReportageByNews(news);
+        }
+
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @Secured("ROLE_INFO_MANAGER")
     @GetMapping("news/{id}")
-    public ResponseEntity<NewsDto> getNewsById(@PathVariable Long id) {
+    public ResponseEntity<NewsDTO> getNewsById(@PathVariable Long id) {
         logger.debug("Getting news by id = " + id);
-        NewsDto newsDto = newsService.getNewsById(id);
+        NewsDTO newsDto = newsService.getNewsDtoById(id);
         return new ResponseEntity<>(newsDto, HttpStatus.OK);
     }
 

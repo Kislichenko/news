@@ -18,6 +18,9 @@
     <li routerLinkActive="active" *ngIf="auth.checkRole(role.InfoManager)">
       <a [routerLink]="['/cabinet', 'infomanager','report']">Репортажи</a>
     </li>
+    <li routerLinkActive="active" *ngIf="auth.checkRole(role.Reporter)">
+      <a [routerLink]="['/cabinet', 'reporter','dashboard']">Репортажи</a>
+    </li>
     <li routerLinkActive="active" *ngIf="auth.checkRole(role.User)">
       <a [routerLink]="['/cabinet', 'user','create']">Создать</a>
     </li>

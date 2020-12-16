@@ -14,7 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class ReqDataDto {
+public class ReqDataDTO {
     private Long id;
 
     @NotBlank(message = "subject is mandatory")
