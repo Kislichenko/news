@@ -8,7 +8,7 @@
       <th>#</th>
       <th>Дата создания</th>
       <th>Тематика</th>
-      <th>Тип рекламного блока</th>
+      <th *ngIf="auth.checkRole(role.Reporter)">Тип рекламного блока</th>
       <th>Начало и конец размещения</th>
       <th>Договор</th>
       <th>Оплата</th>
@@ -22,7 +22,7 @@
       <!--      <td>{{reqData.creationDate | date: 'medium': null: 'ru'}}</td>-->
       <td>{{reqData.creationDate | date: 'dd-MM-yyyy hh:mm'}}
       <td>{{reqData.subject}}</td>
-      <td>{{reqData.type}}</td>
+      <td *ngIf="auth.checkRole(role.Reporter)">{{reqData.type}}</td>
       <td>{{reqData.startDate | date: 'dd-MM-yyyy'}} до {{reqData.endDate | date: 'dd-MM-yyyy'}}</td>
       <td>
         <div *ngIf="auth.checkRole(role.AdManager)">

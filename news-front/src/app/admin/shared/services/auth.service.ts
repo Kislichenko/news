@@ -47,6 +47,18 @@ export class AuthService {
     return tmp;
   }
 
+  login(user: User): Observable<any> {
+    const tmp = this.http.post<HttpResponse<any>>(`${environment.backendUrl}/login`, user, {observe: 'response'})
+      .pipe(tap(response => {
+          this.setToken(response);
+          console.log(response.headers.get('authorization'));
+        }),
+        catchError(this.hadleError.bind(this)));
+
+    return tmp;
+  }
+
+
   getUserByUserName(username: string): Observable<User> {
     return this.http.get<User>(`${environment.backendUrl}/users/${username}`)
       .pipe(map((user: User) => {
@@ -56,22 +68,6 @@ export class AuthService {
       }));
   }
 
-  login(user: User): Observable<any> {
-    //user.returnSecureToken = true
-    const tmp = this.http.post<HttpResponse<any>>(`${environment.backendUrl}/login`, user, {observe: 'response'})
-      .pipe(tap(response => {
-          this.setToken(response);
-          console.log(response.headers.get('authorization'));
-        }),
-        catchError(this.hadleError.bind(this)));
-
-    return tmp;
-
-    // .pipe(
-    //   tap(this.setToken),
-    //   catchError(this.hadleError.bind(this))
-    // )
-  }
 
   logout() {
     this.setToken(null);

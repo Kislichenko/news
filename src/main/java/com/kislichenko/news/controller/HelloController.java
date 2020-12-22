@@ -15,12 +15,6 @@ public class HelloController {
     @Autowired
     ClientRepository clientRepository;
 
-    @RequestMapping("/")
-    public String index() {
-        return "Greetings from Spring Boot!";
-
-    }
-
     @GetMapping("clients/{id}")
     public Client get(@PathVariable(name = "id") int id) throws ClientNotFoundException {
         return clientRepository.findById(id)

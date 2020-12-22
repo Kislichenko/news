@@ -45,9 +45,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+                //.antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/**").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/v2/api-docs").permitAll()
+                .antMatchers("/v3/api-docs").permitAll()
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/secret/**").hasAnyRole("ADMIN", "ADMIN1")
                 //.antMatchers("/change-role").hasRole("ADMIN")
