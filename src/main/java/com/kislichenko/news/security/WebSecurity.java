@@ -52,7 +52,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v3/api-docs").permitAll()
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/secret/**").hasAnyRole("ADMIN", "ADMIN1")
-                //.antMatchers("/change-role").hasRole("ADMIN")
+                .antMatchers("/change-role").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(filterChainExceptionHandler, jwtAuthenticationFilter.getClass())
