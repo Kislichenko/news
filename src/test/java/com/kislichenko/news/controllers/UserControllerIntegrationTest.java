@@ -35,46 +35,6 @@ public class UserControllerIntegrationTest {
     @Autowired
     private AppUserRepository appUserRepository;
 
-    @Test
-    public void givenAuthRequestOnPrivateService_shouldSucceedWith201(){
-
-    }
-    @Test
-    public void givenAuthRequestOnPrivateService_shouldSucceedWith202(){
-
-    }
-    @Test
-    public void givenAuthRequestOnPrivateService_shouldSucceedWith203(){
-
-    }
-    @Test
-    public void givenAuthRequestOnPrivateService_shouldSucceedWith204(){
-
-    }
-    @Test
-    public void givenAuthRequestOnPrivateService_shouldSucceedWith205(){
-
-    }
-    @Test
-    public void givenAuthRequestOnPrivateService_shouldSucceedWith206(){
-
-    }
-    @Test
-    public void givenAuthRequestOnPrivateService_shouldSucceedWith207(){
-
-    }
-    @Test
-    public void givenAuthRequestOnPrivateService_shouldSucceedWith208(){
-
-    }
-    @Test
-    public void givenAuthRequestOnPrivateService_shouldSucceedWith209(){
-
-    }
-    @Test
-    public void givenAuthRequestOnPrivateService_shouldSucceedWith2010(){
-
-    }
 
     @Test
     public void givenAuthRequestOnPrivateService_shouldSucceedWith200() throws Exception {
